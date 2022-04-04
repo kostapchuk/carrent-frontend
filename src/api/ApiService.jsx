@@ -1,4 +1,5 @@
 import ApiClient from "./ApiClient";
+import LocalStorage from "../storage/LocalStorage";
 
 class ApiService {
 
@@ -23,11 +24,15 @@ class ApiService {
             });
     }
 
+    static fetchAvailableCars = () => {
+        return ApiClient.get("/cars/available/" + LocalStorage.getUserId())
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
     static processOrder = (rent) => {
-        ApiClient.post("/orders/", {...rent})
-            .then(r => {
-                console.log("Created Order");
-            })
+        return ApiClient.post("/orders/", {...rent}, {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
             });
@@ -38,6 +43,44 @@ class ApiService {
             .then(r => {
                 console.log("Logout");
             })
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static fetchBalance = () => {
+        return ApiClient.get("/users/" + LocalStorage.getUserId() + "/balance",
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static payTheDebt = () => {
+        return ApiClient.post("/users/pay", {userId: LocalStorage.getUserId()},
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static retrieveRides = () => {
+        return ApiClient.get("/users/" + LocalStorage.getUserId() + "/rides",
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static register = (user) => {
+        return ApiClient.post("/users/", {...user})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static login = (credentials) => {
+        return ApiClient.post("/auth/login", {...credentials})
             .catch(e => {
                 console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
             });

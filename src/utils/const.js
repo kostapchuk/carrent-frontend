@@ -6,4 +6,6 @@ class CarStatus {
     static FREE = 'FREE';
 }
 
+export const BACKEND_URL = "http://localhost:8080/api/v1";
+
 export default CarStatus;

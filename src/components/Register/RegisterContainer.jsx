@@ -1,8 +1,9 @@
 import './Register.styles.css'
-import axios from "axios";
 import React, {useState} from 'react';
 import RegisterView from "./RegisterView";
 import {useNavigate} from "react-router-dom";
+import Header from "../header/Header";
+import ApiService from "../../api/ApiService";
 
 const RegisterContainer = () => {
 
@@ -23,12 +24,12 @@ const RegisterContainer = () => {
             email,
             password,
         }
-        axios.post(`http://localhost:8080/api/v1/users`, {...user})
+        ApiService.register(user)
             .then(res => {
                 navigate("/register-result", {state: {success: res.data.success, message: res.data.message}});
             }).catch(e => {
-            navigate("/register-result", {state: {success: false, message: e.message}});
-        })
+                navigate("/register-result", {state: {success: false, message: e.message}});
+            })
     }
 
     const handleChangeFirstName = event => {
@@ -51,9 +52,12 @@ const RegisterContainer = () => {
     }
 
     return (
-        <RegisterView handleSubmit={handleSubmit} handleChangeFirstName={handleChangeFirstName}
-                      handleChangeLastName={handleChangeLastName} handleChangePhone={handleChangePhone}
-                      handleChangeEmail={handleChangeEmail} handleChangePassword={handleChangePassword}/>
+        <>
+            <Header/>
+            <RegisterView handleSubmit={handleSubmit} handleChangeFirstName={handleChangeFirstName}
+                          handleChangeLastName={handleChangeLastName} handleChangePhone={handleChangePhone}
+                          handleChangeEmail={handleChangeEmail} handleChangePassword={handleChangePassword}/>
+        </>
     );
 };
 

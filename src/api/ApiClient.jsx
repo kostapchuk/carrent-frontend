@@ -1,9 +1,8 @@
 import axios from "axios";
-import LocalStorage from "../storage/LocalStorage";
+import {BACKEND_URL} from "../utils/const";
 
 const ApiClient = axios.create({
-    baseURL: "http://localhost:8080/api/v1",
-    headers: {Authorization: LocalStorage.getToken()},
+    baseURL: BACKEND_URL,
 });
 
 export default ApiClient;

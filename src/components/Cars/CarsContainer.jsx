@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
@@ -9,6 +9,7 @@ const CarsContainer = () => {
 
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [update, setUpdate] = useState(true);
 
     const startRent = (carId) => {
         const rent = {
@@ -16,23 +17,41 @@ const CarsContainer = () => {
             carId: carId,
             carStatus: CarStatus.IN_RENT,
         }
-        ApiService.processOrder(rent);
+        ApiService.processOrder(rent)
+            .then(r => {
+                setUpdate(!update);
+                console.log("Created Order");
+            });
     }
 
-    // todo
-    //  get all the cars that are free or all the free and one that is in the order by the current user
     useEffect(() => {
-        ApiService.fetchCars()
-            .then(res => {
-                setCars(res.data.carsDto.map(c => <CarView key={c.id} car={c}
-                                                           startRent={() => startRent(c.id)}
-                                                           startBook={() => startBook(c.id)}
-                                                           finishRide={() => finishRide(c.id)}
-                                                           pauseRent={() => pauseRent(c.id)}
-                                                           loading={loading}/>));
-                setLoading(false);
-            })
-    }, [loading, setCars]);
+        if (LocalStorage.getUserId()) {
+            console.log("fetchAvailableCars");
+            ApiService.fetchAvailableCars()
+                .then(res => {
+                    console.log(res.data.carsDto);
+                    setCars(res.data.carsDto.map(c => <CarView key={c.id} car={c}
+                                                      startRent={() => startRent(c.id)}
+                                                      startBook={() => startBook(c.id)}
+                                                      finishRide={() => finishRide(c.id)}
+                                                      pauseRent={() => pauseRent(c.id)}
+                                                      loading={loading}/>));
+                });
+        } else {
+            console.log("fetchFreeCars");
+            ApiService.fetchFreeCars()
+                .then(res => {
+                    console.log(res.data.carsDto);
+                    setCars(res.data.carsDto.map(c => <CarView key={c.id} car={c}
+                                                      startRent={() => startRent(c.id)}
+                                                      startBook={() => startBook(c.id)}
+                                                      finishRide={() => finishRide(c.id)}
+                                                      pauseRent={() => pauseRent(c.id)}
+                                                      loading={loading}/>));
+                });
+        }
+        setLoading(false);
+    }, [loading, setCars, update]);
 
     const startBook = (carId) => {
         const book = {
@@ -40,7 +59,11 @@ const CarsContainer = () => {
             carId: carId,
             carStatus: CarStatus.IN_BOOKING,
         }
-        ApiService.processOrder(book);
+        ApiService.processOrder(book)
+            .then(r => {
+                setUpdate(!update);
+                console.log("Created Order");
+            });
     }
 
     const finishRide = (carId) => {
@@ -49,7 +72,12 @@ const CarsContainer = () => {
             carId: carId,
             carStatus: CarStatus.FREE,
         }
-        ApiService.processOrder(ride);
+        ApiService.processOrder(ride)
+            .then(r => {
+                setUpdate(!update);
+                headerRef.current.updateBalance();
+                console.log("Created Order");
+            });
     }
 
     const pauseRent = (carId) => {
@@ -58,12 +86,18 @@ const CarsContainer = () => {
             carId: carId,
             carStatus: CarStatus.IN_RENT_PAUSED,
         }
-        ApiService.processOrder(rent);
+        ApiService.processOrder(rent)
+            .then(r => {
+                setUpdate(!update);
+                console.log("Created Order");
+            });
     }
+
+    const headerRef = useRef();
 
     return (
         <>
-            <Header/>
+            <Header ref={headerRef}/>
             <div>
                 {loading && <p>⏱⏱⏱⏱⏱</p>}
                 {!loading && cars}
