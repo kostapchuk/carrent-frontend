@@ -85,6 +85,22 @@ class ApiService {
                 console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
             });
     }
+
+    static uploadFile = (payload) => {
+        return ApiClient.post("/documents", payload,
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static fetchUsers = () => {
+        return ApiClient.get("/users",
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
 }
 
 export default ApiService;

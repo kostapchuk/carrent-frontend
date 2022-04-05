@@ -22,7 +22,6 @@ const RidesContainer = () => {
 
     return (
         <>
-            <Header/>
             {loading && <p>⏰⏰⏰⏰⏰⏰</p>}
             {!loading && rides.map(r => {
                 return <div key={shortid.generate()}>

@@ -1,5 +1,4 @@
 import './Login.styles.css'
-import Header from "../header/Header";
 
 const LoginView = ({
                        handleSubmit,
@@ -8,7 +7,6 @@ const LoginView = ({
                    }) => {
     return (
         <>
-            <Header/>
             <div className='register-form-container'>
                 <form className='user-from' onSubmit={handleSubmit}>
                     <label>

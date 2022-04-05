@@ -1,11 +1,11 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
 import CarStatus from "../../utils/const";
 import Header from "../header/Header";
 
-const CarsContainer = () => {
+const CarsContainer = (headerRef) => {
 
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -93,11 +93,8 @@ const CarsContainer = () => {
             });
     }
 
-    const headerRef = useRef();
-
     return (
         <>
-            <Header ref={headerRef}/>
             <div>
                 {loading && <p>⏱⏱⏱⏱⏱</p>}
                 {!loading && cars}

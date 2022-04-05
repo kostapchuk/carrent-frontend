@@ -53,7 +53,6 @@ const RegisterContainer = () => {
 
     return (
         <>
-            <Header/>
             <RegisterView handleSubmit={handleSubmit} handleChangeFirstName={handleChangeFirstName}
                           handleChangeLastName={handleChangeLastName} handleChangePhone={handleChangePhone}
                           handleChangeEmail={handleChangeEmail} handleChangePassword={handleChangePassword}/>

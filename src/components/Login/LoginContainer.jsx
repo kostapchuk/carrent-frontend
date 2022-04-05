@@ -1,5 +1,4 @@
 import './Login.styles.css'
-import axios from "axios";
 import React, {useState} from 'react';
 import RegisterView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";
