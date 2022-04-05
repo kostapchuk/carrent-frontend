@@ -1,17 +1,16 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import Logout from "../Login/Logout";
-import {forwardRef, useEffect, useImperativeHandle, useState} from "react";
+import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 
-const Header = forwardRef((props, ref) => {
+const Header = () => {
     const [balance, setBalance] = useState(0);
 
     useEffect(() => {
         if (LocalStorage.getUserId()) {
             ApiService.fetchBalance()
                 .then(r => {
-                    console.log(r.data);
                     setBalance(r.data);
                 })
         }
@@ -23,16 +22,6 @@ const Header = forwardRef((props, ref) => {
                 window.location.href = r.data;
             });
     }
-
-    useImperativeHandle(ref, () => ({
-        updateBalance() {
-            ApiService.fetchBalance()
-                .then(r => {
-                    console.log(r.data);
-                    setBalance(r.data);
-                })
-        }
-    }));
 
     return (
         <div>
@@ -47,6 +36,6 @@ const Header = forwardRef((props, ref) => {
             <p style={{color: "red"}}>header ends here TYT</p>
         </div>
     );
-})
+}
 
 export default Header;
