@@ -26,12 +26,18 @@ const Header = () => {
     return (
         <div class="container">
             <Logout/>
-            {LocalStorage.getUserId() && <p>Balance: {balance} $</p>}
-            {LocalStorage.getUserId() && <button onClick={payTheDebt}>Pay</button>}
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <ul>
+                    <Link className="navbar-brand" to="#">Navbar</Link>
+                </ul>
+
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -56,6 +62,12 @@ const Header = () => {
                         </li>
                     </ul>
                 </div>
+
+                <div className="d-flex flex-row-reverse">
+                    {!LocalStorage.getUserId() && <p className="balance">Balance: {balance} $</p>}
+                    {!LocalStorage.getUserId() && <button onClick={payTheDebt}>Pay</button>}
+                </div>
+
             </div>
             </nav>
         </div>
