@@ -73,7 +73,7 @@ class ApiService {
     }
 
     static register = (user) => {
-        return ApiClient.post("/users/", {...user})
+        return ApiClient.post("/users", {...user})
             .catch(e => {
                 console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
             });
