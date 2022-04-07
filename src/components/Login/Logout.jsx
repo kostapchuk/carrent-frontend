@@ -11,7 +11,7 @@ const Logout = () => {
     }
 
     return(
-        <Link to="/" className="nav-link" onClick={handleClick}>Logout</Link>
+        LocalStorage.getUserId() && <Link to="/" className="nav-link" onClick={handleClick}>Logout</Link>
     );
 }
 
