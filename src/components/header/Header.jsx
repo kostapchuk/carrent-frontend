@@ -3,6 +3,7 @@ import LocalStorage from "../../storage/LocalStorage";
 import Logout from "../Login/Logout";
 import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
+import HeaderStyles from './Header.styles.css'
 
 const Header = () => {
     const [balance, setBalance] = useState(0);
@@ -24,52 +25,54 @@ const Header = () => {
     }
 
     return (
-        <div class="container">
-            <Logout/>
+        <div className="container">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container-fluid">
+                    
+                    <a className="navbar-brand" href="/cars">CarRent</a>
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <ul>
-                    <Link className="navbar-brand" to="#">Navbar</Link>
-                </ul>
-
-
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
                             {!LocalStorage.getUserId() && <Link className="nav-link" aria-current="page" to="/register">Register</Link>}
                         </li>
 
-                        <li class="nav-item">
+                        <li className="nav-item">
                             {!LocalStorage.getUserId() && <Link className="nav-link" to="/">Login</Link>}
                         </li>
 
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <Link className="nav-link" to="/cars">Cars</Link>
                         </li>
 
-                        <li class="nav-item">
+                        <li className="nav-item">
                             {!LocalStorage.getUserId() && <Link className="nav-link" to="/documents">Documents</Link>}
                         </li>
 
-                        <li class="nav-item">
+                        <li className="nav-item">
                             {!LocalStorage.getUserId() && <Link className="nav-link" to="/rides">History</Link>}
+                        </li>
+
+                        <li className="nav-item">
+                            <Logout/>
+                        </li>
+
+                        <li className="nav-item">
+                            {!LocalStorage.getUserId() && <p className="nav-link"> {balance} $</p>}
+                        </li>
+
+                        <li className="nav-item">
+                            {!LocalStorage.getUserId() && <button className="btn btn-primary" onClick={payTheDebt}>Pay</button>}
                         </li>
                     </ul>
                 </div>
-
-                <div className="d-flex flex-row-reverse">
-                    {!LocalStorage.getUserId() && <p className="balance">Balance: {balance} $</p>}
-                    {!LocalStorage.getUserId() && <button onClick={payTheDebt}>Pay</button>}
                 </div>
-
-            </div>
             </nav>
+
         </div>
     );
 }
