@@ -1,35 +1,41 @@
 import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
+import UserContainer from "./UserContainer";
 
 const UsersContainer = () => {
 
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [roles, setRoles] = useState([]);
+    const [statuses, setStatuses] = useState([]);
 
-    useEffect(() => {
+    const updateUsers = () => {
         ApiService.fetchUsers()
             .then(r => {
                 setUsers(r.data.userDtos);
-                console.log(r.data.userDtos);
-            });
-
-    }, [setUsers])
-
-    const handleOnClick = (event) => {
-        event.preventDefault();
+                setLoading(false);
+            })
     }
+
+    useEffect(() => {
+        updateUsers()
+        ApiService.fetchRoles()
+            .then(r => {
+                setRoles(r.data.roles);
+            })
+        ApiService.fetchStatuses()
+            .then(r => {
+                setStatuses(r.data.statuses);
+            })
+    }, [setUsers, setRoles, setStatuses]);
 
     return (
         <>
-            {users.map(u =>
-                <div key={u.id}>
-                    <input type={"text"} value={u.firstName}/>
-                    <input type={"text"} value={u.lastName}/>
-                    <input type={"checkbox"} defaultChecked={u.verified}/>
-                    {u.documentImg1 && <img src={u.documentImg1} alt={"img doc 1"} width={100}/>}
-                    {u.documentImg2 && <img src={u.documentImg2} alt={"img doc 2"} width={100}/>}
-                    <button data-id={u.id} type={"submit"} onClick={handleOnClick}>Update</button>
-                </div>
-            )}
+            <div>
+                {loading && <p>⏱⏱⏱⏱⏱</p>}
+                {!loading && users.map(u => <UserContainer key={u.id} user={u} roles={roles} statuses={statuses}
+                                                           updateUsers={updateUsers}/>)}
+            </div>
         </>
     )
 }

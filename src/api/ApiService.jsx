@@ -101,6 +101,26 @@ class ApiService {
                 console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
             });
     }
+
+    static fetchRoles = () => {
+        return ApiClient.get("/users/roles",
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static fetchStatuses = () => {
+        return ApiClient.get("/users/statuses",
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log("Status: " + e.response.data.status + ". Message: " + e.response.data.message);
+            });
+    }
+
+    static updateUser = (user) => {
+        return ApiClient.put("/users", {...user}, {headers: {Authorization: LocalStorage.getToken()}})
+    }
 }
 
 export default ApiService;
