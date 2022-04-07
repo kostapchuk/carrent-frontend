@@ -31,11 +31,11 @@ const CarsContainer = (headerRef) => {
                 .then(res => {
                     console.log(res.data.carsDto);
                     setCars(res.data.carsDto.map(c => <CarView key={c.id} car={c}
-                                                      startRent={() => startRent(c.id)}
-                                                      startBook={() => startBook(c.id)}
-                                                      finishRide={() => finishRide(c.id)}
-                                                      pauseRent={() => pauseRent(c.id)}
-                                                      loading={loading}/>));
+                                                               startRent={() => startRent(c.id)}
+                                                               startBook={() => startBook(c.id)}
+                                                               finishRide={() => finishRide(c.id)}
+                                                               pauseRent={() => pauseRent(c.id)}
+                                                               loading={loading}/>));
                 });
         } else {
             console.log("fetchFreeCars");
@@ -43,11 +43,11 @@ const CarsContainer = (headerRef) => {
                 .then(res => {
                     console.log(res.data.carsDto);
                     setCars(res.data.carsDto.map(c => <CarView key={c.id} car={c}
-                                                      startRent={() => startRent(c.id)}
-                                                      startBook={() => startBook(c.id)}
-                                                      finishRide={() => finishRide(c.id)}
-                                                      pauseRent={() => pauseRent(c.id)}
-                                                      loading={loading}/>));
+                                                               startRent={() => startRent(c.id)}
+                                                               startBook={() => startBook(c.id)}
+                                                               finishRide={() => finishRide(c.id)}
+                                                               pauseRent={() => pauseRent(c.id)}
+                                                               loading={loading}/>));
                 });
         }
         setLoading(false);

@@ -7,16 +7,14 @@ import CarsContainer from "./components/Cars/CarsContainer";
 import RidesContainer from "./components/Rides/RidesContainer";
 import UploadFileComponent from "./components/documents/UploadFileComponent";
 import Header from "./components/header/Header";
-import {useRef} from "react";
 import UsersContainer from "./components/users/UsersContainer";
+import UserContainer from "./components/users/UserContainer";
 
 function App() {
 
-    const headerRef = useRef();
-
     return (
         <div>
-            <Header ref={headerRef}/>
+            <Header/>
             <Routes>
                 <Route path='/register' element={<RegisterContainer/>}/>
                 <Route path='/' element={<LoginContainer/>}/>
@@ -28,6 +26,7 @@ function App() {
                 <Route path='/register-result' element={<RegistrationResultView/>}/>
                 <Route path='/documents' element={<UploadFileComponent/>}/>
                 <Route path='/admin/users' element={<UsersContainer/>}/>
+                <Route path='/admin/users/:id' element={<UserContainer/>}/>
             </Routes>
         </div>
     );
