@@ -1,14 +1,16 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
 import CarStatus from "../../utils/const";
+import BalanceContext from "../../context/BalanceContext";
 
 const CarsContainer = () => {
 
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [update, setUpdate] = useState(true);
+    const {setBalance} = useContext(BalanceContext);
 
     useEffect(() => {
         if (LocalStorage.getUserId()) {
@@ -34,6 +36,11 @@ const CarsContainer = () => {
         ApiService.processOrder(order)
             .then(r => {
                 setUpdate(!update);
+                if (status === CarStatus.FREE) {
+                    ApiService.fetchBalance().then(res => {
+                        setBalance(res.data)
+                    })
+                }
             });
     }
 
