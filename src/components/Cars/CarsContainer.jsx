@@ -12,18 +12,67 @@ const CarsContainer = () => {
     const [update, setUpdate] = useState(true);
     const {setBalance} = useContext(BalanceContext);
 
-    useEffect(() => {
-        if (LocalStorage.getUserId()) {
-            ApiService.fetchAvailableCars()
-                .then(res => {
-                    setCars(res.data.carsDto);
-                });
-        } else {
-            ApiService.fetchFreeCars()
-                .then(res => {
-                    setCars(res.data.carsDto);
-                });
+    const sampleData = [
+        {
+            "id": 2,
+            "mark": "Mercedes-Benz",
+            "model": "E-class",
+            "rentPricePerHour": 5,
+            "bookPricePerHour": 1.5,
+            "imgUrl": "https://www.mercedes-benz.ru/passengercars/mercedes-benz-cars/models/e-class/saloon-w213-fl-copy/explore/overview/_jcr_content/highlightcontainer/par/highlighttile.MQ6.0.20201027111551.jpeg",
+            "carStatus": "FREE"
+        },
+        {
+            "id": 3,
+            "mark": "BMW",
+            "model": "M5",
+            "rentPricePerHour": 11,
+            "bookPricePerHour": 8.5,
+            "imgUrl": "https://cdn.motor1.com/images/mgl/90w2l/s1/1x1/2022-bmw-m5-cs-front-view.webp",
+            "carStatus": "FREE"
+        },
+        {
+            "id": 4,
+            "mark": "BMW",
+            "model": "M5",
+            "rentPricePerHour": 11,
+            "bookPricePerHour": 8.5,
+            "imgUrl": "https://cdn.motor1.com/images/mgl/90w2l/s1/1x1/2022-bmw-m5-cs-front-view.webp",
+            "carStatus": "FREE"
+        },
+        {
+            "id": 5,
+            "mark": "BMW",
+            "model": "M5",
+            "rentPricePerHour": 11,
+            "bookPricePerHour": 8.5,
+            "imgUrl": "https://cdn.motor1.com/images/mgl/90w2l/s1/1x1/2022-bmw-m5-cs-front-view.webp",
+            "carStatus": "FREE"
+        },
+        {
+            "id": 6,
+            "mark": "BMW",
+            "model": "M5",
+            "rentPricePerHour": 11,
+            "bookPricePerHour": 8.5,
+            "imgUrl": "https://cdn.motor1.com/images/mgl/90w2l/s1/1x1/2022-bmw-m5-cs-front-view.webp",
+            "carStatus": "FREE"
         }
+    ];
+
+    useEffect(() => {
+        // if (LocalStorage.getUserId()) {
+        //     ApiService.fetchAvailableCars()
+        //         .then(res => {
+        //             setCars(res.data.carsDto);
+        //         });
+        // } else {
+        //     ApiService.fetchFreeCars()
+        //         .then(res => {
+        //             setCars(res.data.carsDto);
+        //         });
+        // }
+        setCars(sampleData);
         setLoading(false);
     }, [loading, setCars, update]);
 
