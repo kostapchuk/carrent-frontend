@@ -34,7 +34,6 @@ const CarsContainer = () => {
         ApiService.processOrder(order)
             .then(r => {
                 setUpdate(!update);
-                console.log("Created Order" + r.data);
             });
     }
 

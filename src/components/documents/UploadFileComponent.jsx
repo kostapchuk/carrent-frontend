@@ -26,7 +26,6 @@ const UploadFileComponent = () =>  {
 
         ApiService.uploadFile(data)
             .then(response => {
-                console.log(response);
                 setMsg("File successfully uploaded");
             })
     }
