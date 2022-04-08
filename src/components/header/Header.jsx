@@ -1,13 +1,18 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import Logout from "../Login/Logout";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
+import LoggedInContext from "../../context/LoggedInContext";
+import BalanceContext from "../../context/BalanceContext";
 
 const Header = () => {
-    const [balance, setBalance] = useState(0);
+
+    const {loggedIn} = useContext(LoggedInContext);
+    const {balance, setBalance} = useContext(BalanceContext);
 
     useEffect(() => {
+        console.log("Header renders...");
         if (LocalStorage.getUserId()) {
             ApiService.fetchBalance()
                 .then(r => {
@@ -36,30 +41,30 @@ const Header = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && 
+                                {!loggedIn &&
                                     <Link className="nav-link" aria-current="page" to="/register">Register</Link>}
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <Link className="nav-link" to="/">Login</Link>}
+                                {!loggedIn && <Link className="nav-link" to="/">Login</Link>}
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/cars">Cars</Link>
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <Link className="nav-link" to="/documents">Documents</Link>}
+                                {loggedIn && <Link className="nav-link" to="/documents">Documents</Link>}
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <Link className="nav-link" to="/rides">History</Link>}
+                                {loggedIn && <Link className="nav-link" to="/rides">History</Link>}
                             </li>
                             <li className="nav-item">
                                 <Logout/>
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <p className="nav-link"> {balance} $</p>}
+                                {loggedIn && <p className="nav-link"> {balance} $</p>}
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && 
-                                <button className="btn btn-primary" onClick={payTheDebt}>Pay</button>}
+                                {loggedIn &&
+                                    <button className="btn btn-primary" onClick={payTheDebt}>Pay</button>}
                             </li>
                         </ul>
                     </div>

@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 import LocalStorage from "../../storage/LocalStorage";
-import Header from "../header/Header";
 
 const shortid = require('shortid');
 

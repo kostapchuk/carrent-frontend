@@ -1,8 +1,6 @@
-import './Register.styles.css'
 import React, {useState} from 'react';
 import RegisterView from "./RegisterView";
 import {useNavigate} from "react-router-dom";
-import Header from "../header/Header";
 import ApiService from "../../api/ApiService";
 
 const RegisterContainer = () => {
