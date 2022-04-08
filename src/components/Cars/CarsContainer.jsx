@@ -3,9 +3,8 @@ import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
 import CarStatus from "../../utils/const";
-import Header from "../header/Header";
 
-const CarsContainer = (headerRef) => {
+const CarsContainer = () => {
 
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -75,7 +74,6 @@ const CarsContainer = (headerRef) => {
         ApiService.processOrder(ride)
             .then(r => {
                 setUpdate(!update);
-                headerRef.current.updateBalance();
                 console.log("Created Order");
             });
     }

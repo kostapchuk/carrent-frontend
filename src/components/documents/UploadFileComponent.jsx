@@ -7,7 +7,6 @@ const UploadFileComponent = () =>  {
 
     const [filePrepared, setFilePrepared] = useState('');
     const [msg, setMsg] = useState('');
-    const [error, setError] = useState('');
 
     const onFileChange = (event) => {
         setFilePrepared(event.target.files[0]);
@@ -34,7 +33,7 @@ const UploadFileComponent = () =>  {
     }
 
     return (
-        <div id="container">
+        <>
             <h1>File Upload Example using React</h1>
             <h3>Upload a File</h3>
             <h4>{msg}</h4>
@@ -44,7 +43,7 @@ const UploadFileComponent = () =>  {
             <br/>
             <input onChange={onFileChange} type="file"/>
             <button data-imgnumber={2} disabled={!filePrepared} onClick={uploadFileData}>Upload 2</button>
-        </div>
+        </>
     )
 }
 

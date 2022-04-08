@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 
 const Header = () => {
+
     const [balance, setBalance] = useState(0);
 
     useEffect(() => {
@@ -46,19 +47,19 @@ const Header = () => {
                                 <Link className="nav-link" to="/cars">Cars</Link>
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <Link className="nav-link" to="/documents">Documents</Link>}
+                                {LocalStorage.getUserId() && <Link className="nav-link" to="/documents">Documents</Link>}
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <Link className="nav-link" to="/rides">History</Link>}
+                                {LocalStorage.getUserId() && <Link className="nav-link" to="/rides">History</Link>}
                             </li>
                             <li className="nav-item">
                                 <Logout/>
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && <p className="nav-link"> {balance} $</p>}
+                                {LocalStorage.getUserId() && <p className="nav-link"> {balance} $</p>}
                             </li>
                             <li className="nav-item">
-                                {!LocalStorage.getUserId() && 
+                                {LocalStorage.getUserId() &&
                                 <button className="btn btn-primary" onClick={payTheDebt}>Pay</button>}
                             </li>
                         </ul>
