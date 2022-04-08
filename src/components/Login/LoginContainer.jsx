@@ -1,4 +1,3 @@
-import './Login.styles.css'
 import React, {useState} from 'react';
 import RegisterView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";

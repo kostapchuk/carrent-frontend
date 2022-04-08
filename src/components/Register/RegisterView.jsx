@@ -1,5 +1,4 @@
 import {Link} from 'react-router-dom';
-import './Register.styles.css'
 
 const RegisterView = ({
                           handleSubmit,
