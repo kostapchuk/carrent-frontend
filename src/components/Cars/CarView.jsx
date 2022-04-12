@@ -2,109 +2,47 @@ import CarStatus from "../../utils/const";
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 
+
 const CarView = ({car, loading, startRent, startBook, finishRide, pauseRent}) => {
 
     return (<>
             {loading && <p>⏰⏰⏰⏰⏰⏰</p>}
-            {/* {!loading &&
-                <>
-                    <p>id: {car.id}</p>
-                    <p>mark: {car.mark}</p>
-                    <p>model: {car.model}</p>
-                    <p>rentPricePerHour: {car.rentPricePerHour} $</p>
-                    <p>bookPricePerHour: {car.bookPricePerHour} $</p>
-                    <Link to={"/cars/" + car.id}><img src={car.imgUrl} alt="" width={'200px'}/></Link>
 
-                    {LocalStorage.getUserId() && car.carStatus === CarStatus.FREE &&
-                        <>
-                            <button onClick={startRent}>startRent</button>
-                            <button onClick={startBook}>startBook</button>
-                        </>
-                    }
-
-                    {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT &&
-                        <>
-                            <button onClick={pauseRent}>pauseRent</button>
-                        </>
-                    }
-
-                    {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_BOOKING &&
-                        <>
-                            <button onClick={startRent}>startRent</button>
-                        </>
-                    }
-                    {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT_PAUSED &&
-                        <>
-                            <button onClick={startRent}>startRent</button>
-                        </>
-                    }
-
-                    {LocalStorage.getUserId() && (car.carStatus === CarStatus.IN_BOOKING ||
-                            car.carStatus === CarStatus.IN_RENT || car.carStatus === CarStatus.IN_RENT_PAUSED)
-                        &&
-                        <>
-                            <button onClick={finishRide}>finishRide</button>
-                        </>
-                    }
-                </>
-            } */}
-
-            <div className="col-sm-4">
-                <div className="card" style={{width: "18rem"}}>
-                    <img src={car.imgUrl} className="card-img-top" alt="..."/>
-                    <div className="card-body">
-                        <h5 className="card-title">Card title</h5>
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" className="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            
-
-
-                <div className="row" style={{width: "500px"}}>
-                    <div className="col mb-5">
-                        <div className="card h-100">
-                            <Link to={"/cars/" + car.id}><img className="card-img-top" src={car.imgUrl} alt="" width={'450px'}/></Link>
-                            <div className="card-body p-4">
-                                <div className="text-center">
-                                    <h5 className="fw-bolder">{car.mark}</h5>
-                                    <div className="d-flex justify-content-center small mb-2">
-                                        <h5>{car.model}</h5>
-                                    </div>
-                                    <div>
-                                        <p>CarRent Price: {car.rentPricePerHour} $</p>
-                                    </div>
-                                    <div>
-                                        <p>CarBook Price: {car.bookPricePerHour} $</p>
-                                    </div>
-                                </div>
+            <div className="row col-sm-4 justify-content-center">
+                <div className="card" style={{width: "19rem", height: "550px", margin: "70px 0 30px 0"}}>
+                    <Link to={"/cars/" + car.id}><img className="card-img-top" src={car.imgUrl} alt="" style={{height:"100%", width:"100%", margin: "10px 0 0 0", objectFit: "cover"}}/></Link>
+                    <div className="card-body text-center d-flex flex-column">
+                        <h5 className="card-title">{car.mark}</h5>
+                        <p className="card-text">{car.model}</p>
+                            <div>
+                                <p>Rent <span style={{fontWeight: "bolder"}}>{car.rentPricePerHour}</span> $/h</p>
                             </div>
-                    
-                        {LocalStorage.getUserId() && car.carStatus === CarStatus.FREE &&
-                            <>
-                            <div className="d-flex justify-content-center">
-                                <button className="btn btn-primary m-2" onClick={startRent}>Rent</button>
-                                <button className="btn btn-primary m-2" onClick={startBook}>Book</button>
+                            <div>
+                                <p>Book <span style={{fontWeight: "bolder"}}>{car.bookPricePerHour}</span> $/h</p>
                             </div>
-                            </>
-                        }
+                            
+
+                            <div className="d-flex justify-content-center mt-auto">
+                                <button className="btn btn-primary m-2 px-3" onClick={startRent}>Rent</button>
+                                <button className="btn btn-primary m-2 px-3" onClick={startBook}>Book</button>
+                            </div>
+
 
                         {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT &&
                             <>
-                                <button className="btn btn-primary m-2" onClick={pauseRent}>pauseRent</button>
+                                <button className="btn btn-primary m-2" onClick={pauseRent}>PauseRent</button>
                             </>
                         }
 
                         {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_BOOKING &&
                             <>
-                                <button className="btn btn-primary m-2" onClick={startRent}>startRent</button>
+                                <button className="btn btn-primary m-2" onClick={startRent}>Start Rent</button>
                             </>
                         }
+
                         {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT_PAUSED &&
                             <>
-                                <button className="btn btn-primary m-2" onClick={startRent}>startRent</button>
+                                <button className="btn btn-primary m-2" onClick={startRent}>Start Rent</button>
                             </>
                         }
 
@@ -112,13 +50,12 @@ const CarView = ({car, loading, startRent, startBook, finishRide, pauseRent}) =>
                                 car.carStatus === CarStatus.IN_RENT || car.carStatus === CarStatus.IN_RENT_PAUSED)
                             &&
                             <>
-                                <button className="btn btn-primary m-2" onClick={finishRide}>finishRide</button>
+                                <button className="btn btn-primary m-2" onClick={finishRide}>Finish Ride</button>
                             </>
-                        }</div>
+                        }
                     </div>
                 </div>
-
-
+            </div>
         </>
     );
 }
