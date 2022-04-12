@@ -21,12 +21,14 @@ const CarView = ({car, loading, startRent, startBook, finishRide, pauseRent}) =>
                                 <p>Book <span style={{fontWeight: "bolder"}}>{car.bookPricePerHour}</span> $/h</p>
                             </div>
                             
-
-                            <div className="d-flex justify-content-center mt-auto">
-                                <button className="btn btn-primary m-2 px-3" onClick={startRent}>Rent</button>
-                                <button className="btn btn-primary m-2 px-3" onClick={startBook}>Book</button>
-                            </div>
-
+                        {LocalStorage.getUserId() && car.carStatus === CarStatus.FREE &&
+                        <>
+                        <div className="d-flex justify-content-center mt-auto">
+                            <button className="btn btn-primary m-2 px-3" onClick={startRent}>Rent</button>
+                            <button className="btn btn-primary m-2 px-3" onClick={startBook}>Book</button>
+                        </div>
+                        </>
+                        }
 
                         {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT &&
                             <>
