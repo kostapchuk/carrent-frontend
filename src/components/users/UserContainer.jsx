@@ -4,6 +4,8 @@ import ApiService from "../../api/ApiService";
 
 const UserContainer = ({user, statuses, roles, updateUsers}) => {
 
+    // todo: make it like one state
+
     const [verified, setVerified] = useState(user.verified);
     const [role, setRole] = useState(user.role);
     const [status, setStatus] = useState(user.status);

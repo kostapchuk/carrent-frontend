@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-const RegisterView = ({handleSubmit, handleFormChange}) => {
+const RegisterView = ({handleSubmit, handleFormChange, formUser}) => {
     return (<div className="vh-100 bg-image">
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div className="container h-100">
@@ -16,6 +16,7 @@ const RegisterView = ({handleSubmit, handleFormChange}) => {
                                                    className="form-control form-control-lg"
                                                    onChange={handleFormChange}
                                                    name="firstName"
+                                                   value={formUser.firstName}
                                             />
                                             <label className="form-label">First Name</label>
                                         </div>
@@ -25,6 +26,7 @@ const RegisterView = ({handleSubmit, handleFormChange}) => {
                                                    className="form-control form-control-lg"
                                                    onChange={handleFormChange}
                                                    name="lastName"
+                                                   value={formUser.lastName}
                                             />
                                             <label className="form-label">Last Name</label>
                                         </div>
@@ -34,6 +36,7 @@ const RegisterView = ({handleSubmit, handleFormChange}) => {
                                                    className="form-control form-control-lg"
                                                    onChange={handleFormChange}
                                                    name="email"
+                                                   value={formUser.email}
                                             />
                                             <label className="form-label">Your Email</label>
                                         </div>
@@ -43,6 +46,7 @@ const RegisterView = ({handleSubmit, handleFormChange}) => {
                                                    className="form-control form-control-lg"
                                                    onChange={handleFormChange}
                                                    name="password"
+                                                   value={formUser.password}
                                             />
                                             <label className="form-label">Password</label>
                                         </div>
@@ -52,13 +56,13 @@ const RegisterView = ({handleSubmit, handleFormChange}) => {
                                                    className="form-control form-control-lg"
                                                    onChange={handleFormChange}
                                                    name="phone"
+                                                   value={formUser.phone}
                                             />
                                             <label className="form-label">Phone</label>
                                         </div>
 
                                         <div className="d-flex justify-content-center">
-                                            <button type="submit"
-                                                    className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                            <button className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
                                                 Register
                                             </button>
                                         </div>

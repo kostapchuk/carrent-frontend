@@ -36,7 +36,7 @@ const LoginContainer = () => {
     }
 
     return (
-        <LoginView handleSubmit={handleSubmit} handleFormChange={handleFormChange}/>
+        <LoginView handleSubmit={handleSubmit} handleFormChange={handleFormChange} formUser={formUser}/>
     );
 };
 

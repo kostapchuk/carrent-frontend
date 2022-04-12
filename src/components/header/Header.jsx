@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import Logout from "../Login/Logout";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import ApiService from "../../api/ApiService";
 import LoggedInContext from "../../context/LoggedInContext";
 import BalanceContext from "../../context/BalanceContext";

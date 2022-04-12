@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-const LoginView = ({handleSubmit, handleFormChange}) => {
+const LoginView = ({handleSubmit, handleFormChange, formUser}) => {
     return (<div className="vh-100 bg-image">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
@@ -15,6 +15,7 @@ const LoginView = ({handleSubmit, handleFormChange}) => {
                                                className="form-control form-control-lg"
                                                onChange={handleFormChange}
                                                name="email"
+                                               value={formUser.email}
                                         />
                                         <label className="form-label">Your Email</label>
                                     </div>
@@ -23,13 +24,13 @@ const LoginView = ({handleSubmit, handleFormChange}) => {
                                                className="form-control form-control-lg"
                                                onChange={handleFormChange}
                                                name="password"
+                                               value={formUser.password}
                                         />
                                         <label className="form-label">Password</label>
                                     </div>
                                     <div className="d-flex justify-content-center">
-                                        <button type="submit"
-                                                className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">Log
-                                            In
+                                        <button className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                            Log In
                                         </button>
                                     </div>
                                     <div className="d-flex justify-content-center pt-4">

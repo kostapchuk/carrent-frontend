@@ -32,7 +32,7 @@ const RegisterContainer = () => {
     }
 
     return (
-        <RegisterView handleSubmit={handleSubmit} handleFormChange={handleFormChange}/>
+        <RegisterView handleSubmit={handleSubmit} handleFormChange={handleFormChange} formUser={formUser}/>
     );
 };
 
