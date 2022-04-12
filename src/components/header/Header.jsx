@@ -20,7 +20,7 @@ const Header = () => {
                     setBalance(r.data);
                 })
         }
-    }, [balance])
+    }, [setBalance])
 
     const payTheDebt = () => {
         ApiService.payTheDebt()
