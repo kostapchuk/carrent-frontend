@@ -1,8 +1,8 @@
 import axios from "axios";
-import {BACKEND_URL} from "../utils/const";
 
 const ApiClient = axios.create({
-    baseURL: BACKEND_URL,
+    baseURL: process.env.REACT_APP_BACKEND_URL,
 });
+console.log(process.env.REACT_APP_BACKEND_URL);
 
 export default ApiClient;
