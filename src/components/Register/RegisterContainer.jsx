@@ -6,55 +6,33 @@ import ApiService from "../../api/ApiService";
 const RegisterContainer = () => {
 
     const navigate = useNavigate();
-
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [formUser, setFormUser] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        password: '',
+    })
 
     const handleSubmit = event => {
         event.preventDefault();
-        const user = {
-            firstName,
-            lastName,
-            phone,
-            email,
-            password,
-        }
-        ApiService.register(user)
-            .then(res => {
-                navigate("/register-result", {state: {success: res.data.success, message: res.data.message}});
-            }).catch(e => {
-                navigate("/register-result", {state: {success: false, message: e.message}});
-            })
+        ApiService.register(formUser)
+            .then(res => navigate("/register-result", {state: {success: res.data.success, message: res.data.message}}))
+            .catch(e => navigate("/register-result", {state: {success: false, message: e.message}}))
     }
 
-    const handleChangeFirstName = event => {
-        setFirstName(event.target.value);
-    }
-
-    const handleChangeLastName = event => {
-        setLastName(event.target.value);
-    }
-
-    const handleChangePhone = event => {
-        setPhone(event.target.value);
-    }
-
-    const handleChangeEmail = event => {
-        setEmail(event.target.value);
-    }
-    const handleChangePassword = event => {
-        setPassword(event.target.value);
+    const handleFormChange = event => {
+        const {name, value} = event.target;
+        setFormUser(prevFormUser => {
+            return {
+                ...prevFormUser,
+                [name]: value
+            }
+        });
     }
 
     return (
-        <>
-            <RegisterView handleSubmit={handleSubmit} handleChangeFirstName={handleChangeFirstName}
-                          handleChangeLastName={handleChangeLastName} handleChangePhone={handleChangePhone}
-                          handleChangeEmail={handleChangeEmail} handleChangePassword={handleChangePassword}/>
-        </>
+        <RegisterView handleSubmit={handleSubmit} handleFormChange={handleFormChange}/>
     );
 };
 

@@ -1,46 +1,42 @@
 import React, {useContext, useState} from 'react';
-import RegisterView from "./LoginView";
+import LoginView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
 import LoggedInContext from "../../context/LoggedInContext";
-import BalanceContext from "../../context/BalanceContext";
 
 const LoginContainer = () => {
 
     const navigate = useNavigate();
-    const {loggedIn, setLoggedIn} = useContext(LoggedInContext);
-    const {balance, setBalance} = useContext(BalanceContext);
-
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const {setLoggedIn} = useContext(LoggedInContext);
+    const [formUser, setFormUser] = useState({
+        email: '',
+        password: ''
+    })
 
     const handleSubmit = event => {
         event.preventDefault();
-        const credentials = {
-            email,
-            password
-        }
-        ApiService.login(credentials)
+        ApiService.login(formUser)
             .then(res => {
                 LocalStorage.setToken(res.data.token);
                 LocalStorage.setUserId(res.data.userId);
                 setLoggedIn(true);
-                console.log("after login: " + loggedIn);
                 navigate('/cars');
             })
     }
 
-    const handleChangeEmail = event => {
-        setEmail(event.target.value);
-    }
-    const handleChangePassword = event => {
-        setPassword(event.target.value);
+    const handleFormChange = event => {
+        const {name, value} = event.target;
+        setFormUser(prevFormUser => {
+            return {
+                ...prevFormUser,
+                [name]: value
+            }
+        })
     }
 
     return (
-        <RegisterView handleSubmit={handleSubmit} handleChangeEmail={handleChangeEmail}
-                      handleChangePassword={handleChangePassword}/>
+        <LoginView handleSubmit={handleSubmit} handleFormChange={handleFormChange}/>
     );
 };
 
