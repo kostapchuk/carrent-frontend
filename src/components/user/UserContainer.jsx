@@ -1,15 +1,14 @@
 import {useState} from "react";
-import ApiService from "../../../api/ApiService";
+import ApiService from "../../api/ApiService";
 import UserView from "./UserView";
 
-const UserContainer = ({user, statuses, roles, updateUsers}) => {
+const UserContainer = ({user, statuses, roles, updateUsers, updateMessage}) => {
 
     // todo: make it like one state
 
     const [verified, setVerified] = useState(user.verified);
     const [role, setRole] = useState(user.role);
     const [status, setStatus] = useState(user.status);
-    const [updateResult, setUpdateResult] = useState('');
 
     const handleVerifiedChange = () => {
         setVerified(!verified);
@@ -33,16 +32,15 @@ const UserContainer = ({user, statuses, roles, updateUsers}) => {
         ApiService.updateUser(userRequest)
             .then(r => {
                 updateUsers();
-                setUpdateResult("Successfully updated the user");
+                updateMessage("Successfully updated the user");
             })
             .catch(e => {
-                setUpdateResult("Could not update the user");
+                updateMessage("Could not update the user");
             })
     }
 
     return (
         <UserView user={user}
-                  updateResult={updateResult}
                   status={status}
                   handleStatusChange={handleStatusChange}
                   statuses={statuses}
@@ -52,6 +50,7 @@ const UserContainer = ({user, statuses, roles, updateUsers}) => {
                   verified={verified}
                   handleVerifiedChange={handleVerifiedChange}
                   handleSave={handleSave}
+                  updateMessage={updateMessage}
         />
     )
 }

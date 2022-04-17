@@ -4,11 +4,13 @@ import LocalStorage from "../../storage/LocalStorage";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
 import LoggedInContext from "../../context/LoggedInContext";
+import BalanceContext from "../../context/BalanceContext";
 
 const LoginContainer = () => {
 
     const navigate = useNavigate();
     const {setLoggedIn} = useContext(LoggedInContext);
+    const {setBalance} = useContext(BalanceContext);
     const [formUser, setFormUser] = useState({
         email: '',
         password: ''
@@ -21,6 +23,10 @@ const LoginContainer = () => {
                 LocalStorage.setToken(res.data.token);
                 LocalStorage.setUserId(res.data.userId);
                 setLoggedIn(true);
+                ApiService.fetchBalance()
+                    .then(r => {
+                        setBalance(r.data);
+                    })
                 navigate('/cars');
             })
     }

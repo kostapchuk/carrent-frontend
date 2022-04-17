@@ -46,9 +46,10 @@ const CarsContainer = () => {
 
     return (
         <div className="container">
-            <div className="row">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 {loading && <p>⏱⏱⏱⏱⏱</p>}
-                {!loading && cars.map(c => <CarView key={c.id} car={c}
+                {!loading && cars.map(c => <CarView key={c.id}
+                                                    car={c}
                                                     startRent={() => processOrderReducer(CarStatus.IN_RENT, c.id)}
                                                     startBook={() => processOrderReducer(CarStatus.IN_BOOKING, c.id)}
                                                     finishRide={() => processOrderReducer(CarStatus.FREE, c.id)}
