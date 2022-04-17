@@ -13,7 +13,6 @@ const CarContainer = () => {
     useEffect(() => {
         ApiService.fetchCarById(params.id)
             .then(res => {
-                console.log(res.data);
                 setCar(res.data);
                 setLoading(false);
             })

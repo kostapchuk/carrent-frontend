@@ -1,24 +1,46 @@
-import RegisterContainer from "./components/Register/RegisterContainer";
-import { Routes, Route } from 'react-router-dom';
-import LoginContainer from "./components/Login/LoginContainer";
-import RegistrationResultView from "./components/Register/RegistrationResultView";
-import CarContainer from "./components/Cars/CarContainer";
-import CarsContainer from "./components/Cars/CarsContainer";
+import LoggedInContext from "./context/LoggedInContext";
+import {useMemo, useState} from "react";
+import LocalStorage from "./storage/LocalStorage";
+import BalanceContext from "./context/BalanceContext";
+import AppRouter from "./components/AppRouter";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+import Header from "./components/header/Header";
+
+// admin
+// verified
+// logged in
+// loading
 
 function App() {
+
+    const [loggedIn, setLoggedIn] = useState(LocalStorage.getUserId());
+    const loggedInValue = useMemo(
+        () => ({loggedIn, setLoggedIn}),
+        [loggedIn]
+    );
+
+    const [balance, setBalance] = useState(0);
+    const balanceValue = useMemo(
+        () => ({balance, setBalance}),
+        [balance]
+    );
+
+
     return (
-        <div>
-            {/*<Header />*/}
-            <Routes>
-                <Route path='/register' element={<RegisterContainer/>} />
-                <Route path='/' element={<LoginContainer/>} />
-                <Route path='/cars' element={<CarsContainer/>} />
-                <Route path='/cars/:id' element={<CarContainer/>} />
-                <Route path='/register-result' element={<RegistrationResultView/>} />
-                {/*<Route path='/shop' component={ShopPage} />*/}
-                {/*<Route exact path='/checkout' component={CheckoutPage} />*/}
-            </Routes>
-        </div>
+        <PayPalScriptProvider
+            options={{
+                "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+                components: "buttons",
+                currency: "USD"
+            }}
+        >
+            <LoggedInContext.Provider value={loggedInValue}>
+                <BalanceContext.Provider value={balanceValue}>
+                    <Header/>
+                    <AppRouter/>
+                </BalanceContext.Provider>
+            </LoggedInContext.Provider>
+        </PayPalScriptProvider>
     );
 }
 

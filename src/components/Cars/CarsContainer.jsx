@@ -1,74 +1,61 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
 import CarStatus from "../../utils/const";
-import Header from "../header/Header";
+import BalanceContext from "../../context/BalanceContext";
 
 const CarsContainer = () => {
 
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [update, setUpdate] = useState(true);
+    const {setBalance} = useContext(BalanceContext);
 
-    const startRent = (carId) => {
-        const rent = {
-            userId: LocalStorage.getUserId(),
-            carId: carId,
-            carStatus: CarStatus.IN_RENT,
-        }
-        ApiService.processOrder(rent);
-    }
-
-    // todo
-    //  get all the cars that are free or all the free and one that is in the order by the current user
     useEffect(() => {
-        ApiService.fetchCars()
-            .then(res => {
-                setCars(res.data.carsDto.map(c => <CarView key={c.id} car={c}
-                                                           startRent={() => startRent(c.id)}
-                                                           startBook={() => startBook(c.id)}
-                                                           finishRide={() => finishRide(c.id)}
-                                                           pauseRent={() => pauseRent(c.id)}
-                                                           loading={loading}/>));
-                setLoading(false);
-            })
-    }, [loading, setCars]);
+        if (LocalStorage.getUserId()) {
+            ApiService.fetchAvailableCars()
+                .then(res => {
+                    setCars(res.data.carsDto);
+                });
+        } else {
+            ApiService.fetchFreeCars()
+                .then(res => {
+                    setCars(res.data.carsDto);
+                });
+        }
+        setLoading(false);
+    }, [loading, setCars, update]);
 
-    const startBook = (carId) => {
-        const book = {
+    const processOrderReducer = (status, carId) => {
+        const order = {
             userId: LocalStorage.getUserId(),
             carId: carId,
-            carStatus: CarStatus.IN_BOOKING,
+            carStatus: status,
         }
-        ApiService.processOrder(book);
-    }
-
-    const finishRide = (carId) => {
-        const ride = {
-            userId: LocalStorage.getUserId(),
-            carId: carId,
-            carStatus: CarStatus.FREE,
-        }
-        ApiService.processOrder(ride);
-    }
-
-    const pauseRent = (carId) => {
-        const rent = {
-            userId: LocalStorage.getUserId(),
-            carId: carId,
-            carStatus: CarStatus.IN_RENT_PAUSED,
-        }
-        ApiService.processOrder(rent);
+        ApiService.processOrder(order)
+            .then(r => {
+                setUpdate(!update);
+                if (status === CarStatus.FREE) {
+                    ApiService.fetchBalance().then(res => {
+                        setBalance(res.data)
+                    })
+                }
+            });
     }
 
     return (
-        <>
-            <Header/>
-            <div>
+        <div className="container">
+            <div className="row">
                 {loading && <p>⏱⏱⏱⏱⏱</p>}
-                {!loading && cars}
+                {!loading && cars.map(c => <CarView key={c.id} car={c}
+                                                    startRent={() => processOrderReducer(CarStatus.IN_RENT, c.id)}
+                                                    startBook={() => processOrderReducer(CarStatus.IN_BOOKING, c.id)}
+                                                    finishRide={() => processOrderReducer(CarStatus.FREE, c.id)}
+                                                    pauseRent={() => processOrderReducer(CarStatus.IN_RENT_PAUSED, c.id)}
+                                                    loading={loading}/>)}
             </div>
-        </>
+        </div>
     );
 }
 
