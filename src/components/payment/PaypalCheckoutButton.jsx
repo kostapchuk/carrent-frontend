@@ -1,23 +1,15 @@
-import {useContext, useEffect, useState} from "react";
-import {
-    PayPalButtons,
-    usePayPalScriptReducer
-} from "@paypal/react-paypal-js";
+import {useContext} from "react";
+import {PayPalButtons} from "@paypal/react-paypal-js";
 import ApiService from "../../api/ApiService";
 import BalanceContext from "../../context/BalanceContext";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
 
-// GET BALANCE FROM BACKEND
-// UPDATE BALANCE IN DB AFTER SUCCESS
-
 const ButtonWrapper = () => {
     const {balance, setBalance} = useContext(BalanceContext);
     const navigate = useNavigate();
 
-    // creates a paypal order
     const createOrder = (data, actions) => {
-        let orderId = null;
         return ApiService.findDebt()
             .then(r => {
                 return actions.order
@@ -53,11 +45,22 @@ const ButtonWrapper = () => {
     };
 
     return (
-        <PayPalButtons
-            style={{layout: "vertical"}}
-            createOrder={createOrder}
-            onApprove={onApprove}
-        />
+        balance < 0
+            ?
+            <PayPalButtons
+                style={{
+                    layout: 'horizontal',
+                    size: 'small',
+                    color: 'black',
+                    label: 'paypal',
+                    height: 25,
+                    tagline: 'false'
+                }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+            />
+            :
+            <></>
     )
 }
 
