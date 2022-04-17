@@ -56,8 +56,16 @@ class ApiService {
             });
     }
 
-    static payTheDebt = () => {
-        return ApiClient.post("/users/pay", {userId: LocalStorage.getUserId()},
+    static payDebt = () => {
+        return ApiClient.post(`/users/${LocalStorage.getUserId()}/pay`, '',
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
+            });
+    }
+
+    static findDebt = () => {
+        return ApiClient.get(`/users/${LocalStorage.getUserId()}/debt`,
             {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);

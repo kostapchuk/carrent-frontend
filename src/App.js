@@ -3,6 +3,7 @@ import {useMemo, useState} from "react";
 import LocalStorage from "./storage/LocalStorage";
 import BalanceContext from "./context/BalanceContext";
 import AppRouter from "./components/AppRouter";
+import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 
 function App() {
 
@@ -20,11 +21,19 @@ function App() {
 
 
     return (
-        <LoggedInContext.Provider value={loggedInValue}>
-            <BalanceContext.Provider value={balanceValue}>
-                <AppRouter/>
-            </BalanceContext.Provider>
-        </LoggedInContext.Provider>
+        <PayPalScriptProvider
+            options={{
+                "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+                components: "buttons",
+                currency: "USD"
+            }}
+        >
+            <LoggedInContext.Provider value={loggedInValue}>
+                <BalanceContext.Provider value={balanceValue}>
+                    <AppRouter/>
+                </BalanceContext.Provider>
+            </LoggedInContext.Provider>
+        </PayPalScriptProvider>
     );
 }
 
