@@ -7,6 +7,7 @@ const UsersContainer = () => {
     // todo: make it like one state
 
     const [users, setUsers] = useState([]);
+    const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(true);
     const [roles, setRoles] = useState([]);
     const [statuses, setStatuses] = useState([]);
@@ -17,6 +18,10 @@ const UsersContainer = () => {
                 setUsers(r.data.userDtos);
                 setLoading(false);
             })
+    }
+
+    const updateMessage = (msg) => {
+        setMessage(msg);
     }
 
     useEffect(() => {
@@ -37,6 +42,8 @@ const UsersContainer = () => {
                    roles={roles}
                    statuses={statuses}
                    updateUsers={updateUsers}
+                   message={message}
+                   updateMessage={updateMessage}
         />
     )
 }

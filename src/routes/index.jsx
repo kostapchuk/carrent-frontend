@@ -6,7 +6,7 @@ import CarContainer from "../components/Cars/CarContainer";
 import RegistrationResultView from "../components/Register/RegistrationResultView";
 import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
-import UserContainer from "../components/users/user/UserContainer";
+import UserContainer from "../components/user/UserContainer";
 import ResultContainer from "../components/payment/ResultContainer";
 
 export const RouteNames = {
