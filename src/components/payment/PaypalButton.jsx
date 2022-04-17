@@ -5,7 +5,7 @@ import BalanceContext from "../../context/BalanceContext";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
 
-const ButtonWrapper = () => {
+const PaypalButton = () => {
     const {balance, setBalance} = useContext(BalanceContext);
     const navigate = useNavigate();
 
@@ -37,11 +37,15 @@ const ButtonWrapper = () => {
     const onApprove = (data, actions) => {
         return actions.order.capture()
             .then(() => {
+                navigate(RouteNames.SUCCESS_PAYMENT);
                 ApiService.payDebt();
                 setBalance(ApiService.fetchBalance()
-                    .then(r => r.data))
-                navigate(RouteNames.SUCCESS_PAYMENT)
+                    .then(r => r.data));
             });
+    };
+
+    const onCancel = (data, actions) => {
+        navigate(RouteNames.CANCELLED_PAYMENT);
     };
 
     return (
@@ -58,10 +62,11 @@ const ButtonWrapper = () => {
                 }}
                 createOrder={createOrder}
                 onApprove={onApprove}
+                onCancel={onCancel}
             />
             :
             <></>
     )
 }
 
-export default ButtonWrapper;
+export default PaypalButton;

@@ -19,7 +19,9 @@ const CarContainer = () => {
     }, [setCar, setLoading, params.id]);
 
     return (
-        <CarView car={car} loading={loading}/>
+        <CarView car={car}
+                 loading={loading}
+        />
     );
 }
 

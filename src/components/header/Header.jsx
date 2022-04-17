@@ -1,26 +1,15 @@
 import {Link} from "react-router-dom";
-import LocalStorage from "../../storage/LocalStorage";
 import Logout from "../Login/Logout";
-import {useContext, useEffect} from "react";
-import ApiService from "../../api/ApiService";
+import {useContext} from "react";
 import LoggedInContext from "../../context/LoggedInContext";
 import BalanceContext from "../../context/BalanceContext";
 import {RouteNames} from "../../routes";
-import ButtonWrapper from "../payment/PaypalCheckoutButton";
+import PaypalButton from "../payment/PaypalButton";
 
 const Header = () => {
 
     const {loggedIn} = useContext(LoggedInContext);
-    const {balance, setBalance} = useContext(BalanceContext);
-
-    useEffect(() => {
-        if (LocalStorage.getUserId()) {
-            ApiService.fetchBalance()
-                .then(r => {
-                    setBalance(r.data);
-                })
-        }
-    }, [setBalance])
+    const {balance} = useContext(BalanceContext);
 
     return (
         <div className="container">
@@ -36,11 +25,22 @@ const Header = () => {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 {!loggedIn &&
-                                    <Link className="nav-link" aria-current="page"
-                                          to={RouteNames.REGISTER}>Register</Link>}
+                                    <Link className="nav-link"
+                                          aria-current="page"
+                                          to={RouteNames.REGISTER}
+                                    >
+                                        Register
+                                    </Link>
+                                }
                             </li>
                             <li className="nav-item">
-                                {!loggedIn && <Link className="nav-link" to={RouteNames.LOGIN}>Login</Link>}
+                                {!loggedIn &&
+                                    <Link className="nav-link"
+                                          to={RouteNames.LOGIN}
+                                    >
+                                        Login
+                                    </Link>
+                                }
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to={RouteNames.CARS}>Cars</Link>
@@ -55,7 +55,7 @@ const Header = () => {
                                 {loggedIn && <p className="nav-link"> {balance} $</p>}
                             </li>
                             <li className="nav-item">
-                                {loggedIn && <ButtonWrapper/>}
+                                {loggedIn && <PaypalButton/>}
                             </li>
                             <li className="nav-item">
                                 <Logout/>

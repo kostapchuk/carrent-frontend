@@ -8,12 +8,11 @@ const CarView = ({car, loading, startRent, startBook, finishRide, pauseRent}) =>
     return (<>
             {loading && <p>⏰⏰⏰⏰⏰⏰</p>}
 
-            <div className="row col-sm-4 justify-content-center">
-                <div className="card" style={{width: "19rem", height: "550px", margin: "70px 0 30px 0"}}>
-                    <Link to={"/cars/" + car.id}><img className="card-img-top" src={car.imgUrl} alt="" style={{height:"100%", width:"100%", margin: "10px 0 0 0", objectFit: "cover"}}/></Link>
+            <div className="col">
+                <div className="card h-100">
+                    <Link to={"/cars/" + car.id}><img className="card-img-top" src={car.imgUrl} alt=""/></Link>
                     <div className="card-body text-center d-flex flex-column">
-                        <h5 className="card-title">{car.mark}</h5>
-                        <p className="card-text">{car.model}</p>
+                        <h6 className="card-title">{car.mark} {car.model}</h6>
                             <div>
                                 <p>Rent <span style={{fontWeight: "bolder"}}>{car.rentPricePerHour}</span> $/h</p>
                             </div>
@@ -25,7 +24,7 @@ const CarView = ({car, loading, startRent, startBook, finishRide, pauseRent}) =>
                         <>
                         <div className="d-flex justify-content-center mt-auto">
                             <button className="btn btn-primary m-2 px-3" onClick={startRent}>Rent</button>
-                            <button className="btn btn-primary m-2 px-3" onClick={startBook}>Book</button>
+                            <button className="btn btn-outline-primary m-2 px-3" onClick={startBook}>Book</button>
                         </div>
                         </>
                         }

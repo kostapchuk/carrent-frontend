@@ -1,12 +1,13 @@
 import LoginContainer from "../components/Login/LoginContainer";
 import RegisterContainer from "../components/Register/RegisterContainer";
-import RidesContainer from "../components/Rides/RidesContainer";
+import RidesContainer from "../components/rides/RidesContainer";
 import CarsContainer from "../components/Cars/CarsContainer";
 import CarContainer from "../components/Cars/CarContainer";
 import RegistrationResultView from "../components/Register/RegistrationResultView";
 import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
 import UserContainer from "../components/users/user/UserContainer";
+import ResultContainer from "../components/payment/ResultContainer";
 
 export const RouteNames = {
     LOGIN: "/login",
@@ -33,8 +34,10 @@ export const publicRoutes = [
 export const allRoutes = [
     ...publicRoutes,
     {path: RouteNames.RIDES, exact: true, component: <RidesContainer/>},
-    {path: RouteNames.SUCCESS_PAYMENT, exact: true, component: <RidesContainer/>},
-    {path: RouteNames.CANCELLED_PAYMENT, exact: true, component: <LoginContainer/>},
+    {path: RouteNames.SUCCESS_PAYMENT, exact: true, component: <ResultContainer success={true}
+                                                                                message="Success payment"/>},
+    {path: RouteNames.CANCELLED_PAYMENT, exact: true, component: <ResultContainer success={false}
+                                                                                  message="Cancelled payment"/>},
     {path: RouteNames.DOCUMENTS, exact: true, component: <UploadFileComponent/>},
     {path: RouteNames.ADMIN_USERS, exact: true, component: <UsersContainer/>},
     {path: RouteNames.ADMIN_USER, exact: true, component: <UserContainer/>},
