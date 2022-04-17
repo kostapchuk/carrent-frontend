@@ -1,10 +1,12 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import Logout from "../Login/Logout";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import ApiService from "../../api/ApiService";
 import LoggedInContext from "../../context/LoggedInContext";
 import BalanceContext from "../../context/BalanceContext";
+import {RouteNames} from "../../routes";
+import ButtonWrapper from "../payment/PaypalCheckoutButton";
 
 const Header = () => {
 
@@ -12,29 +14,21 @@ const Header = () => {
     const {balance, setBalance} = useContext(BalanceContext);
 
     useEffect(() => {
-        console.log("Header renders...");
         if (LocalStorage.getUserId()) {
             ApiService.fetchBalance()
                 .then(r => {
                     setBalance(r.data);
                 })
         }
-    }, [balance])
-
-    const payTheDebt = () => {
-        ApiService.payTheDebt()
-            .then(r => {
-                window.location.href = r.data;
-            });
-    }
+    }, [setBalance])
 
     return (
         <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/cars">CarRent</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"/>
                     </button>
@@ -42,29 +36,29 @@ const Header = () => {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 {!loggedIn &&
-                                    <Link className="nav-link" aria-current="page" to="/register">Register</Link>}
+                                    <Link className="nav-link" aria-current="page"
+                                          to={RouteNames.REGISTER}>Register</Link>}
                             </li>
                             <li className="nav-item">
-                                {!loggedIn && <Link className="nav-link" to="/">Login</Link>}
+                                {!loggedIn && <Link className="nav-link" to={RouteNames.LOGIN}>Login</Link>}
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/cars">Cars</Link>
+                                <Link className="nav-link" to={RouteNames.CARS}>Cars</Link>
                             </li>
                             <li className="nav-item">
-                                {loggedIn && <Link className="nav-link" to="/documents">Documents</Link>}
+                                {loggedIn && <Link className="nav-link" to={RouteNames.DOCUMENTS}>Documents</Link>}
                             </li>
                             <li className="nav-item">
-                                {loggedIn && <Link className="nav-link" to="/rides">History</Link>}
-                            </li>
-                            <li className="nav-item">
-                                <Logout/>
+                                {loggedIn && <Link className="nav-link" to={RouteNames.RIDES}>History</Link>}
                             </li>
                             <li className="nav-item">
                                 {loggedIn && <p className="nav-link"> {balance} $</p>}
                             </li>
                             <li className="nav-item">
-                                {loggedIn &&
-                                    <button className="btn btn-primary" onClick={payTheDebt}>Pay</button>}
+                                {loggedIn && <ButtonWrapper/>}
+                            </li>
+                            <li className="nav-item">
+                                <Logout/>
                             </li>
                         </ul>
                     </div>
