@@ -6,7 +6,7 @@ import CarContainer from "../components/Cars/CarContainer";
 import RegistrationResultView from "../components/Register/RegistrationResultView";
 import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
-import UserContainer from "../components/users/UserContainer";
+import UserContainer from "../components/users/user/UserContainer";
 
 export const RouteNames = {
     LOGIN: "/login",

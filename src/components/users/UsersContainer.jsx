@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
-import UserContainer from "./UserContainer";
+import UsersView from "./UsersView";
 
 const UsersContainer = () => {
+
+    // todo: make it like one state
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,13 +32,12 @@ const UsersContainer = () => {
     }, [setUsers, setRoles, setStatuses]);
 
     return (
-        <>
-            <div>
-                {loading && <p>⏱⏱⏱⏱⏱</p>}
-                {!loading && users.map(u => <UserContainer key={u.id} user={u} roles={roles} statuses={statuses}
-                                                           updateUsers={updateUsers}/>)}
-            </div>
-        </>
+        <UsersView loading={loading}
+                   users={users}
+                   roles={roles}
+                   statuses={statuses}
+                   updateUsers={updateUsers}
+        />
     )
 }
 

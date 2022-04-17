@@ -4,6 +4,12 @@ import LocalStorage from "./storage/LocalStorage";
 import BalanceContext from "./context/BalanceContext";
 import AppRouter from "./components/AppRouter";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
+import Header from "./components/header/Header";
+
+// admin
+// verified
+// logged in
+// loading
 
 function App() {
 
@@ -30,6 +36,7 @@ function App() {
         >
             <LoggedInContext.Provider value={loggedInValue}>
                 <BalanceContext.Provider value={balanceValue}>
+                    <Header/>
                     <AppRouter/>
                 </BalanceContext.Provider>
             </LoggedInContext.Provider>
