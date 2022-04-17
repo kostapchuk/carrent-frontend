@@ -1,6 +1,6 @@
 import {useState} from "react";
-import shortid from "shortid";
-import ApiService from "../../api/ApiService";
+import ApiService from "../../../api/ApiService";
+import UserView from "./UserView";
 
 const UserContainer = ({user, statuses, roles, updateUsers}) => {
 
@@ -15,11 +15,11 @@ const UserContainer = ({user, statuses, roles, updateUsers}) => {
         setVerified(!verified);
     }
 
-    const handeRoleChange = (event) => {
+    const handleRoleChange = (event) => {
         setRole(event.target.value);
     }
 
-    const handeStatusChange = (event) => {
+    const handleStatusChange = (event) => {
         setStatus(event.target.value);
     }
 
@@ -41,21 +41,18 @@ const UserContainer = ({user, statuses, roles, updateUsers}) => {
     }
 
     return (
-        <>
-            <p>{updateResult}</p>
-            <span>{user.firstName} {user.lastName}</span>
-            <select name="statuses" value={status} onChange={handeStatusChange}>
-                {statuses.map(s => <option key={shortid.generate()} value={s}>{s}</option>)}
-            </select>
-            <select name="roles" value={role} onChange={handeRoleChange}>
-                {roles.map(r => <option key={shortid.generate()} value={r}>{r}</option>)}
-            </select>
-            <input type={"checkbox"} defaultChecked={verified} onChange={handleVerifiedChange}/>
-            {user.documentImg1 && <img src={user.documentImg1} alt={"img doc 1"} width={100}/>}
-            {user.documentImg2 && <img src={user.documentImg2} alt={"img doc 2"} width={100}/>}
-            <button onClick={handleSave}>Save</button>
-            <br/>
-        </>
+        <UserView user={user}
+                  updateResult={updateResult}
+                  status={status}
+                  handleStatusChange={handleStatusChange}
+                  statuses={statuses}
+                  role={role}
+                  handleRoleChange={handleRoleChange}
+                  roles={roles}
+                  verified={verified}
+                  handleVerifiedChange={handleVerifiedChange}
+                  handleSave={handleSave}
+        />
     )
 }
 
