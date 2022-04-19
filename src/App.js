@@ -1,7 +1,6 @@
 import LoggedInContext from "./context/LoggedInContext";
 import {useMemo, useState} from "react";
 import LocalStorage from "./storage/LocalStorage";
-import BalanceContext from "./context/BalanceContext";
 import AppRouter from "./components/AppRouter";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import Header from "./components/header/Header";
@@ -19,13 +18,6 @@ function App() {
         [loggedIn]
     );
 
-    const [balance, setBalance] = useState(0);
-    const balanceValue = useMemo(
-        () => ({balance, setBalance}),
-        [balance]
-    );
-
-
     return (
         <PayPalScriptProvider
             options={{
@@ -35,10 +27,8 @@ function App() {
             }}
         >
             <LoggedInContext.Provider value={loggedInValue}>
-                <BalanceContext.Provider value={balanceValue}>
-                    <Header/>
-                    <AppRouter/>
-                </BalanceContext.Provider>
+                <Header/>
+                <AppRouter/>
             </LoggedInContext.Provider>
         </PayPalScriptProvider>
     );

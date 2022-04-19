@@ -2,14 +2,15 @@ import {Link} from "react-router-dom";
 import Logout from "../Login/Logout";
 import {useContext} from "react";
 import LoggedInContext from "../../context/LoggedInContext";
-import BalanceContext from "../../context/BalanceContext";
 import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
+import {useSelector} from "react-redux";
+import {selectBalance} from "../../slices/BalanceSlice";
 
 const Header = () => {
 
     const {loggedIn} = useContext(LoggedInContext);
-    const {balance} = useContext(BalanceContext);
+    const balance = useSelector(selectBalance);
 
     return (
         <div className="container">
