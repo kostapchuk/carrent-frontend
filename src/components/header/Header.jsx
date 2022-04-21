@@ -1,16 +1,23 @@
 import {Link} from "react-router-dom";
 import Logout from "../Login/Logout";
-import {useContext} from "react";
-import LoggedInContext from "../../context/LoggedInContext";
+import {useEffect} from "react";
 import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
-import {useSelector} from "react-redux";
-import {selectBalance} from "../../slices/BalanceSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchBalance, selectBalance} from "../../slices/BalanceSlice";
+import {selectLoggedIn} from "../../slices/LoggedInSlice";
 
 const Header = () => {
 
-    const {loggedIn} = useContext(LoggedInContext);
     const balance = useSelector(selectBalance);
+    const loggedIn = useSelector(selectLoggedIn);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (loggedIn) {
+            dispatch(fetchBalance());
+        }
+    }, [balance])
 
     return (
         <div className="container">

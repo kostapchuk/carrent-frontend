@@ -1,28 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import LoginView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
-import LoggedInContext from "../../context/LoggedInContext";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchBalance, selectBalance, thunkFetchBalance, updateBalance} from "../../slices/BalanceSlice";
+import {useDispatch} from "react-redux";
+import {fetchBalance} from "../../slices/BalanceSlice";
+import {updateLoggedIn} from "../../slices/LoggedInSlice";
 
 const LoginContainer = () => {
 
     const navigate = useNavigate();
-    const {loggedIn, setLoggedIn} = useContext(LoggedInContext);
     const dispatch = useDispatch();
-    const balance = useSelector(selectBalance);
     const [formUser, setFormUser] = useState({
         email: '',
         password: ''
     })
-
-    useEffect(() => {
-        if (loggedIn && balance === null) {
-            dispatch(fetchBalance());
-        }
-    }, [balance, dispatch, loggedIn])
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -30,7 +22,8 @@ const LoginContainer = () => {
             .then(res => {
                 LocalStorage.setToken(res.data.token);
                 LocalStorage.setUserId(res.data.userId);
-                setLoggedIn(true);
+                dispatch(updateLoggedIn(true));
+                dispatch(fetchBalance());
                 navigate('/cars');
             })
     }
