@@ -1,16 +1,16 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import LoginView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
-import LoggedInContext from "../../context/LoggedInContext";
-import BalanceContext from "../../context/BalanceContext";
+import {useDispatch} from "react-redux";
+import {fetchBalance} from "../../slices/BalanceSlice";
+import {updateAdmin, updateLoggedIn} from "../../slices/UserSlice";
 
 const LoginContainer = () => {
 
     const navigate = useNavigate();
-    const {setLoggedIn} = useContext(LoggedInContext);
-    const {setBalance} = useContext(BalanceContext);
+    const dispatch = useDispatch();
     const [formUser, setFormUser] = useState({
         email: '',
         password: ''
@@ -22,11 +22,9 @@ const LoginContainer = () => {
             .then(res => {
                 LocalStorage.setToken(res.data.token);
                 LocalStorage.setUserId(res.data.userId);
-                setLoggedIn(true);
-                ApiService.fetchBalance()
-                    .then(r => {
-                        setBalance(r.data);
-                    })
+                dispatch(updateLoggedIn(true));
+                dispatch(updateAdmin(res.data.role === 'ADMIN'));
+                dispatch(fetchBalance());
                 navigate('/cars');
             })
     }

@@ -4,7 +4,6 @@ class OrderStatus {
     static RENT_PAUSED = 'RENT_PAUSED';
 
     static getStatusValue = (status) => {
-        console.log(status);
         switch (status) {
             case OrderStatus.RENT:
                 return "Renting"
