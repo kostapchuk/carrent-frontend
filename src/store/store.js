@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import balanceReducer from '../slices/BalanceSlice'
-import loggedInReducer from "../slices/LoggedInSlice";
+import userReducer from "../slices/UserSlice";
 
 export default configureStore({
     reducer: {
         balance: balanceReducer,
-        loggedIn: loggedInReducer,
+        user: userReducer,
     }
 })

@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import ApiService from "../../api/ApiService";
 import {useDispatch, useSelector} from "react-redux";
-import {selectLoggedIn, updateLoggedIn} from "../../slices/LoggedInSlice";
+import {selectLoggedIn, updateLoggedIn} from "../../slices/UserSlice";
 
 const Logout = () => {
 

@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
 import {useDispatch} from "react-redux";
 import {fetchBalance} from "../../slices/BalanceSlice";
-import {updateLoggedIn} from "../../slices/LoggedInSlice";
+import {updateAdmin, updateLoggedIn} from "../../slices/UserSlice";
 
 const LoginContainer = () => {
 
@@ -23,6 +23,7 @@ const LoginContainer = () => {
                 LocalStorage.setToken(res.data.token);
                 LocalStorage.setUserId(res.data.userId);
                 dispatch(updateLoggedIn(true));
+                dispatch(updateAdmin(res.data.role === 'ADMIN'));
                 dispatch(fetchBalance());
                 navigate('/cars');
             })

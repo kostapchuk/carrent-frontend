@@ -5,12 +5,13 @@ import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchBalance, selectBalance} from "../../slices/BalanceSlice";
-import {selectLoggedIn} from "../../slices/LoggedInSlice";
+import {selectAdmin, selectLoggedIn} from "../../slices/UserSlice";
 
 const Header = () => {
 
     const balance = useSelector(selectBalance);
     const loggedIn = useSelector(selectLoggedIn);
+    const admin = useSelector(selectAdmin);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -67,6 +68,10 @@ const Header = () => {
                             </li>
                             <li className="nav-item">
                                 <Logout/>
+                            </li>
+                            <li className="nav-item">
+                                {loggedIn && admin &&
+                                    <Link className="nav-link" to={RouteNames.ADMIN_USERS}>Users</Link>}
                             </li>
                         </ul>
                     </div>
