@@ -1,18 +1,23 @@
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
+import {ICar} from "../../types/types";
 
-const CarContainer = () => {
+type CarContainerParams = {
+    id: string,
+}
 
-    const [car, setCar] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const params = useParams();
+const CarContainer: FC = () => {
+
+    const [car, setCar] = useState<ICar | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const params = useParams<CarContainerParams>();
 
     useEffect(() => {
         ApiService.fetchCarById(params.id)
-            .then(res => {
+            .then((res: any) => {
                 setCar(res.data);
                 setLoading(false);
             })

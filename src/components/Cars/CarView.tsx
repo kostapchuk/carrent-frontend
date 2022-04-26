@@ -1,13 +1,15 @@
 import CarCard from "./CarCard";
+import {FC} from "react";
+import {CarViewProps} from "../../types/types";
 
-const CarView = ({
-                     car,
-                     loading,
-                     startRent,
-                     startBook,
-                     finishRide,
-                     pauseRent
-                 }) => {
+const CarView: FC<CarViewProps> = ({
+                                       car,
+                                       loading,
+                                       startRent,
+                                       startBook,
+                                       finishRide,
+                                       pauseRent
+                                   }) => {
 
     return (
         loading

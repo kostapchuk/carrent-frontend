@@ -1,14 +1,15 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
-import CarStatus from "../../utils/const";
+import {FC} from "react";
+import {CarCardProps, CarStatus} from "../../types/types";
 
-const CarCard = ({
-                     car,
-                     startRent,
-                     startBook,
-                     finishRide,
-                     pauseRent
-                 }) => {
+const CarCard: FC<CarCardProps> = ({
+                                       car,
+                                       startRent,
+                                       startBook,
+                                       finishRide,
+                                       pauseRent,
+                                   }) => {
     return (
         <div className="card h-100">
             <Link to={"/cars/" + car.id}><img className="card-img-top" src={car.imgUrl} alt=""/></Link>
@@ -22,29 +23,29 @@ const CarCard = ({
                 </div>
 
                 {LocalStorage.getUserId() && car.carStatus === CarStatus.FREE &&
-                    <div className="d-flex justify-content-center mt-auto">
-                        <button className="btn btn-primary m-2 px-3" onClick={startRent}>Rent</button>
-                        <button className="btn btn-outline-primary m-2 px-3" onClick={startBook}>Book
-                        </button>
-                    </div>
+                        <div className="d-flex justify-content-center mt-auto">
+                          <button className="btn btn-primary m-2 px-3" onClick={startRent}>Rent</button>
+                          <button className="btn btn-outline-primary m-2 px-3" onClick={startBook}>Book
+                          </button>
+                        </div>
                 }
 
                 {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT &&
-                    <button className="btn btn-primary m-2" onClick={pauseRent}>PauseRent</button>
+                        <button className="btn btn-primary m-2" onClick={pauseRent}>PauseRent</button>
                 }
 
                 {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_BOOKING &&
-                    <button className="btn btn-primary m-2" onClick={startRent}>Start Rent</button>
+                        <button className="btn btn-primary m-2" onClick={startRent}>Start Rent</button>
                 }
 
                 {LocalStorage.getUserId() && car.carStatus === CarStatus.IN_RENT_PAUSED &&
-                    <button className="btn btn-primary m-2" onClick={startRent}>Start Rent</button>
+                        <button className="btn btn-primary m-2" onClick={startRent}>Start Rent</button>
                 }
 
                 {LocalStorage.getUserId() && (car.carStatus === CarStatus.IN_BOOKING ||
                         car.carStatus === CarStatus.IN_RENT || car.carStatus === CarStatus.IN_RENT_PAUSED)
                     &&
-                    <button className="btn btn-primary m-2" onClick={finishRide}>Finish Ride</button>
+                        <button className="btn btn-primary m-2" onClick={finishRide}>Finish Ride</button>
                 }
             </div>
         </div>

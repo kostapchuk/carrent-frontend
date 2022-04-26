@@ -2,28 +2,27 @@ import {useEffect, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
-import CarStatus from "../../utils/const";
 import {useDispatch} from "react-redux";
 import {updateBalance} from '../../slices/BalanceSlice'
-
+import {CarStatus, ICar} from "../../types/types";
 
 const CarsContainer = () => {
 
     const dispatch = useDispatch();
 
-    const [cars, setCars] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [update, setUpdate] = useState(true);
+    const [cars, setCars] = useState<ICar[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [update, setUpdate] = useState<boolean>(true);
 
     useEffect(() => {
         if (LocalStorage.getUserId()) {
             ApiService.fetchAvailableCars()
-                .then(res => {
+                .then((res: any) => {
                     setCars(res.data.carsDto);
                 });
         } else {
             ApiService.fetchFreeCars()
-                .then(res => {
+                .then((res: any) => {
                     setCars(res.data.carsDto);
                 });
         }
@@ -40,7 +39,7 @@ const CarsContainer = () => {
             .then(r => {
                 setUpdate(!update);
                 if (status === CarStatus.FREE) {
-                    ApiService.findBalance().then(res => {
+                    ApiService.findBalance().then((res: any) => {
                         dispatch(updateBalance(res.data))
                     })
                 }
