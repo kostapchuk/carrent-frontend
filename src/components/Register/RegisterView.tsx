@@ -1,6 +1,14 @@
 import {Link} from 'react-router-dom';
+import {FC} from "react";
+import React = require('react');
 
-const RegisterView = ({handleSubmit, handleFormChange, formUser}) => {
+interface RegisterViewProps {
+    handleSubmit: (event: React.FormEvent) => void,
+    handleFormChange: (event: React.ChangeEvent) => void,
+    formUser,
+}
+
+const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, formUser}) => {
     return (<div className="vh-100 bg-image">
             <div className="mask d-flex align-items-center h-100 gradient-custom-3">
                 <div className="container h-100">
@@ -62,7 +70,8 @@ const RegisterView = ({handleSubmit, handleFormChange, formUser}) => {
                                         </div>
 
                                         <div className="d-flex justify-content-center">
-                                            <button className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                            <button
+                                                className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
                                                 Register
                                             </button>
                                         </div>
