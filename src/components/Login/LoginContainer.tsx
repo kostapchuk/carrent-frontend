@@ -1,25 +1,26 @@
-import React, {useState} from 'react';
+import {FC, useState} from 'react';
 import LoginView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
 import {useDispatch} from "react-redux";
-import {fetchBalance} from "../../slices/BalanceSlice";
+import {fetchBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
 import {updateAdmin, updateLoggedIn} from "../../slices/UserSlice";
+import React from 'react';
 
-const LoginContainer = () => {
+const LoginContainer: FC = () => {
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useBalanceDispatch();
     const [formUser, setFormUser] = useState({
         email: '',
         password: ''
     })
 
-    const handleSubmit = event => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
         ApiService.login(formUser)
-            .then(res => {
+            .then((res: any) => {
                 LocalStorage.setToken(res.data.token);
                 LocalStorage.setUserId(res.data.userId);
                 dispatch(updateLoggedIn(true));
@@ -29,7 +30,7 @@ const LoginContainer = () => {
             })
     }
 
-    const handleFormChange = event => {
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const {name, value} = event.target;
         setFormUser(prevFormUser => {
             return {

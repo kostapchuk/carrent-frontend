@@ -1,5 +1,6 @@
 import {useLocation} from 'react-router-dom';
 import {FC} from "react";
+import React from 'react';
 
 interface RegistrationResultLocation {
     success: boolean,

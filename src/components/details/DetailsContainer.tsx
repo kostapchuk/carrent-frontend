@@ -1,5 +1,6 @@
 import DetailsView from "./DetailsView";
 import shortid from "shortid";
+import React from 'react';
 
 const DetailsContainer = ({details}) => {
     return (

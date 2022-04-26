@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {FC} from "react";
-import React = require('react');
+import React from 'react';
 
 interface RegisterViewProps {
     handleSubmit: (event: React.FormEvent) => void,

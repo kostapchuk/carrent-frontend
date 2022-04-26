@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import {FC} from "react";
 import {CarCardProps, CarStatus} from "../../types/types";
+import React from 'react';
 
 const CarCard: FC<CarCardProps> = ({
                                        car,

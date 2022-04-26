@@ -3,6 +3,7 @@ import ApiService from "../../api/ApiService";
 import LocalStorage from "../../storage/LocalStorage";
 import RidesView from "./RidesView";
 import {IRide} from "../../types/types";
+import React from 'react';
 
 const RidesContainer: FC = () => {
 

@@ -1,7 +1,7 @@
 import shortid from "shortid";
 import {IRole, IStatus, IUser} from "../../types/types";
 import {FC} from "react";
-import React = require("react");
+import React from 'react';
 
 interface UserViewProps {
     user: IUser,

@@ -1,6 +1,6 @@
 import {FC, useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {fetchBalance} from "../../slices/BalanceSlice";
+import {fetchBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
+import React from 'react';
 
 interface ResultContainerProps {
     success: boolean,
@@ -9,7 +9,7 @@ interface ResultContainerProps {
 
 const ResultContainer: FC<ResultContainerProps> = ({success, message}) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useBalanceDispatch();
 
     useEffect(() => {
         dispatch(fetchBalance())

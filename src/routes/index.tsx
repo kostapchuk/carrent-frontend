@@ -8,6 +8,7 @@ import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
 import UserContainer from "../components/user/UserContainer";
 import ResultContainer from "../components/payment/ResultContainer";
+import React from 'react';
 
 export const RouteNames = {
     LOGIN: "/login",
@@ -24,21 +25,25 @@ export const RouteNames = {
 }
 
 export const publicRoutes = [
-    {path: RouteNames.LOGIN, exact: true, component: <LoginContainer/>},
-    {path: RouteNames.REGISTER, exact: true, component: <RegisterContainer/>},
-    {path: RouteNames.CARS, exact: true, component: <CarsContainer/>},
-    {path: RouteNames.CAR, exact: true, component: <CarContainer/>},
-    {path: RouteNames.REGISTER_RESULT, exact: true, component: <RegistrationResultView/>},
+    {path: RouteNames.LOGIN, component: <LoginContainer/>},
+    {path: RouteNames.REGISTER, component: <RegisterContainer/>},
+    {path: RouteNames.CARS, component: <CarsContainer/>},
+    {path: RouteNames.CAR, component: <CarContainer/>},
+    {path: RouteNames.REGISTER_RESULT, component: <RegistrationResultView/>},
 ]
 
 export const allRoutes = [
     ...publicRoutes,
-    {path: RouteNames.RIDES, exact: true, component: <RidesContainer/>},
-    {path: RouteNames.SUCCESS_PAYMENT, exact: true, component: <ResultContainer success={true}
-                                                                                message="Success payment"/>},
-    {path: RouteNames.CANCELLED_PAYMENT, exact: true, component: <ResultContainer success={false}
-                                                                                  message="Cancelled payment"/>},
-    {path: RouteNames.DOCUMENTS, exact: true, component: <UploadFileComponent/>},
-    {path: RouteNames.ADMIN_USERS, exact: true, component: <UsersContainer/>},
-    {path: RouteNames.ADMIN_USER, exact: true, component: <UserContainer/>},
+    {path: RouteNames.RIDES, component: <RidesContainer/>},
+    {
+        path: RouteNames.SUCCESS_PAYMENT, component: <ResultContainer success={true}
+                                                                                   message="Success payment"/>
+    },
+    {
+        path: RouteNames.CANCELLED_PAYMENT, component: <ResultContainer success={false}
+                                                                                     message="Cancelled payment"/>
+    },
+    {path: RouteNames.DOCUMENTS, component: <UploadFileComponent/>},
+    {path: RouteNames.ADMIN_USERS, component: <UsersContainer/>},
+    // {path: RouteNames.ADMIN_USER, component: <UserContainer/>},
 ]

@@ -1,5 +1,6 @@
 import ApiClient from "./ApiClient";
 import LocalStorage from "../storage/LocalStorage";
+import {ICar} from "../types/types";
 
 class ApiService {
 
@@ -11,21 +12,21 @@ class ApiService {
     }
 
     static fetchFreeCars = () => {
-        return ApiClient.get("/cars/free")
+        return ApiClient.get<ICar>("/cars/free")
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     static fetchCars = () => {
-        return ApiClient.get("/cars")
+        return ApiClient.get<ICar>("/cars")
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     static fetchAvailableCars = () => {
-        return ApiClient.get(`/cars/available/${LocalStorage.getUserId()}`)
+        return ApiClient.get<ICar>(`/cars/available/${LocalStorage.getUserId()}`)
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });

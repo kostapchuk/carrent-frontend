@@ -2,7 +2,7 @@ import {FC, useState} from 'react';
 import RegisterView from "./RegisterView";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
-import React = require('react');
+import React from 'react';
 
 const RegisterContainer: FC = () => {
 

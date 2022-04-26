@@ -2,13 +2,12 @@ import shortid from 'shortid';
 import {FC} from 'react';
 import DetailsContainer from '../details/DetailsContainer';
 import {IRide} from '../../types/types';
-import React = require('react');
+import React from 'react';
 
 interface RideViewProps {
     open: boolean,
     handleOpenClick: (event: React.MouseEvent) => void,
     ride: IRide,
-    children?: React.ReactNode | React.ReactNode[];
 }
 
 const RideView: FC<RideViewProps> = ({
@@ -30,16 +29,18 @@ const RideView: FC<RideViewProps> = ({
                 aria-expanded={open}
                 onClick={handleOpenClick}
             >
-                {ride.mark}
-                {' '}
-                {ride.model}
-                {' '}
-                {ride.date}
-                {' '}
-                {ride.totalPrice}
-                $
-                {' '}
-                {ride.totalTimeHours}
+                <>
+                    {ride.mark}
+                    {' '}
+                    {ride.model}
+                    {' '}
+                    {ride.date}
+                    {' '}
+                    {ride.totalPrice}
+                    $
+                    {' '}
+                    {ride.totalTimeHours}
+                </>
             </button>
         </h2>
         <div

@@ -1,6 +1,14 @@
 import {Link} from 'react-router-dom';
+import {FC} from "react";
+import React from 'react';
 
-const LoginView = ({handleSubmit, handleFormChange, formUser}) => {
+interface LoginViewProps {
+    handleSubmit: (event: React.FormEvent) => void,
+    handleFormChange: (event: React.ChangeEvent) => void,
+    formUser,
+}
+
+const LoginView: FC<LoginViewProps> = ({handleSubmit, handleFormChange, formUser}) => {
     return (<div className="vh-100 bg-image">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
@@ -29,7 +37,8 @@ const LoginView = ({handleSubmit, handleFormChange, formUser}) => {
                                         <label className="form-label">Password</label>
                                     </div>
                                     <div className="d-flex justify-content-center">
-                                        <button className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                        <button
+                                            className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
                                             Log In
                                         </button>
                                     </div>

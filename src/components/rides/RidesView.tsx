@@ -2,6 +2,7 @@ import RideContainer from "../ride/RideContainer";
 import shortid from "shortid";
 import {FC} from "react";
 import {IRide} from "../../types/types";
+import React from 'react';
 
 interface RidesViewProps {
     loading: boolean,

@@ -1,6 +1,7 @@
 import CarCard from "./CarCard";
 import {FC} from "react";
 import {CarViewProps} from "../../types/types";
+import React from 'react';
 
 const CarView: FC<CarViewProps> = ({
                                        car,

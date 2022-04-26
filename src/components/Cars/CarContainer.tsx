@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
 import {ICar} from "../../types/types";
+import React from 'react';
 
 type CarContainerParams = {
     id: string,

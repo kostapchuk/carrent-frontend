@@ -1,12 +1,13 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
 import ApiService from "../../api/ApiService";
-import {useDispatch, useSelector} from "react-redux";
-import {selectLoggedIn, updateLoggedIn} from "../../slices/UserSlice";
+import {useSelector} from "react-redux";
+import {selectLoggedIn, updateLoggedIn, useUserDispatch} from "../../slices/UserSlice";
+import React from 'react';
 
 const Logout = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useUserDispatch();
     const loggedIn = useSelector(selectLoggedIn);
 
     const handleClick = () => {
@@ -16,7 +17,7 @@ const Logout = () => {
         dispatch(updateLoggedIn(false));
     }
 
-    return(
+    return (
         loggedIn && <Link to="/" className="nav-link" onClick={handleClick}>Logout</Link>
     );
 }

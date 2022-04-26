@@ -2,14 +2,15 @@ import {PayPalButtons} from "@paypal/react-paypal-js";
 import ApiService from "../../api/ApiService";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
-import {fetchBalance, selectBalance} from '../../slices/BalanceSlice'
-import {useDispatch, useSelector} from "react-redux";
+import {fetchBalance, selectBalance, useBalanceDispatch} from '../../slices/BalanceSlice'
+import {useSelector} from "react-redux";
 import {FC} from "react";
+import React from 'react';
 
 const PaypalButton: FC = () => {
 
     const balance = useSelector(selectBalance);
-    const dispatch = useDispatch();
+    const dispatch = useBalanceDispatch();
     const navigate = useNavigate();
 
     const createOrder = (data, actions) => {

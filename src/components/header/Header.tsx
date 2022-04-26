@@ -1,18 +1,19 @@
 import {Link} from "react-router-dom";
 import Logout from "../Login/Logout";
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchBalance, selectBalance} from "../../slices/BalanceSlice";
+import {useSelector} from "react-redux";
+import {fetchBalance, selectBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
 import {selectAdmin, selectLoggedIn} from "../../slices/UserSlice";
+import React from 'react';
 
-const Header = () => {
+const Header: FC = () => {
 
     const balance = useSelector(selectBalance);
     const loggedIn = useSelector(selectLoggedIn);
     const admin = useSelector(selectAdmin);
-    const dispatch = useDispatch();
+    const dispatch = useBalanceDispatch();
 
     useEffect(() => {
         if (loggedIn) {
@@ -34,21 +35,21 @@ const Header = () => {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 {!loggedIn &&
-                                    <Link className="nav-link"
-                                          aria-current="page"
-                                          to={RouteNames.REGISTER}
-                                    >
-                                        Register
-                                    </Link>
+                                        <Link className="nav-link"
+                                              aria-current="page"
+                                              to={RouteNames.REGISTER}
+                                        >
+                                          Register
+                                        </Link>
                                 }
                             </li>
                             <li className="nav-item">
                                 {!loggedIn &&
-                                    <Link className="nav-link"
-                                          to={RouteNames.LOGIN}
-                                    >
-                                        Login
-                                    </Link>
+                                        <Link className="nav-link"
+                                              to={RouteNames.LOGIN}
+                                        >
+                                          Login
+                                        </Link>
                                 }
                             </li>
                             <li className="nav-item">
@@ -71,7 +72,7 @@ const Header = () => {
                             </li>
                             <li className="nav-item">
                                 {loggedIn && admin &&
-                                    <Link className="nav-link" to={RouteNames.ADMIN_USERS}>Users</Link>}
+                                        <Link className="nav-link" to={RouteNames.ADMIN_USERS}>Users</Link>}
                             </li>
                         </ul>
                     </div>
