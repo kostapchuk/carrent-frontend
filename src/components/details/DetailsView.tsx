@@ -6,7 +6,7 @@ const DetailsView = ({detail}) => {
         <tr key={shortid.generate()}>
             <td>
                 {new Date(detail.start).toLocaleString()}
-                 -
+                -
                 {new Date(detail.end).toLocaleString()}
             </td>
             <td>{OrderStatus.getStatusValue(detail.status)}</td>
