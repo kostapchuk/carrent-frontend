@@ -1,7 +1,7 @@
 import shortid from "shortid";
 import {IRole, IStatus, IUser} from "../../types/types";
 import {FC} from "react";
-import React = require("react")
+import React = require("react");
 
 interface UserViewProps {
     user: IUser,
@@ -17,17 +17,17 @@ interface UserViewProps {
 }
 
 const UserView: FC<UserViewProps> = ({
-                      user,
-                      status,
-                      handleStatusChange,
-                      statuses,
-                      role,
-                      handleRoleChange,
-                      roles,
-                      verified,
-                      handleVerifiedChange,
-                      handleSave,
-                  }) => {
+                                         user,
+                                         status,
+                                         handleStatusChange,
+                                         statuses,
+                                         role,
+                                         handleRoleChange,
+                                         roles,
+                                         verified,
+                                         handleVerifiedChange,
+                                         handleSave,
+                                     }) => {
     return (
         <>
             <tr>

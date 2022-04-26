@@ -2,7 +2,7 @@ import {FC, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UserView from "./UserView";
 import {IRole, IStatus, IUser} from "../../types/types";
-import React = require("react")
+import React = require("react");
 
 interface UserContainerProps {
     user: IUser,
