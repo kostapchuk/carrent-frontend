@@ -1,6 +1,26 @@
 import UserContainer from "../user/UserContainer";
+import {FC} from "react";
+import {IRole, IStatus, IUser} from "../../types/types";
 
-const UsersView = ({loading, users, roles, statuses, updateUsers, message, updateMessage}) => {
+interface UsersViewProps {
+    loading: boolean,
+    users: IUser[],
+    roles: IRole[],
+    statuses: IStatus[],
+    updateUsers: () => void,
+    message: string,
+    updateMessage: (msg: string) => void,
+}
+
+const UsersView: FC<UsersViewProps> = ({
+                                           loading,
+                                           users,
+                                           roles,
+                                           statuses,
+                                           updateUsers,
+                                           message,
+                                           updateMessage
+                                       }) => {
     return (
         <div className="container">
             {loading

@@ -1,10 +1,23 @@
 import shortid from "shortid";
+import {IRole, IStatus, IUser} from "../../types/types";
+import {FC} from "react";
+import React = require("react")
 
-// todo: move update result value to the higher order component
+interface UserViewProps {
+    user: IUser,
+    status: string,
+    handleStatusChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
+    statuses: IStatus[],
+    role: string,
+    handleRoleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
+    roles: IRole[],
+    verified: boolean,
+    handleVerifiedChange: () => void,
+    handleSave: () => void,
+}
 
-const UserView = ({
+const UserView: FC<UserViewProps> = ({
                       user,
-                      updateResult,
                       status,
                       handleStatusChange,
                       statuses,
@@ -13,12 +26,10 @@ const UserView = ({
                       roles,
                       verified,
                       handleVerifiedChange,
-                      handleSave
-
+                      handleSave,
                   }) => {
     return (
         <>
-            <p>{updateResult}</p>
             <tr>
                 <th scope="row">{user.id}</th>
                 <td>{user.firstName} {user.lastName}</td>
@@ -31,8 +42,8 @@ const UserView = ({
                     >
                         {statuses.map(s =>
                             <option key={shortid.generate()}
-                                    value={s}>
-                                {s}
+                                    value={s.name}>
+                                {s.name}
                             </option>
                         )}
                     </select>
@@ -46,8 +57,8 @@ const UserView = ({
                     >
                         {roles.map(r =>
                             <option key={shortid.generate()}
-                                    value={r}>
-                                {r}
+                                    value={r.name}>
+                                {r.name}
                             </option>
                         )}
                     </select>

@@ -1,20 +1,19 @@
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UsersView from "./UsersView";
+import {IRole, IStatus, IUser} from "../../types/types";
 
-const UsersContainer = () => {
+const UsersContainer: FC = () => {
 
-    // todo: make it like one state
-
-    const [users, setUsers] = useState([]);
-    const [message, setMessage] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [roles, setRoles] = useState([]);
-    const [statuses, setStatuses] = useState([]);
+    const [users, setUsers] = useState<IUser[]>([]);
+    const [message, setMessage] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
+    const [roles, setRoles] = useState<IRole[]>([]);
+    const [statuses, setStatuses] = useState<IStatus[]>([]);
 
     const updateUsers = () => {
         ApiService.fetchUsers()
-            .then(r => {
+            .then((r: any) => {
                 setUsers(r.data.userDtos);
                 setLoading(false);
             })
@@ -27,11 +26,11 @@ const UsersContainer = () => {
     useEffect(() => {
         updateUsers()
         ApiService.fetchRoles()
-            .then(r => {
+            .then((r: any) => {
                 setRoles(r.data.roles);
             })
         ApiService.fetchStatuses()
-            .then(r => {
+            .then((r: any) => {
                 setStatuses(r.data.statuses);
             })
     }, [setUsers, setRoles, setStatuses]);

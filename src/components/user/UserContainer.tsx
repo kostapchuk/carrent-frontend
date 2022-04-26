@@ -1,24 +1,32 @@
-import {useState} from "react";
+import {FC, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UserView from "./UserView";
+import {IRole, IStatus, IUser} from "../../types/types";
+import React = require("react")
 
-const UserContainer = ({user, statuses, roles, updateUsers, updateMessage}) => {
+interface UserContainerProps {
+    user: IUser,
+    statuses: IStatus[],
+    roles: IRole[],
+    updateUsers: () => void,
+    updateMessage: (msg: string) => void,
+}
 
-    // todo: make it like one state
+const UserContainer: FC<UserContainerProps> = ({user, statuses, roles, updateUsers, updateMessage}) => {
 
-    const [verified, setVerified] = useState(user.verified);
-    const [role, setRole] = useState(user.role);
-    const [status, setStatus] = useState(user.status);
+    const [verified, setVerified] = useState<boolean>(user.verified);
+    const [role, setRole] = useState<string>(user.role.name);
+    const [status, setStatus] = useState<string>(user.status.name);
 
     const handleVerifiedChange = () => {
         setVerified(!verified);
     }
 
-    const handleRoleChange = (event) => {
+    const handleRoleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setRole(event.target.value);
     }
 
-    const handleStatusChange = (event) => {
+    const handleStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setStatus(event.target.value);
     }
 
@@ -50,7 +58,6 @@ const UserContainer = ({user, statuses, roles, updateUsers, updateMessage}) => {
                   verified={verified}
                   handleVerifiedChange={handleVerifiedChange}
                   handleSave={handleSave}
-                  updateMessage={updateMessage}
         />
     )
 }
