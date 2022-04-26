@@ -2,10 +2,11 @@ import {PayPalButtons} from "@paypal/react-paypal-js";
 import ApiService from "../../api/ApiService";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
-import {updateBalance, selectBalance, fetchBalance} from '../../slices/BalanceSlice'
+import {fetchBalance, selectBalance} from '../../slices/BalanceSlice'
 import {useDispatch, useSelector} from "react-redux";
+import {FC} from "react";
 
-const PaypalButton = () => {
+const PaypalButton: FC = () => {
 
     const balance = useSelector(selectBalance);
     const dispatch = useDispatch();
@@ -13,12 +14,12 @@ const PaypalButton = () => {
 
     const createOrder = (data, actions) => {
         return ApiService.findDebt()
-            .then(r => {
+            .then((r: any) => {
                 return actions.order
                     .create({
                         purchase_units: [
                             {
-                                description: "Sunflower",
+                                description: "Car rent payment",
                                 amount: {
                                     currency_code: "USD",
                                     value: r.data,
@@ -55,11 +56,10 @@ const PaypalButton = () => {
             <PayPalButtons
                 style={{
                     layout: 'horizontal',
-                    size: 'small',
                     color: 'black',
                     label: 'paypal',
                     height: 25,
-                    tagline: 'false'
+                    tagline: false
                 }}
                 createOrder={createOrder}
                 onApprove={onApprove}
