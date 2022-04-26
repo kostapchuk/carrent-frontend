@@ -1,7 +1,14 @@
 import RideContainer from "../ride/RideContainer";
 import shortid from "shortid";
+import {FC} from "react";
+import {IRide} from "../../types/types";
 
-const RidesView = ({loading, rides}) => {
+interface RidesViewProps {
+    loading: boolean,
+    rides: IRide[],
+}
+
+const RidesView: FC<RidesViewProps> = ({loading, rides}) => {
     return (
         <div className="container">
             {loading && <p>⏰⏰⏰⏰⏰⏰</p>}
@@ -11,9 +18,8 @@ const RidesView = ({loading, rides}) => {
             >
                 {!loading && rides.map(ride =>
                     <RideContainer
-                        ride={ride}
-                        details={ride.rideDetailsDtos}
                         key={shortid.generate()}
+                        ride={ride}
                     />)
                 }
             </div>
