@@ -48,7 +48,7 @@ class ApiService {
             });
     }
 
-    static fetchBalance = () => {
+    static findBalance = () => {
         return ApiClient.get(`/users/${LocalStorage.getUserId()}/balance`,
             {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {

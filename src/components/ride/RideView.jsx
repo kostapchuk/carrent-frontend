@@ -1,8 +1,12 @@
 import shortid from "shortid";
-import DetailsContainer from "./details/DetailsContainer";
+import DetailsContainer from "../details/DetailsContainer";
 
-const RideContainer = ({open, setOpen, ride, details}) => {
-
+const RideView = ({
+                      open,
+                      handleOpenClick,
+                      ride,
+                      details
+                  }) => {
     return (
         <div key={shortid.generate()}
              className="accordion-item"
@@ -10,18 +14,15 @@ const RideContainer = ({open, setOpen, ride, details}) => {
             <h2 className="accordion-header"
                 id="panelsStayOpen-headingOne"
             >
-                <button className="accordion-button"
+                <button className={`accordion-button ${open ? "" : "collapsed"}`}
                         type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#panelsStayOpen-collapseOne"
-                        aria-expanded="true"
-                        aria-controls="panelsStayOpen-collapseOne"
+                        aria-expanded={open}
+                        onClick={handleOpenClick}
                 >
                     {ride.mark} {ride.model} {ride.date} {ride.totalPrice}$ {ride.totalTimeHours}h
                 </button>
             </h2>
-            <div id="panelsStayOpen-collapseOne"
-                 className="accordion-collapse collapse show"
+            <div className={`accordion-collapse collapse ${open ? "show" : ""}`}
                  aria-labelledby="panelsStayOpen-headingOne"
             >
                 <div className="accordion-body">
@@ -29,8 +30,7 @@ const RideContainer = ({open, setOpen, ride, details}) => {
                 </div>
             </div>
         </div>
-    );
-
+    )
 }
 
-export default RideContainer;
+export default RideView;

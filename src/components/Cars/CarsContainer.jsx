@@ -1,16 +1,19 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
 import CarStatus from "../../utils/const";
-import BalanceContext from "../../context/BalanceContext";
+import {useDispatch} from "react-redux";
+import {updateBalance} from '../../slices/BalanceSlice'
+
 
 const CarsContainer = () => {
+
+    const dispatch = useDispatch();
 
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
     const [update, setUpdate] = useState(true);
-    const {setBalance} = useContext(BalanceContext);
 
     useEffect(() => {
         if (LocalStorage.getUserId()) {
@@ -37,8 +40,8 @@ const CarsContainer = () => {
             .then(r => {
                 setUpdate(!update);
                 if (status === CarStatus.FREE) {
-                    ApiService.fetchBalance().then(res => {
-                        setBalance(res.data)
+                    ApiService.findBalance().then(res => {
+                        dispatch(updateBalance(res.data))
                     })
                 }
             });
@@ -46,9 +49,10 @@ const CarsContainer = () => {
 
     return (
         <div className="container">
-            <div className="row">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 {loading && <p>⏱⏱⏱⏱⏱</p>}
-                {!loading && cars.map(c => <CarView key={c.id} car={c}
+                {!loading && cars.map(c => <CarView key={c.id}
+                                                    car={c}
                                                     startRent={() => processOrderReducer(CarStatus.IN_RENT, c.id)}
                                                     startBook={() => processOrderReducer(CarStatus.IN_BOOKING, c.id)}
                                                     finishRide={() => processOrderReducer(CarStatus.FREE, c.id)}

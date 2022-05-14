@@ -1,12 +1,14 @@
-import {useContext} from "react";
 import {PayPalButtons} from "@paypal/react-paypal-js";
 import ApiService from "../../api/ApiService";
-import BalanceContext from "../../context/BalanceContext";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
+import {updateBalance, selectBalance, fetchBalance} from '../../slices/BalanceSlice'
+import {useDispatch, useSelector} from "react-redux";
 
-const ButtonWrapper = () => {
-    const {balance, setBalance} = useContext(BalanceContext);
+const PaypalButton = () => {
+
+    const balance = useSelector(selectBalance);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const createOrder = (data, actions) => {
@@ -37,11 +39,14 @@ const ButtonWrapper = () => {
     const onApprove = (data, actions) => {
         return actions.order.capture()
             .then(() => {
+                navigate(RouteNames.SUCCESS_PAYMENT);
                 ApiService.payDebt();
-                setBalance(ApiService.fetchBalance()
-                    .then(r => r.data))
-                navigate(RouteNames.SUCCESS_PAYMENT)
+                dispatch(fetchBalance());
             });
+    };
+
+    const onCancel = (data, actions) => {
+        navigate(RouteNames.CANCELLED_PAYMENT);
     };
 
     return (
@@ -58,10 +63,11 @@ const ButtonWrapper = () => {
                 }}
                 createOrder={createOrder}
                 onApprove={onApprove}
+                onCancel={onCancel}
             />
             :
             <></>
     )
 }
 
-export default ButtonWrapper;
+export default PaypalButton;

@@ -1,9 +1,7 @@
 import {useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 import LocalStorage from "../../storage/LocalStorage";
-import RideContainer from "./RideContainer";
-
-const shortid = require('shortid');
+import RidesView from "./RidesView";
 
 const RidesContainer = () => {
 
@@ -21,20 +19,9 @@ const RidesContainer = () => {
     }, [setRides, setLoading]);
 
     return (
-        <div className="container">
-            {loading && <p>⏰⏰⏰⏰⏰⏰</p>}
-            <div
-                className="accordion"
-                id="accordionPanelsStayOpenExample"
-            >
-                {!loading && rides.map(ride =>
-                    <RideContainer
-                        ride={ride}
-                        details={ride.rideDetailsDtos}
-                    />)
-                }
-            </div>
-        </div>
+        <RidesView rides={rides}
+                   loading={loading}
+        />
     );
 }
 
