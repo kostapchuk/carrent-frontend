@@ -1,22 +1,26 @@
 import LocalStorage from "../../storage/LocalStorage";
 import ApiService from "../../api/ApiService";
-import {FC, useState} from "react";
-import React from 'react';
+import React, {FC, useState} from "react";
 
 const UploadFileComponent: FC = () => {
 
-    const [filePrepared, setFilePrepared] = useState<File>(null);
+    const [filePrepared1, setFilePrepared1] = useState<Blob | null>(null);
+    const [filePrepared2, setFilePrepared2] = useState<Blob | null>(null);
     const [msg, setMsg] = useState<boolean>(false);
 
-    const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFilePrepared(event.target.files[0]);
+    const onFileChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFilePrepared1(event.target.files![0]);
     }
 
-    const uploadFileData = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const onFileChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFilePrepared2(event.target.files![0]);
+    }
+
+    const uploadFileData1 = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setMsg(false);
         let data: FormData = new FormData();
-        data.append('file', filePrepared);
+        data.append('file', filePrepared1 ? filePrepared1 : new Blob());
         data.append("payload", new Blob([JSON.stringify({
             userId: LocalStorage.getUserId(),
             imgNumber: (event.target as HTMLButtonElement).dataset.imgnumber,
@@ -25,7 +29,25 @@ const UploadFileComponent: FC = () => {
         }));
 
         ApiService.uploadFile(data)
-            .then(response => {
+            .then(() => {
+                setMsg(true);
+            })
+    }
+
+    const uploadFileData2 = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        setMsg(false);
+        let data: FormData = new FormData();
+        data.append('file', filePrepared2 ? filePrepared2 : new Blob());
+        data.append("payload", new Blob([JSON.stringify({
+            userId: LocalStorage.getUserId(),
+            imgNumber: (event.target as HTMLButtonElement).dataset.imgnumber,
+        })], {
+            type: "application/json"
+        }));
+
+        ApiService.uploadFile(data)
+            .then(() => {
                 setMsg(true);
             })
     }
@@ -38,9 +60,9 @@ const UploadFileComponent: FC = () => {
                     <label className="my-2" htmlFor="formFile" style={{fontWeight: "bold"}}>Upload the first
                         file</label>
                     <div className="d-flex" style={{height: "37px"}}>
-                        <input className="form-control" type="file" id="formFile1"/>
-                        <button className="btn btn-primary" data-imgnumber={1} disabled={!filePrepared}
-                                onClick={uploadFileData} style={{width: "100px"}}>Upload 1
+                        <input className="form-control" onChange={onFileChange1} type="file" id="formFile1"/>
+                        <button className="btn btn-primary" data-imgnumber={1} disabled={!filePrepared1}
+                                onClick={uploadFileData1} style={{width: "100px"}}>Upload 1
                         </button>
                     </div>
                 </div>
@@ -52,9 +74,9 @@ const UploadFileComponent: FC = () => {
                     <label className="my-2" htmlFor="formFile2" style={{fontWeight: "bold"}}>Upload the second
                         file</label>
                     <div className="d-flex" style={{height: "37px"}}>
-                        <input className="form-control" onChange={onFileChange} type="file" id="formFile2"/>
-                        <button className="btn btn-primary" data-imgnumber={2} disabled={!filePrepared}
-                                onClick={uploadFileData}>Upload 2
+                        <input className="form-control" onChange={onFileChange2} type="file" id="formFile2"/>
+                        <button className="btn btn-primary" data-imgnumber={2} disabled={!filePrepared2}
+                                onClick={uploadFileData2}>Upload 2
                         </button>
                     </div>
                 </div>

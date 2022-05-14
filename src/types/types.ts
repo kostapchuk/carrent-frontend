@@ -6,6 +6,13 @@ export enum CarStatus {
     UNAVAILABLE = "UNAVAILABLE",
 }
 
+export interface IDetailProps {
+    start: Date,
+    end: Date,
+    status: OrderStatus,
+    price: number,
+}
+
 export interface ICar {
     id: number,
     mark: string,
@@ -16,35 +23,23 @@ export interface ICar {
     carStatus: CarStatus,
 }
 
-export interface CarViewProps {
-    car: ICar,
-    startRent?: () => void,
-    startBook?: () => void,
-    finishRide?: () => void,
-    pauseRent?: () => void,
-    loading: boolean,
+export interface ILoginUser {
+    email: string,
+    password: string,
 }
 
-export interface CarCardProps {
-    car: ICar,
-    startRent?: () => void,
-    startBook?: () => void,
-    finishRide?: () => void,
-    pauseRent?: () => void,
+export interface IRegisterUser {
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    password: string,
 }
 
 export enum OrderStatus {
     RENT = "RENT",
     BOOKING = "BOOKING",
     RENT_PAUSED = "RENT_PAUSED",
-}
-
-export interface IRole {
-    name: string,
-}
-
-export interface IStatus {
-    name: string,
 }
 
 export interface IUser {
@@ -54,8 +49,8 @@ export interface IUser {
     documentImg1: string,
     documentImg2: string,
     verified: boolean,
-    role: IRole,
-    status: IStatus,
+    role: string,
+    status: string,
 }
 
 export interface IDetail {
@@ -71,5 +66,5 @@ export interface IRide {
     date: Date,
     totalPrice: number,
     totalTimeHours: number,
-    details: IDetail[],
+    rideDetailsDtos: IDetail[],
 }

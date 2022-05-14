@@ -1,16 +1,15 @@
-import {FC, useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UsersView from "./UsersView";
-import {IRole, IStatus, IUser} from "../../types/types";
-import React from 'react';
+import {IUser} from "../../types/types";
 
 const UsersContainer: FC = () => {
 
     const [users, setUsers] = useState<IUser[]>([]);
     const [message, setMessage] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
-    const [roles, setRoles] = useState<IRole[]>([]);
-    const [statuses, setStatuses] = useState<IStatus[]>([]);
+    const [roles, setRoles] = useState<string[]>([]);
+    const [statuses, setStatuses] = useState<string[]>([]);
 
     const updateUsers = () => {
         ApiService.fetchUsers()
@@ -20,7 +19,7 @@ const UsersContainer: FC = () => {
             })
     }
 
-    const updateMessage = (msg) => {
+    const updateMessage = (msg: string) => {
         setMessage(msg);
     }
 

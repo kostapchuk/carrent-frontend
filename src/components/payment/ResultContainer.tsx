@@ -1,6 +1,5 @@
-import {FC, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import {fetchBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
-import React from 'react';
 
 interface ResultContainerProps {
     success: boolean,

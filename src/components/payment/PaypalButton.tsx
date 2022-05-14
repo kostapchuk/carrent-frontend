@@ -4,8 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
 import {fetchBalance, selectBalance, useBalanceDispatch} from '../../slices/BalanceSlice'
 import {useSelector} from "react-redux";
-import {FC} from "react";
-import React from 'react';
+import React, {FC} from "react";
 
 const PaypalButton: FC = () => {
 
@@ -13,7 +12,7 @@ const PaypalButton: FC = () => {
     const dispatch = useBalanceDispatch();
     const navigate = useNavigate();
 
-    const createOrder = (data, actions) => {
+    const createOrder = (data: any, actions: any) => {
         return ApiService.findDebt()
             .then((r: any) => {
                 return actions.order
@@ -31,14 +30,14 @@ const PaypalButton: FC = () => {
                             shipping_preference: "NO_SHIPPING",
                         },
                     })
-                    .then(orderId => {
+                    .then((orderId: number) => {
                         return orderId;
                     });
             });
 
     };
 
-    const onApprove = (data, actions) => {
+    const onApprove = (data: any, actions: any) => {
         return actions.order.capture()
             .then(() => {
                 navigate(RouteNames.SUCCESS_PAYMENT);
@@ -47,7 +46,7 @@ const PaypalButton: FC = () => {
             });
     };
 
-    const onCancel = (data, actions) => {
+    const onCancel = () => {
         navigate(RouteNames.CANCELLED_PAYMENT);
     };
 

@@ -1,13 +1,12 @@
 import UserContainer from "../user/UserContainer";
-import {FC} from "react";
-import {IRole, IStatus, IUser} from "../../types/types";
-import React from 'react';
+import React, {FC} from "react";
+import {IUser} from "../../types/types";
 
 interface UsersViewProps {
     loading: boolean,
     users: IUser[],
-    roles: IRole[],
-    statuses: IStatus[],
+    roles: string[],
+    statuses: string[],
     updateUsers: () => void,
     message: string,
     updateMessage: (msg: string) => void,

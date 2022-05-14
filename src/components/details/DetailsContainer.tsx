@@ -1,8 +1,14 @@
 import DetailsView from "./DetailsView";
 import shortid from "shortid";
-import React from 'react';
+import React, {FC} from 'react';
+import {IDetailProps} from "../../types/types";
 
-const DetailsContainer = ({details}) => {
+interface DetailsContainerProps {
+    details: IDetailProps[],
+}
+
+const DetailsContainer: FC<DetailsContainerProps> = ({details}) => {
+
     return (
         <table className="table table-borderless">
             <thead>

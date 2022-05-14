@@ -1,12 +1,11 @@
 import {Link} from "react-router-dom";
 import Logout from "../Login/Logout";
-import {FC, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
 import {useSelector} from "react-redux";
 import {fetchBalance, selectBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
 import {selectAdmin, selectLoggedIn} from "../../slices/UserSlice";
-import React from 'react';
 
 const Header: FC = () => {
 

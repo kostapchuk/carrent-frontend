@@ -1,13 +1,12 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UserView from "./UserView";
-import {IRole, IStatus, IUser} from "../../types/types";
-import React from 'react';
+import {IUser} from "../../types/types";
 
 interface UserContainerProps {
     user: IUser,
-    statuses: IStatus[],
-    roles: IRole[],
+    statuses: string[],
+    roles: string[],
     updateUsers: () => void,
     updateMessage: (msg: string) => void,
 }
@@ -15,8 +14,8 @@ interface UserContainerProps {
 const UserContainer: FC<UserContainerProps> = ({user, statuses, roles, updateUsers, updateMessage}) => {
 
     const [verified, setVerified] = useState<boolean>(user.verified);
-    const [role, setRole] = useState<string>(user.role.name);
-    const [status, setStatus] = useState<string>(user.status.name);
+    const [role, setRole] = useState<string>(user.role);
+    const [status, setStatus] = useState<string>(user.status);
 
     const handleVerifiedChange = () => {
         setVerified(!verified);
@@ -38,11 +37,11 @@ const UserContainer: FC<UserContainerProps> = ({user, statuses, roles, updateUse
             status: status
         }
         ApiService.updateUser(userRequest)
-            .then(r => {
+            .then(() => {
                 updateUsers();
                 updateMessage("Successfully updated the user");
             })
-            .catch(e => {
+            .catch(() => {
                 updateMessage("Could not update the user");
             })
     }

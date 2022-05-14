@@ -1,6 +1,5 @@
 import {useLocation} from 'react-router-dom';
-import {FC} from "react";
-import React from 'react';
+import React, {FC} from "react";
 
 interface RegistrationResultLocation {
     success: boolean,
@@ -13,7 +12,9 @@ const RegistrationResultView: FC = () => {
     const state = location.state as RegistrationResultLocation;
 
     return (
-        <h2>{state.success ? "✅ " : "🆘 "} {state.message}</h2>
+        <div className="container">
+            <h2>{state.success ? "✅ " : "🆘 "} {state.message}</h2>
+        </div>
     );
 
 }

@@ -4,7 +4,7 @@ import {ICar} from "../types/types";
 
 class ApiService {
 
-    static fetchCarById = (carId) => {
+    static fetchCarById = (carId: number) => {
         return ApiClient.get("/cars/" + carId)
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
@@ -32,7 +32,7 @@ class ApiService {
             });
     }
 
-    static processOrder = (rent) => {
+    static processOrder = (rent: object) => {
         return ApiClient.post("/orders/", {...rent}, {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
@@ -41,7 +41,7 @@ class ApiService {
 
     static logout = () => {
         ApiClient.post("/auth/logout")
-            .then(r => {
+            .then(() => {
                 console.log("Logout");
             })
             .catch(e => {
@@ -81,21 +81,21 @@ class ApiService {
             });
     }
 
-    static register = (user) => {
+    static register = (user: object) => {
         return ApiClient.post("/users", {...user})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
-    static login = (credentials) => {
+    static login = (credentials: object) => {
         return ApiClient.post("/auth/login", {...credentials})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
-    static uploadFile = (payload) => {
+    static uploadFile = (payload: object) => {
         return ApiClient.post("/documents", payload, {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
@@ -123,7 +123,7 @@ class ApiService {
             });
     }
 
-    static updateUser = (user) => {
+    static updateUser = (user: object) => {
         return ApiClient.put("/users", {...user}, {headers: {Authorization: LocalStorage.getToken()}})
     }
 }

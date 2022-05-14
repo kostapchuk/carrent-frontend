@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
-import {FC} from "react";
-import React from 'react';
+import React, {FC} from "react";
+import {IRegisterUser} from "../../types/types";
 
 interface RegisterViewProps {
-    handleSubmit: (event: React.FormEvent) => void,
-    handleFormChange: (event: React.ChangeEvent) => void,
-    formUser,
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    formUser: IRegisterUser,
 }
 
 const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, formUser}) => {

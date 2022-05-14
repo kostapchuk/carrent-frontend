@@ -6,7 +6,6 @@ import CarContainer from "../components/Cars/CarContainer";
 import RegistrationResultView from "../components/Register/RegistrationResultView";
 import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
-import UserContainer from "../components/user/UserContainer";
 import ResultContainer from "../components/payment/ResultContainer";
 import React from 'react';
 
@@ -45,5 +44,4 @@ export const allRoutes = [
     },
     {path: RouteNames.DOCUMENTS, component: <UploadFileComponent/>},
     {path: RouteNames.ADMIN_USERS, component: <UsersContainer/>},
-    // {path: RouteNames.ADMIN_USER, component: <UserContainer/>},
 ]

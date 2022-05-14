@@ -8,7 +8,7 @@ function App() {
     return (
         <PayPalScriptProvider
             options={{
-                "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID,
+                "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID ? process.env.REACT_APP_PAYPAL_CLIENT_ID : "",
                 components: "buttons",
                 currency: "USD"
             }}

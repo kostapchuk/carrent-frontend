@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import ApiService from "../api/ApiService";
-import store from "../store/store";
+import {store, RootState} from "../store/store";
 import {useDispatch} from "react-redux";
 
 export const fetchBalance = createAsyncThunk('balance/fetchBalance',
@@ -29,7 +29,7 @@ export const balanceSlice = createSlice({
 
 export const {updateBalance} = balanceSlice.actions
 
-export const selectBalance = state => state.balance.value
+export const selectBalance = (state: RootState) => state.balance.value
 
 export type BalanceDispatch = typeof store.dispatch
 export const useBalanceDispatch = () => useDispatch<BalanceDispatch>()

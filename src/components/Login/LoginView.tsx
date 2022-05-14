@@ -1,11 +1,11 @@
 import {Link} from 'react-router-dom';
-import {FC} from "react";
-import React from 'react';
+import React, {FC} from "react";
+import {ILoginUser} from "../../types/types"
 
 interface LoginViewProps {
-    handleSubmit: (event: React.FormEvent) => void,
-    handleFormChange: (event: React.ChangeEvent) => void,
-    formUser,
+    handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
+    handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
+    formUser: ILoginUser,
 }
 
 const LoginView: FC<LoginViewProps> = ({handleSubmit, handleFormChange, formUser}) => {

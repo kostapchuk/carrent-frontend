@@ -1,7 +1,6 @@
-import {FC, useState} from "react";
+import React, {FC, useState} from "react";
 import RideView from "./RideView";
 import {IRide} from "../../types/types";
-import React from 'react';
 
 interface RideContainerProps {
     ride: IRide,

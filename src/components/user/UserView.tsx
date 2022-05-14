@@ -1,16 +1,15 @@
 import shortid from "shortid";
-import {IRole, IStatus, IUser} from "../../types/types";
-import {FC} from "react";
-import React from 'react';
+import {IUser} from "../../types/types";
+import React, {FC} from "react";
 
 interface UserViewProps {
     user: IUser,
     status: string,
     handleStatusChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-    statuses: IStatus[],
+    statuses: string[],
     role: string,
     handleRoleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
-    roles: IRole[],
+    roles: string[],
     verified: boolean,
     handleVerifiedChange: () => void,
     handleSave: () => void,
@@ -42,8 +41,8 @@ const UserView: FC<UserViewProps> = ({
                     >
                         {statuses.map(s =>
                             <option key={shortid.generate()}
-                                    value={s.name}>
-                                {s.name}
+                                    value={s}>
+                                {s}
                             </option>
                         )}
                     </select>
@@ -57,8 +56,8 @@ const UserView: FC<UserViewProps> = ({
                     >
                         {roles.map(r =>
                             <option key={shortid.generate()}
-                                    value={r.name}>
-                                {r.name}
+                                    value={r}>
+                                {r}
                             </option>
                         )}
                     </select>

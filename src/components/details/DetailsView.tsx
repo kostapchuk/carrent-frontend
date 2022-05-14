@@ -1,10 +1,14 @@
-import shortid from "shortid";
-import {OrderStatus} from "../../types/types";
-import React from 'react';
+import {IDetailProps, OrderStatus} from "../../types/types";
+import React, {FC} from 'react';
 
-const DetailsView = ({detail}) => {
+interface DetailsViewProps {
+    detail: IDetailProps,
+    key: string,
+}
 
-    const getStatusValue = (status) => {
+const DetailsView: FC<DetailsViewProps> = ({detail, key}) => {
+
+    const getStatusValue = (status: OrderStatus) => {
         switch (status) {
             case OrderStatus.RENT:
                 return "Renting"
@@ -18,7 +22,7 @@ const DetailsView = ({detail}) => {
     }
 
     return (
-        <tr key={shortid.generate()}>
+        <tr key={key}>
             <td>
                 {new Date(detail.start).toLocaleString()}
                 -

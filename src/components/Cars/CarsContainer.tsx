@@ -1,22 +1,23 @@
-import {useEffect, useState} from "react";
+import React, {FC, useEffect, useState} from "react";
 import LocalStorage from "../../storage/LocalStorage";
 import CarView from "./CarView";
 import ApiService from "../../api/ApiService";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {updateBalance} from '../../slices/BalanceSlice'
 import {CarStatus, ICar} from "../../types/types";
-import React from 'react';
+import {selectLoggedIn} from "../../slices/UserSlice";
 
-const CarsContainer = () => {
+const CarsContainer: FC = () => {
 
     const dispatch = useDispatch();
 
     const [cars, setCars] = useState<ICar[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [update, setUpdate] = useState<boolean>(true);
+    const loggedIn = useSelector(selectLoggedIn);
 
     useEffect(() => {
-        if (LocalStorage.getUserId()) {
+        if (loggedIn) {
             ApiService.fetchAvailableCars()
                 .then((res: any) => {
                     setCars(res.data.carsDto);
@@ -28,16 +29,16 @@ const CarsContainer = () => {
                 });
         }
         setLoading(false);
-    }, [loading, setCars, update]);
+    }, [loading, setCars, update, loggedIn]);
 
-    const processOrderReducer = (status, carId) => {
+    const processOrderReducer = (status: CarStatus, carId: number) => {
         const order = {
             userId: LocalStorage.getUserId(),
             carId: carId,
             carStatus: status,
         }
         ApiService.processOrder(order)
-            .then(r => {
+            .then(() => {
                 setUpdate(!update);
                 if (status === CarStatus.FREE) {
                     ApiService.findBalance().then((res: any) => {

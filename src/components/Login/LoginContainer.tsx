@@ -1,12 +1,10 @@
-import {FC, useState} from 'react';
+import React, {FC, useState} from 'react';
 import LoginView from "./LoginView";
 import LocalStorage from "../../storage/LocalStorage";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
-import {useDispatch} from "react-redux";
 import {fetchBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
 import {updateAdmin, updateLoggedIn} from "../../slices/UserSlice";
-import React from 'react';
 
 const LoginContainer: FC = () => {
 

@@ -6,10 +6,13 @@ import 'bootstrap/dist/js/bootstrap.bundle';
 import {Provider} from 'react-redux';
 
 import {createRoot} from 'react-dom/client';
-import store from './store/store';
+import {store} from './store/store';
 
-const container = document.getElementById('root');
-const root = createRoot(container);
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+    throw new Error('Failed to find the root element');
+}
+const root = createRoot(rootElement);
 root.render(
     <Provider store={store}>
         <BrowserRouter>
