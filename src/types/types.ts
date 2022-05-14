@@ -1,9 +1,9 @@
 export enum CarStatus {
-    FREE,
-    IN_RENT,
-    IN_BOOKING,
-    IN_RENT_PAUSED,
-    UNAVAILABLE,
+    FREE = "FREE",
+    IN_RENT = "IN_RENT",
+    IN_BOOKING = "IN_BOOKING",
+    IN_RENT_PAUSED = "IN_RENT_PAUSED",
+    UNAVAILABLE = "UNAVAILABLE",
 }
 
 export interface ICar {
@@ -34,16 +34,9 @@ export interface CarCardProps {
 }
 
 export enum OrderStatus {
-    RENT,
-    BOOKING,
-    RENT_PAUSED,
-}
-
-export interface DetailProps {
-    start: Date,
-    end: Date,
-    status: OrderStatus,
-    price: number,
+    RENT = "RENT",
+    BOOKING = "BOOKING",
+    RENT_PAUSED = "RENT_PAUSED",
 }
 
 export interface IRole {
