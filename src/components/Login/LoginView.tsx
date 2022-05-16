@@ -24,8 +24,8 @@ const LoginView: FC<LoginViewProps> = ({handleSubmit, handleFormChange, formUser
                                                onChange={handleFormChange}
                                                name="email"
                                                value={formUser.email}
+                                               placeholder="Your Email"
                                         />
-                                        <label className="form-label">Your Email</label>
                                     </div>
                                     <div className="form-outline mb-4">
                                         <input type="password"
@@ -33,8 +33,8 @@ const LoginView: FC<LoginViewProps> = ({handleSubmit, handleFormChange, formUser
                                                onChange={handleFormChange}
                                                name="password"
                                                value={formUser.password}
+                                               placeholder="Password"
                                         />
-                                        <label className="form-label">Password</label>
                                     </div>
                                     <div className="d-flex justify-content-center">
                                         <button

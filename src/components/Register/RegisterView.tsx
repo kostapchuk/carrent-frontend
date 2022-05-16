@@ -25,8 +25,8 @@ const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, fo
                                                    onChange={handleFormChange}
                                                    name="firstName"
                                                    value={formUser.firstName}
+                                                   placeholder="First Name"
                                             />
-                                            <label className="form-label">First Name</label>
                                         </div>
 
                                         <div className="form-outline mb-4">
@@ -35,8 +35,8 @@ const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, fo
                                                    onChange={handleFormChange}
                                                    name="lastName"
                                                    value={formUser.lastName}
+                                                   placeholder="Last Name"
                                             />
-                                            <label className="form-label">Last Name</label>
                                         </div>
 
                                         <div className="form-outline mb-4">
@@ -45,8 +45,8 @@ const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, fo
                                                    onChange={handleFormChange}
                                                    name="email"
                                                    value={formUser.email}
+                                                   placeholder="Your Email"
                                             />
-                                            <label className="form-label">Your Email</label>
                                         </div>
 
                                         <div className="form-outline mb-4">
@@ -55,8 +55,8 @@ const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, fo
                                                    onChange={handleFormChange}
                                                    name="password"
                                                    value={formUser.password}
+                                                   placeholder="Password"
                                             />
-                                            <label className="form-label">Password</label>
                                         </div>
 
                                         <div className="form-outline mb-4">
@@ -65,8 +65,8 @@ const RegisterView: FC<RegisterViewProps> = ({handleSubmit, handleFormChange, fo
                                                    onChange={handleFormChange}
                                                    name="phone"
                                                    value={formUser.phone}
+                                                   placeholder="Phone"
                                             />
-                                            <label className="form-label">Phone</label>
                                         </div>
 
                                         <div className="d-flex justify-content-center">
