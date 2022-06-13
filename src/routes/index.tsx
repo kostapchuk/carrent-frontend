@@ -8,6 +8,7 @@ import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
 import ResultContainer from "../components/payment/ResultContainer";
 import React from 'react';
+import AddCarContainer from "../components/addCar/AddCarContainer";
 
 export const RouteNames = {
     LOGIN: "/login",
@@ -21,6 +22,7 @@ export const RouteNames = {
     DOCUMENTS: "/documents",
     ADMIN_USERS: "/admin/users",
     ADMIN_USER: "/admin/users/:id",
+    ADD_CAR: "/admin/add-car"
 }
 
 export const publicRoutes = [
@@ -29,6 +31,7 @@ export const publicRoutes = [
     {path: RouteNames.CARS, component: <CarsContainer/>},
     {path: RouteNames.CAR, component: <CarContainer/>},
     {path: RouteNames.REGISTER_RESULT, component: <RegistrationResultView/>},
+    {path: RouteNames.ADD_CAR, component: <AddCarContainer/>},
 ]
 
 export const allRoutes = [

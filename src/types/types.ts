@@ -23,6 +23,14 @@ export interface ICar {
     carStatus: CarStatus,
 }
 
+export interface IAddCar {
+    brand: string,
+    model: string,
+    imgUrl: string,
+    rentPricePerHour: string,
+    bookPricePerHour: string,
+}
+
 export interface ILoginUser {
     email: string,
     password: string,
