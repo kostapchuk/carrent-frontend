@@ -8,7 +8,7 @@ class LocalStorage {
     };
 
     getToken = (): string => {
-        return window.localStorage.getItem('token') || "";
+        return window.localStorage.getItem('token') || '';
     };
 
     getUserId = () => {
@@ -17,27 +17,27 @@ class LocalStorage {
 
     clearToken = () => {
         window.localStorage.removeItem('token');
-    }
+    };
 
     clearUserId = () => {
         window.localStorage.removeItem('userId');
-    }
+    };
 
     setLoggedIn(loggedIn: string) {
         window.localStorage.setItem('loggedIn', loggedIn);
     }
 
     getLoggedIn = (): string => {
-        return window.localStorage.getItem('loggedIn') || "";
-    }
+        return window.localStorage.getItem('loggedIn') || '';
+    };
 
     setAdmin(admin: string) {
         window.localStorage.setItem('admin', admin);
     }
 
     getAdmin = (): string => {
-        return window.localStorage.getItem('admin') || "";
-    }
+        return window.localStorage.getItem('admin') || '';
+    };
 }
 
 export default new LocalStorage();
