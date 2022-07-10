@@ -1,6 +1,6 @@
-import RideContainer from '../ride/RideContainer';
 import shortid from 'shortid';
 import React, { FC } from 'react';
+import RideContainer from '../ride/RideContainer';
 import { IRide } from '../../types/types';
 
 interface RidesViewProps {

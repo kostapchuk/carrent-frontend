@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import LocalStorage from '../../storage/LocalStorage';
 import CarView from './CarView';
 import ApiService from '../../api/ApiService';
-import { useDispatch, useSelector } from 'react-redux';
 import { updateBalance } from '../../slices/BalanceSlice';
 import { CarStatus, ICar } from '../../types/types';
 import { selectLoggedIn } from '../../slices/UserSlice';
@@ -31,7 +31,7 @@ const CarsContainer: FC = () => {
     const processOrderReducer = (status: CarStatus, carId: number) => {
         const order = {
             userId: LocalStorage.getUserId(),
-            carId: carId,
+            carId,
             carStatus: status,
         };
         ApiService.processOrder(order).then(() => {

@@ -1,9 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { allRoutes, publicRoutes, RouteNames } from '../routes';
 import { useSelector } from 'react-redux';
+import { FC } from 'react';
+import { allRoutes, publicRoutes, RouteNames } from '../routes';
 import { selectLoggedIn } from '../slices/UserSlice';
 
-function AppRouter() {
+const AppRouter: FC = () => {
     const loggedIn = useSelector(selectLoggedIn);
 
     return (
@@ -21,6 +22,6 @@ function AppRouter() {
             />
         </Routes>
     );
-}
+};
 
 export default AppRouter;

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
-import RegisterView from './RegisterView';
 import { useNavigate } from 'react-router-dom';
+import RegisterView from './RegisterView';
 import ApiService from '../../api/ApiService';
 
 const RegisterContainer: FC = () => {

@@ -35,7 +35,7 @@ export const allRoutes = [
     { path: RouteNames.RIDES, component: <RidesContainer /> },
     {
         path: RouteNames.SUCCESS_PAYMENT,
-        component: <ResultContainer success={true} message="Success payment" />,
+        component: <ResultContainer success message="Success payment" />,
     },
     {
         path: RouteNames.CANCELLED_PAYMENT,

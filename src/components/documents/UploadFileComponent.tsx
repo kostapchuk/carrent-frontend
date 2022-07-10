@@ -1,6 +1,6 @@
+import React, { FC, useState } from 'react';
 import LocalStorage from '../../storage/LocalStorage';
 import ApiService from '../../api/ApiService';
-import React, { FC, useState } from 'react';
 
 const UploadFileComponent: FC = () => {
     const [filePrepared1, setFilePrepared1] = useState<Blob | null>(null);
@@ -18,8 +18,8 @@ const UploadFileComponent: FC = () => {
     const uploadFileData1 = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setMsg(false);
-        let data: FormData = new FormData();
-        data.append('file', filePrepared1 ? filePrepared1 : new Blob());
+        const data: FormData = new FormData();
+        data.append('file', filePrepared1 || new Blob());
         data.append(
             'payload',
             new Blob(
@@ -44,8 +44,8 @@ const UploadFileComponent: FC = () => {
     const uploadFileData2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setMsg(false);
-        let data: FormData = new FormData();
-        data.append('file', filePrepared2 ? filePrepared2 : new Blob());
+        const data: FormData = new FormData();
+        data.append('file', filePrepared2 || new Blob());
         data.append(
             'payload',
             new Blob(
@@ -75,6 +75,7 @@ const UploadFileComponent: FC = () => {
                 </h3>
                 <div style={{ width: '400px' }}>
                     <label
+                        aria-controls=""
                         className="my-2"
                         htmlFor="formFile"
                         style={{ fontWeight: 'bold' }}
@@ -89,6 +90,7 @@ const UploadFileComponent: FC = () => {
                             id="formFile1"
                         />
                         <button
+                            type="button"
                             className="btn btn-primary"
                             data-imgnumber={1}
                             disabled={!filePrepared1}
@@ -119,6 +121,7 @@ const UploadFileComponent: FC = () => {
                             id="formFile2"
                         />
                         <button
+                            type="button"
                             className="btn btn-primary"
                             data-imgnumber={2}
                             disabled={!filePrepared2}

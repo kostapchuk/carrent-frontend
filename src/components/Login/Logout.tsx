@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import LocalStorage from '../../storage/LocalStorage';
 import ApiService from '../../api/ApiService';
 import {
@@ -6,8 +8,6 @@ import {
     updateLoggedIn,
     useUserDispatch,
 } from '../../slices/UserSlice';
-import { FC } from 'react';
-import { useSelector } from 'react-redux';
 
 const Logout: FC = () => {
     const dispatch = useUserDispatch();
@@ -25,7 +25,7 @@ const Logout: FC = () => {
             Logout
         </Link>
     ) : (
-        <></>
+        <div />
     );
 };
 

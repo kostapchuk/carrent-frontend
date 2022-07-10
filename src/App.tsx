@@ -1,8 +1,9 @@
-import AppRouter from './components/AppRouter';
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { FC } from 'react';
+import AppRouter from './components/AppRouter';
 import Header from './components/header/Header';
 
-function App() {
+const App: FC = () => {
     return (
         <PayPalScriptProvider
             options={{
@@ -17,6 +18,6 @@ function App() {
             <AppRouter />
         </PayPalScriptProvider>
     );
-}
+};
 
 export default App;

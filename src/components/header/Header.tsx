@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import Logout from '../Login/Logout';
 import { FC, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import Logout from '../Login/Logout';
 import { RouteNames } from '../../routes';
 import PaypalButton from '../payment/PaypalButton';
-import { useSelector } from 'react-redux';
 import {
     fetchBalance,
     selectBalance,

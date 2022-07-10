@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState, store } from '../store/store';
 import { useDispatch } from 'react-redux';
+import { RootState, store } from '../store/store';
 import LocalStorage from '../storage/LocalStorage';
 
 export const userSlice = createSlice({
@@ -12,15 +12,19 @@ export const userSlice = createSlice({
     reducers: {
         updateLoggedIn: (state, action) => {
             state.loggedIn = action.payload;
-            action.payload
-                ? LocalStorage.setLoggedIn('yes')
-                : LocalStorage.setLoggedIn('');
+            if (action.payload) {
+                LocalStorage.setLoggedIn('yes');
+            } else {
+                LocalStorage.setLoggedIn('');
+            }
         },
         updateAdmin: (state, action) => {
             state.admin = action.payload;
-            action.payload
-                ? LocalStorage.setAdmin('yes')
-                : LocalStorage.setAdmin('');
+            if (action.payload) {
+                LocalStorage.setLoggedIn('yes');
+            } else {
+                LocalStorage.setLoggedIn('');
+            }
         },
     },
 });

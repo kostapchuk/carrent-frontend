@@ -3,15 +3,15 @@ import LocalStorage from '../storage/LocalStorage';
 import { ICar } from '../types/types';
 
 class ApiService {
-    fetchCarById = (carId: number) => {
-        return ApiClient.get('/cars/' + carId).catch(e => {
-            console.log(
+    static fetchCarById = (carId: number) => {
+        return ApiClient.get(`/cars/${carId}`).catch(e => {
+            console.error(
                 `Status: ${e.response.data.status}. Message: ${e.response.data.message}`,
             );
         });
     };
 
-    fetchFreeCars = () => {
+    static fetchFreeCars = () => {
         return ApiClient.get<ICar>('/cars/free').catch(e => {
             console.log(
                 `Status: ${e.response.data.status}. Message: ${e.response.data.message}`,
@@ -19,7 +19,7 @@ class ApiService {
         });
     };
 
-    fetchCars = () => {
+    static fetchCars = () => {
         return ApiClient.get<ICar>('/cars').catch(e => {
             console.log(
                 `Status: ${e.response.data.status}. Message: ${e.response.data.message}`,
@@ -27,7 +27,7 @@ class ApiService {
         });
     };
 
-    fetchAvailableCars = () => {
+    static fetchAvailableCars = () => {
         return ApiClient.get<ICar>(
             `/cars/available/${LocalStorage.getUserId()}`,
         ).catch(e => {
@@ -37,7 +37,7 @@ class ApiService {
         });
     };
 
-    processOrder = (rent: object) => {
+    static processOrder = (rent: object) => {
         return ApiClient.post(
             '/orders/',
             { ...rent },
@@ -49,7 +49,7 @@ class ApiService {
         });
     };
 
-    logout = () => {
+    static logout = () => {
         ApiClient.post('/auth/logout')
             .then(() => {
                 console.log('Logout');
@@ -61,7 +61,7 @@ class ApiService {
             });
     };
 
-    findBalance = () => {
+    static findBalance = () => {
         return ApiClient.get(`/users/${LocalStorage.getUserId()}/balance`, {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -71,7 +71,7 @@ class ApiService {
         });
     };
 
-    payDebt = () => {
+    static payDebt = () => {
         return ApiClient.post(`/users/${LocalStorage.getUserId()}/pay`, '', {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -81,7 +81,7 @@ class ApiService {
         });
     };
 
-    findDebt = () => {
+    static findDebt = () => {
         return ApiClient.get(`/users/${LocalStorage.getUserId()}/debt`, {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -91,7 +91,7 @@ class ApiService {
         });
     };
 
-    retrieveRides = () => {
+    static retrieveRides = () => {
         return ApiClient.get(`/users/${LocalStorage.getUserId()}/rides`, {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -101,7 +101,7 @@ class ApiService {
         });
     };
 
-    register = (user: object) => {
+    static register = (user: object) => {
         return ApiClient.post('/users', { ...user }).catch(e => {
             console.log(
                 `Status: ${e.response.data.status}. Message: ${e.response.data.message}`,
@@ -109,7 +109,7 @@ class ApiService {
         });
     };
 
-    login = (credentials: object) => {
+    static login = (credentials: object) => {
         return ApiClient.post('/auth/login', { ...credentials }).catch(e => {
             console.log(
                 `Status: ${e.response.data.status}. Message: ${e.response.data.message}`,
@@ -117,7 +117,7 @@ class ApiService {
         });
     };
 
-    uploadFile = (payload: object) => {
+    static uploadFile = (payload: object) => {
         return ApiClient.post('/documents', payload, {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -127,7 +127,7 @@ class ApiService {
         });
     };
 
-    fetchUsers = () => {
+    static fetchUsers = () => {
         return ApiClient.get('/users', {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -137,7 +137,7 @@ class ApiService {
         });
     };
 
-    fetchRoles = () => {
+    static fetchRoles = () => {
         return ApiClient.get('/users/roles', {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -147,7 +147,7 @@ class ApiService {
         });
     };
 
-    fetchStatuses = () => {
+    static fetchStatuses = () => {
         return ApiClient.get('/users/statuses', {
             headers: { Authorization: LocalStorage.getToken() },
         }).catch(e => {
@@ -157,7 +157,7 @@ class ApiService {
         });
     };
 
-    updateUser = (user: object) => {
+    static updateUser = (user: object) => {
         return ApiClient.put(
             '/users',
             { ...user },
@@ -166,4 +166,4 @@ class ApiService {
     };
 }
 
-export default new ApiService();
+export default ApiService;

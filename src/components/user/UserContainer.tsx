@@ -39,9 +39,9 @@ const UserContainer: FC<UserContainerProps> = ({
     const handleSave = () => {
         const userRequest = {
             ...user,
-            role: role,
-            verified: verified,
-            status: status,
+            role,
+            verified,
+            status,
         };
         ApiService.updateUser(userRequest)
             .then(() => {

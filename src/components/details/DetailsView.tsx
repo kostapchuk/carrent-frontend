@@ -1,5 +1,5 @@
-import { IDetailProps, OrderStatus } from '../../types/types';
 import { FC } from 'react';
+import { IDetailProps, OrderStatus } from '../../types/types';
 
 interface DetailsViewProps {
     detail: IDetailProps;

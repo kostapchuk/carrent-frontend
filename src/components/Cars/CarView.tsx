@@ -1,13 +1,13 @@
-import CarCard from './CarCard';
 import { FC } from 'react';
+import CarCard from './CarCard';
 import { ICar } from '../../types/types';
 
 export interface CarViewProps {
     car: ICar | null;
-    startRent?: () => void;
-    startBook?: () => void;
-    finishRide?: () => void;
-    pauseRent?: () => void;
+    startRent: () => void;
+    startBook: () => void;
+    finishRide: () => void;
+    pauseRent: () => void;
     loading: boolean;
 }
 

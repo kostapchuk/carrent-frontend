@@ -1,14 +1,14 @@
 import { PayPalButtons } from '@paypal/react-paypal-js';
-import ApiService from '../../api/ApiService';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { FC } from 'react';
+import ApiService from '../../api/ApiService';
 import { RouteNames } from '../../routes';
 import {
     fetchBalance,
     selectBalance,
     useBalanceDispatch,
 } from '../../slices/BalanceSlice';
-import { useSelector } from 'react-redux';
-import { FC } from 'react';
 
 const PaypalButton: FC = () => {
     const balance = useSelector(selectBalance);
@@ -64,7 +64,7 @@ const PaypalButton: FC = () => {
             onCancel={onCancel}
         />
     ) : (
-        <></>
+        <div>To be done later</div>
     );
 };
 

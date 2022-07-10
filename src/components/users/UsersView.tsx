@@ -1,5 +1,5 @@
-import UserContainer from '../user/UserContainer';
 import { FC } from 'react';
+import UserContainer from '../user/UserContainer';
 import { IUser } from '../../types/types';
 
 interface UsersViewProps {

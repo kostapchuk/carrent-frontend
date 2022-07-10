@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import LoginView from './LoginView';
 import LocalStorage from '../../storage/LocalStorage';
-import { useNavigate } from 'react-router-dom';
 import ApiService from '../../api/ApiService';
 import { fetchBalance, useBalanceDispatch } from '../../slices/BalanceSlice';
 import { updateAdmin, updateLoggedIn } from '../../slices/UserSlice';

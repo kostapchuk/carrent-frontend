@@ -19,10 +19,8 @@ const RideView: FC<RideViewProps> = ({ open, handleOpenClick, ride }) => {
                     aria-expanded={open}
                     onClick={handleOpenClick}
                 >
-                    <>
-                        {ride.mark} {ride.model} {ride.date} {ride.totalPrice}${' '}
-                        {ride.totalTimeHours}
-                    </>
+                    {ride.mark} {ride.model} {ride.date} {ride.totalPrice}${' '}
+                    {ride.totalTimeHours}
                 </button>
             </h2>
             <div

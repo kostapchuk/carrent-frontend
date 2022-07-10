@@ -84,7 +84,10 @@ const RegisterView: FC<RegisterViewProps> = ({
                                         </div>
 
                                         <div className="d-flex justify-content-center">
-                                            <button className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body">
+                                            <button
+                                                type="button"
+                                                className="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
+                                            >
                                                 Register
                                             </button>
                                         </div>

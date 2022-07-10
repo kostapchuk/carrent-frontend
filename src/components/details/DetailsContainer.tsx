@@ -1,6 +1,6 @@
-import DetailsView from './DetailsView';
 import shortid from 'shortid';
 import { FC } from 'react';
+import DetailsView from './DetailsView';
 import { IDetailProps } from '../../types/types';
 
 interface DetailsContainerProps {

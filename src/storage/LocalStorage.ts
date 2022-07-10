@@ -1,43 +1,43 @@
 class LocalStorage {
-    setToken = (token: string) => {
+    static setToken = (token: string) => {
         window.localStorage.setItem('token', token);
     };
 
-    setUserId = (userId: string) => {
+    static setUserId = (userId: string) => {
         window.localStorage.setItem('userId', userId);
     };
 
-    getToken = (): string => {
+    static getToken = (): string => {
         return window.localStorage.getItem('token') || '';
     };
 
-    getUserId = () => {
+    static getUserId = () => {
         return window.localStorage.getItem('userId');
     };
 
-    clearToken = () => {
+    static clearToken = () => {
         window.localStorage.removeItem('token');
     };
 
-    clearUserId = () => {
+    static clearUserId = () => {
         window.localStorage.removeItem('userId');
     };
 
-    setLoggedIn(loggedIn: string) {
+    static setLoggedIn(loggedIn: string) {
         window.localStorage.setItem('loggedIn', loggedIn);
     }
 
-    getLoggedIn = (): string => {
+    static getLoggedIn = (): string => {
         return window.localStorage.getItem('loggedIn') || '';
     };
 
-    setAdmin(admin: string) {
+    static setAdmin(admin: string) {
         window.localStorage.setItem('admin', admin);
     }
 
-    getAdmin = (): string => {
+    static getAdmin = (): string => {
         return window.localStorage.getItem('admin') || '';
     };
 }
 
-export default new LocalStorage();
+export default LocalStorage;
