@@ -1,47 +1,48 @@
 import { FC, useEffect, useState } from 'react';
-import ApiService from '../../api/ApiService';
-import UsersView from './UsersView';
+
+import { User } from '../../api/ApiService';
 import { IUser } from '../../types/types';
+import UsersView from './UsersView';
 
 const UsersContainer: FC = () => {
-    const [users, setUsers] = useState<IUser[]>([]);
-    const [message, setMessage] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(true);
-    const [roles, setRoles] = useState<string[]>([]);
-    const [statuses, setStatuses] = useState<string[]>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [message, setMessage] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [roles, setRoles] = useState<string[]>([]);
+  const [statuses, setStatuses] = useState<string[]>([]);
 
-    const updateUsers = () => {
-        ApiService.fetchUsers().then((r: any) => {
-            setUsers(r.data.userDtos);
-            setLoading(false);
-        });
-    };
+  const updateUsers = () => {
+    User.fetchUsers().then((data) => {
+      setUsers(data.userDtos);
+      setLoading(false);
+    });
+  };
 
-    const updateMessage = (msg: string) => {
-        setMessage(msg);
-    };
+  const updateMessage = (msg: string) => {
+    setMessage(msg);
+  };
 
-    useEffect(() => {
-        updateUsers();
-        ApiService.fetchRoles().then((r: any) => {
-            setRoles(r.data.roles);
-        });
-        ApiService.fetchStatuses().then((r: any) => {
-            setStatuses(r.data.statuses);
-        });
-    }, [setUsers, setRoles, setStatuses]);
+  useEffect(() => {
+    updateUsers();
+    User.fetchRoles().then((data) => {
+      setRoles(data.roles);
+    });
+    User.fetchStatuses().then((data) => {
+      setStatuses(data.statuses);
+    });
+  }, [setUsers, setRoles, setStatuses]);
 
-    return (
-        <UsersView
-            loading={loading}
-            users={users}
-            roles={roles}
-            statuses={statuses}
-            updateUsers={updateUsers}
-            message={message}
-            updateMessage={updateMessage}
-        />
-    );
+  return (
+    <UsersView
+      loading={loading}
+      message={message}
+      roles={roles}
+      statuses={statuses}
+      updateMessage={updateMessage}
+      updateUsers={updateUsers}
+      users={users}
+    />
+  );
 };
 
 export default UsersContainer;

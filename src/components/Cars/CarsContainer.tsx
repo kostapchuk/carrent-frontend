@@ -1,79 +1,71 @@
 import { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import LocalStorage from '../../storage/LocalStorage';
-import CarView from './CarView';
-import ApiService from '../../api/ApiService';
+
+import { Car, Order, User } from '../../api/ApiService';
 import { updateBalance } from '../../slices/BalanceSlice';
-import { CarStatus, ICar } from '../../types/types';
 import { selectLoggedIn } from '../../slices/UserSlice';
+import LocalStorage from '../../storage/LocalStorage';
+import { CarStatus, ICar } from '../../types/types';
+import CarView from './CarView';
 
 const CarsContainer: FC = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [cars, setCars] = useState<ICar[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [update, setUpdate] = useState<boolean>(true);
-    const loggedIn = useSelector(selectLoggedIn);
+  const [cars, setCars] = useState<ICar[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [update, setUpdate] = useState<boolean>(true);
+  const loggedIn = useSelector(selectLoggedIn);
 
-    useEffect(() => {
-        if (loggedIn) {
-            ApiService.fetchAvailableCars().then((res: any) => {
-                setCars(res.data.carsDto);
-            });
-        } else {
-            ApiService.fetchFreeCars().then((res: any) => {
-                setCars(res.data.carsDto);
-            });
-        }
-        setLoading(false);
-    }, [loading, setCars, update, loggedIn]);
+  useEffect(() => {
+    if (loggedIn) {
+      Car.fetchAvailableCars().then((data) => {
+        setCars(data.carsDto);
+      });
+    } else {
+      Car.fetchFreeCars().then((data) => {
+        setCars(data.carsDto);
+      });
+    }
+    setLoading(false);
+  }, [loading, setCars, update, loggedIn]);
 
-    const processOrderReducer = (status: CarStatus, carId: number) => {
-        const order = {
-            userId: LocalStorage.getUserId(),
-            carId,
-            carStatus: status,
-        };
-        ApiService.processOrder(order).then(() => {
-            setUpdate(!update);
-            if (status === CarStatus.FREE) {
-                ApiService.findBalance().then((res: any) => {
-                    dispatch(updateBalance(res.data));
-                });
-            }
-        });
+  const processOrderReducer = (status: CarStatus, carId: number) => {
+    const order = {
+      userId: LocalStorage.getUserId(),
+      carId,
+      carStatus: status,
     };
+    Order.processOrder(order).then(() => {
+      setUpdate(!update);
+      if (status === CarStatus.FREE) {
+        User.findBalance().then((data) => {
+          dispatch(updateBalance(data));
+        });
+      }
+    });
+  };
 
-    return (
-        <div className="container">
-            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-                {loading && <p>⏱⏱⏱⏱⏱</p>}
-                {!loading &&
-                    cars.map(c => (
-                        <CarView
-                            key={c.id}
-                            car={c}
-                            startRent={() =>
-                                processOrderReducer(CarStatus.IN_RENT, c.id)
-                            }
-                            startBook={() =>
-                                processOrderReducer(CarStatus.IN_BOOKING, c.id)
-                            }
-                            finishRide={() =>
-                                processOrderReducer(CarStatus.FREE, c.id)
-                            }
-                            pauseRent={() =>
-                                processOrderReducer(
-                                    CarStatus.IN_RENT_PAUSED,
-                                    c.id,
-                                )
-                            }
-                            loading={loading}
-                        />
-                    ))}
-            </div>
-        </div>
-    );
+  return (
+    <div className="container">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        {loading && <p>⏱⏱⏱⏱⏱</p>}
+        {!loading &&
+          cars.map((c) => (
+            <CarView
+              car={c}
+              finishRide={() => processOrderReducer(CarStatus.FREE, c.id)}
+              key={c.id}
+              loading={loading}
+              pauseRent={() =>
+                processOrderReducer(CarStatus.IN_RENT_PAUSED, c.id)
+              }
+              startBook={() => processOrderReducer(CarStatus.IN_BOOKING, c.id)}
+              startRent={() => processOrderReducer(CarStatus.IN_RENT, c.id)}
+            />
+          ))}
+      </div>
+    </div>
+  );
 };
 
 export default CarsContainer;

@@ -1,21 +1,20 @@
 import { FC, useState } from 'react';
-import RideView from './RideView';
+
 import { IRide } from '../../types/types';
+import RideView from './RideView';
 
 interface RideContainerProps {
-    ride: IRide;
+  ride: IRide;
 }
 
 const RideContainer: FC<RideContainerProps> = ({ ride }) => {
-    const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-    const handleOpenClick = () => {
-        setOpen(!open);
-    };
+  const handleOpenClick = () => {
+    setOpen(!open);
+  };
 
-    return (
-        <RideView open={open} handleOpenClick={handleOpenClick} ride={ride} />
-    );
+  return <RideView handleOpenClick={handleOpenClick} open={open} ride={ride} />;
 };
 
 export default RideContainer;

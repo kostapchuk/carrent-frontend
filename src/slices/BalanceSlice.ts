@@ -1,30 +1,32 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import ApiService from '../api/ApiService';
-import { store, RootState } from '../store/store';
 
-export const fetchBalance = createAsyncThunk('balance/fetchBalance', () => {
-    return ApiService.findBalance().then((r: any) => r.data);
-});
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+import { User } from '../api/ApiService';
+import type { RootState, store } from '../store/store';
+
+export const fetchBalance = createAsyncThunk('balance/fetchBalance', () =>
+  User.findBalance().then((data) => data)
+);
 
 export const balanceSlice = createSlice({
-    name: 'balance',
-    initialState: {
-        value: 0,
+  name: 'balance',
+  initialState: {
+    value: 0,
+  },
+  reducers: {
+    updateBalance: (state, action: PayloadAction<number>) => {
+      state.value = action.payload;
     },
-    reducers: {
-        updateBalance: (state, action: PayloadAction<number>) => {
-            state.value = action.payload;
-        },
-    },
-    extraReducers: builder => {
-        builder.addCase(
-            fetchBalance.fulfilled,
-            (state, action: PayloadAction<number>) => {
-                state.value = action.payload;
-            },
-        );
-    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      fetchBalance.fulfilled,
+      (state, action: PayloadAction<number>) => {
+        state.value = action.payload;
+      }
+    );
+  },
 });
 
 export const { updateBalance } = balanceSlice.actions;

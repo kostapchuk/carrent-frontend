@@ -1,32 +1,34 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { RootState, store } from '../store/store';
+
+import { createSlice } from '@reduxjs/toolkit';
+
 import LocalStorage from '../storage/LocalStorage';
+import type { RootState, store } from '../store/store';
 
 export const userSlice = createSlice({
-    name: 'user',
-    initialState: {
-        loggedIn: LocalStorage.getLoggedIn().length !== 0,
-        admin: LocalStorage.getAdmin().length !== 0,
+  name: 'user',
+  initialState: {
+    loggedIn: LocalStorage.getLoggedIn().length !== 0,
+    admin: LocalStorage.getAdmin().length !== 0,
+  },
+  reducers: {
+    updateLoggedIn: (state, action) => {
+      state.loggedIn = action.payload;
+      if (action.payload) {
+        LocalStorage.setLoggedIn('yes');
+      } else {
+        LocalStorage.setLoggedIn('');
+      }
     },
-    reducers: {
-        updateLoggedIn: (state, action) => {
-            state.loggedIn = action.payload;
-            if (action.payload) {
-                LocalStorage.setLoggedIn('yes');
-            } else {
-                LocalStorage.setLoggedIn('');
-            }
-        },
-        updateAdmin: (state, action) => {
-            state.admin = action.payload;
-            if (action.payload) {
-                LocalStorage.setLoggedIn('yes');
-            } else {
-                LocalStorage.setLoggedIn('');
-            }
-        },
+    updateAdmin: (state, action) => {
+      state.admin = action.payload;
+      if (action.payload) {
+        LocalStorage.setLoggedIn('yes');
+      } else {
+        LocalStorage.setLoggedIn('');
+      }
     },
+  },
 });
 
 export const { updateLoggedIn, updateAdmin } = userSlice.actions;
