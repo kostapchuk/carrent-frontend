@@ -46,7 +46,6 @@ const PaypalButton: FC = () => {
     );
 
   const onApprove = (data: OnApproveData, actions: OnApproveActions) =>
-    // eslint-disable-next-line
     actions.order!.capture().then(() => {
       navigate(RouteNames.SUCCESS_PAYMENT);
       User.payDebt();
