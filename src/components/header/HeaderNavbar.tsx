@@ -2,7 +2,7 @@ import React, {FC, useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
-import Logout from "../login/Logout";
+import Logout from "../logout/Logout";
 import {useSelector} from "react-redux";
 import {fetchBalance, selectBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
 import {selectAdmin, selectLoggedIn} from "../../slices/UserSlice";
