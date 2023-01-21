@@ -14,7 +14,7 @@ const CarsContainer: FC = () => {
     useEffect(() => {
         const promise = (loggedIn ? ApiService.fetchAvailableCars() : ApiService.fetchFreeCars());
         promise.then((res: any) => {
-            setCars(res.data.carsDto);
+            setCars(res.data);
             setLoading(false);
         });
     }, [loading, setCars, loggedIn]);
