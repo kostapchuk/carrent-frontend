@@ -48,7 +48,7 @@ const RideView: FC<RideViewProps> = ({
                 aria-labelledby="panelsStayOpen-headingOne"
             >
                 <div className="accordion-body">
-                    <AllDetailsTable details={ride.rideDetailsDtos}/>
+                    <AllDetailsTable details={ride.rideDetailsResponses}/>
                 </div>
             </div>
         </div>
