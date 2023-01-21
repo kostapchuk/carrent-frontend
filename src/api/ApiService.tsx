@@ -26,7 +26,7 @@ class ApiService {
     }
 
     fetchAvailableCars = () => {
-        return ApiClient.get<ICar>(`/cars/available/${LocalStorage.getUserId()}`)
+        return ApiClient.get<ICar>(`/cars/available?userId=${LocalStorage.getUserId()}`, {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });

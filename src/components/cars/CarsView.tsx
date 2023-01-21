@@ -12,7 +12,7 @@ const CarsView: FC<CarsViewProps> = ({cars, loading,}) => {
         <div className="container">
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                 {loading && <p>⏱⏱⏱⏱⏱</p>}
-                {cars.map(c => <CarContainer car={c}/>)}
+                {cars.map(c => <CarContainer key={c.id} car={c}/>)}
             </div>
         </div>
     );
