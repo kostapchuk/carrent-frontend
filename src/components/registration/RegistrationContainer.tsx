@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
-import RegisterView from "./RegisterView";
+import RegistrationView from "./RegistrationView";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
 
-const RegisterContainer: FC = () => {
+const RegistrationContainer: FC = () => {
 
     const navigate = useNavigate();
     const [formUser, setFormUser] = useState({
@@ -39,8 +39,8 @@ const RegisterContainer: FC = () => {
     }
 
     return (
-        <RegisterView handleSubmit={handleSubmit} handleFormChange={handleFormChange} formUser={formUser}/>
+        <RegistrationView handleSubmit={handleSubmit} handleFormChange={handleFormChange} formUser={formUser}/>
     );
 };
 
-export default RegisterContainer;
+export default RegistrationContainer;
