@@ -1,5 +1,5 @@
 import LoginContainer from "../components/login/LoginContainer";
-import RegisterContainer from "../components/register/RegisterContainer";
+import RegistrationContainer from "../components/register/RegistrationContainer";
 import RidesContainer from "../components/rides/RidesContainer";
 import CarsContainer from "../components/cars/CarsContainer";
 import RegistrationResultView from "../components/register/RegistrationResultView";
@@ -24,7 +24,7 @@ export const RouteNames = {
 
 export const publicRoutes = [
     {path: RouteNames.LOGIN, component: <LoginContainer/>},
-    {path: RouteNames.REGISTER, component: <RegisterContainer/>},
+    {path: RouteNames.REGISTER, component: <RegistrationContainer/>},
     {path: RouteNames.CARS, component: <CarsContainer/>},
     {path: RouteNames.REGISTER_RESULT, component: <RegistrationResultView/>},
 ]
