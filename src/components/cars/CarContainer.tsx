@@ -1,32 +1,43 @@
-import React, {FC, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import CarView from "./CarView";
+import React, {FC} from 'react';
+import {CarStatus, ICar} from "../../types/types";
+import LocalStorage from "../../storage/LocalStorage";
 import ApiService from "../../api/ApiService";
-import {ICar} from "../../types/types";
+import {updateBalance} from "../../slices/BalanceSlice";
+import {useDispatch} from "react-redux";
+import CarView from "./CarView";
 
-type CarContainerParams = {
-    id: string,
+interface CarContainerProps {
+    car: ICar,
 }
 
-const CarContainer: FC = () => {
+const CarContainer: FC<CarContainerProps> = ({car}) => {
 
-    const [car, setCar] = useState<ICar | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const params = useParams<CarContainerParams>();
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        ApiService.fetchCarById(Number(params.id))
-            .then((res: any) => {
-                setCar(res.data);
-                setLoading(false);
-            })
-    }, [setCar, setLoading, params.id]);
+    const processOrderReducer = (status: CarStatus, carId: number) => {
+        const order = {
+            userId: LocalStorage.getUserId(),
+            carId: carId,
+            carStatus: status,
+        }
+        ApiService.processOrder(order)
+            .then(() => {
+                if (status === CarStatus.FREE) {
+                    ApiService.findBalance().then((res: any) => {
+                        dispatch(updateBalance(res.data))
+                    })
+                }
+            });
+    }
 
     return (
-        <CarView car={car}
-                 loading={loading}
-        />
+        <CarView key={car.id}
+                 car={car}
+                 startRent={() => processOrderReducer(CarStatus.IN_RENT, car.id)}
+                 startBook={() => processOrderReducer(CarStatus.IN_BOOKING, car.id)}
+                 finishRide={() => processOrderReducer(CarStatus.FREE, car.id)}
+                 pauseRent={() => processOrderReducer(CarStatus.IN_RENT_PAUSED, car.id)}/>
     );
-}
+};
 
 export default CarContainer;
