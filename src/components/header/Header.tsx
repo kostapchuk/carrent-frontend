@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import Logout from "../Login/Logout";
+import Logout from "../login/Logout";
 import React, {FC, useEffect} from "react";
 import {RouteNames} from "../../routes";
 import PaypalButton from "../payment/PaypalButton";
