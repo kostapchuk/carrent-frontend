@@ -13,7 +13,7 @@ const RidesContainer: FC = () => {
         if (LocalStorage.getUserId()) {
             ApiService.retrieveRides()
                 .then((res: any) => {
-                    setRides(res.data.rideDtos);
+                    setRides(res.data);
                     setLoading(false);
                 })
         }

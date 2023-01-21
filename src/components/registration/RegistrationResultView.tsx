@@ -16,7 +16,6 @@ const RegistrationResultView: FC = () => {
             <h2>{state.success ? "✅ " : "🆘 "} {state.message}</h2>
         </div>
     );
-
 }
 
 export default RegistrationResultView;

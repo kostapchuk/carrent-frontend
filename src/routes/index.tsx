@@ -1,9 +1,8 @@
-import LoginContainer from "../components/Login/LoginContainer";
-import RegisterContainer from "../components/Register/RegisterContainer";
+import LoginContainer from "../components/login/LoginContainer";
+import RegistrationContainer from "../components/registration/RegistrationContainer";
 import RidesContainer from "../components/rides/RidesContainer";
-import CarsContainer from "../components/Cars/CarsContainer";
-import CarContainer from "../components/Cars/CarContainer";
-import RegistrationResultView from "../components/Register/RegistrationResultView";
+import CarsContainer from "../components/cars/CarsContainer";
+import RegistrationResultView from "../components/registration/RegistrationResultView";
 import UploadFileComponent from "../components/documents/UploadFileComponent";
 import UsersContainer from "../components/users/UsersContainer";
 import ResultContainer from "../components/payment/ResultContainer";
@@ -25,9 +24,8 @@ export const RouteNames = {
 
 export const publicRoutes = [
     {path: RouteNames.LOGIN, component: <LoginContainer/>},
-    {path: RouteNames.REGISTER, component: <RegisterContainer/>},
+    {path: RouteNames.REGISTER, component: <RegistrationContainer/>},
     {path: RouteNames.CARS, component: <CarsContainer/>},
-    {path: RouteNames.CAR, component: <CarContainer/>},
     {path: RouteNames.REGISTER_RESULT, component: <RegistrationResultView/>},
 ]
 

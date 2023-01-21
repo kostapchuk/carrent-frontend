@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import React, {FC} from 'react';
-import DetailsContainer from '../details/DetailsContainer';
+import AllDetailsTable from '../details/AllDetailsTable';
 import {IRide} from '../../types/types';
 
 interface RideViewProps {
@@ -48,7 +48,7 @@ const RideView: FC<RideViewProps> = ({
                 aria-labelledby="panelsStayOpen-headingOne"
             >
                 <div className="accordion-body">
-                    <DetailsContainer details={ride.rideDetailsDtos}/>
+                    <AllDetailsTable details={ride.rideDetailsResponses}/>
                 </div>
             </div>
         </div>

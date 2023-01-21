@@ -66,5 +66,5 @@ export interface IRide {
     date: Date,
     totalPrice: number,
     totalTimeHours: number,
-    rideDetailsDtos: IDetail[],
+    rideDetailsResponses: IDetail[],
 }
