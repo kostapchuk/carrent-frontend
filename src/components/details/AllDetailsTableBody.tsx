@@ -13,8 +13,8 @@ const AllDetailsTableBody: FC<AllDetailsTableHeaderProps> = ({details}) => {
         {
             details.map(d =>
                 <DetailsRowContainer
+                    key={shortid()}
                     detail={d}
-                    key={shortid.generate()}
                 />)
         }
         </tbody>

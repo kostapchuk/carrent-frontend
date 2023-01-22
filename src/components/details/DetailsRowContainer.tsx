@@ -4,10 +4,9 @@ import DetailsRowView from "./DetailsRowView";
 
 interface DetailsRowContainerProps {
     detail: IDetailProps,
-    key: string,
 }
 
-const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail, key}) => {
+const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail}) => {
 
     const retrieveStatusValue = (status: OrderStatus) => {
         switch (status) {
@@ -23,7 +22,7 @@ const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail, key}) => {
     }
 
     return (
-        <DetailsRowView detail={detail} key={key} retrieveStatusValue={retrieveStatusValue}/>
+        <DetailsRowView detail={detail} retrieveStatusValue={retrieveStatusValue}/>
     );
 }
 

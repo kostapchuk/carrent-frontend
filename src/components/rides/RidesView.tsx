@@ -12,11 +12,8 @@ const RidesView: FC<RidesViewProps> = ({loading, rides}) => {
     return (
         <div className="container">
             {loading && <p>⏰⏰⏰⏰⏰⏰</p>}
-            <div
-                className="accordion"
-                id="accordionPanelsStayOpenExample"
-            >
-                {!loading && rides.map(ride =>
+            <div className="accordion">
+                {rides.map(ride =>
                     <RideContainer
                         key={shortid.generate()}
                         ride={ride}

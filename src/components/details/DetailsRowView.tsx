@@ -3,13 +3,12 @@ import React, {FC} from 'react';
 
 interface DetailsRowViewProps {
     detail: IDetailProps,
-    key: string,
     retrieveStatusValue: (status: OrderStatus) => String,
 }
 
-const DetailsRowView: FC<DetailsRowViewProps> = ({detail, key, retrieveStatusValue}) => {
+const DetailsRowView: FC<DetailsRowViewProps> = ({detail, retrieveStatusValue}) => {
     return (
-        <tr key={key}>
+        <tr>
             <td>
                 {new Date(detail.start).toLocaleString()}
                 -

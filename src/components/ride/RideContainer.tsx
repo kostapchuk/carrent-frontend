@@ -10,13 +10,9 @@ const RideContainer: FC<RideContainerProps> = ({ride}) => {
 
     const [open, setOpen] = useState<boolean>(false);
 
-    const handleOpenClick = () => {
-        setOpen(!open);
-    }
-
     return (
         <RideView open={open}
-                  handleOpenClick={handleOpenClick}
+                  handleOpenClick={() => setOpen(!open)}
                   ride={ride}/>
     );
 

@@ -14,7 +14,7 @@ const UsersContainer: FC = () => {
     const updateUsers = () => {
         ApiService.fetchUsers()
             .then((r: any) => {
-                setUsers(r.data.userDtos);
+                setUsers(r.data);
                 setLoading(false);
             })
     }
@@ -27,11 +27,11 @@ const UsersContainer: FC = () => {
         updateUsers()
         ApiService.fetchRoles()
             .then((r: any) => {
-                setRoles(r.data.roles);
+                setRoles(r.data);
             })
         ApiService.fetchStatuses()
             .then((r: any) => {
-                setStatuses(r.data.statuses);
+                setStatuses(r.data);
             })
     }, [setUsers, setRoles, setStatuses]);
 
