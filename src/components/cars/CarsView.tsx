@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
-import CarContainer from "./CarContainer";
-import {ICar} from "../../types/types";
+import {Car} from "../../types/types";
+import CarContainer from "../car/CarContainer";
 
 interface CarsViewProps {
-    cars: ICar[],
+    cars: Car[],
     loading: boolean
 }
 

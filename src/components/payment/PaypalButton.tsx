@@ -1,10 +1,10 @@
 import {PayPalButtons} from "@paypal/react-paypal-js";
-import ApiService from "../../api/ApiService";
 import {useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
 import {fetchBalance, selectBalance, useBalanceDispatch} from '../../slices/BalanceSlice'
 import {useSelector} from "react-redux";
 import React, {FC} from "react";
+import AuthApiService from "../../api/AuthApiService";
 
 const PaypalButton: FC = () => {
 
@@ -13,7 +13,7 @@ const PaypalButton: FC = () => {
     const navigate = useNavigate();
 
     const createOrder = (data: any, actions: any) => {
-        return ApiService.findDebt()
+        return AuthApiService.findDebt()
             .then((r: any) => {
                 return actions.order
                     .create({
@@ -41,7 +41,7 @@ const PaypalButton: FC = () => {
         return actions.order.capture()
             .then(() => {
                 navigate(RouteNames.SUCCESS_PAYMENT);
-                ApiService.payDebt();
+                AuthApiService.payDebt();
                 dispatch(fetchBalance());
             });
     };

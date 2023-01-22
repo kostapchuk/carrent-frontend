@@ -1,7 +1,11 @@
 import axios from "axios";
+import LocalStorage from "../storage/LocalStorage";
 
-const ApiClient = axios.create({
+export const ApiClient = axios.create({
     baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
-export default ApiClient;
+export const AuthApiClient = axios.create({
+    baseURL: process.env.REACT_APP_BACKEND_URL,
+    headers: {Authorization: LocalStorage.getToken()},
+});

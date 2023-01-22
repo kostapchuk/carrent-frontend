@@ -6,11 +6,16 @@ import ApiService from "../../api/ApiService";
 import {fetchBalance, useBalanceDispatch} from "../../slices/BalanceSlice";
 import {updateAdmin, updateLoggedIn} from "../../slices/UserSlice";
 
+export interface LoginUser {
+    email: string,
+    password: string,
+}
+
 const LoginContainer: FC = () => {
 
     const navigate = useNavigate();
     const dispatch = useBalanceDispatch();
-    const [formUser, setFormUser] = useState({
+    const [formUser, setFormUser] = useState<LoginUser>({
         email: '',
         password: ''
     })

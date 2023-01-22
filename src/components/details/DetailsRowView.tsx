@@ -1,15 +1,14 @@
-import {IDetailProps, OrderStatus} from "../../types/types";
+import {Details, OrderStatus} from "../../types/types";
 import React, {FC} from 'react';
 
 interface DetailsRowViewProps {
-    detail: IDetailProps,
-    key: string,
+    detail: Details,
     retrieveStatusValue: (status: OrderStatus) => String,
 }
 
-const DetailsRowView: FC<DetailsRowViewProps> = ({detail, key, retrieveStatusValue}) => {
+const DetailsRowView: FC<DetailsRowViewProps> = ({detail, retrieveStatusValue}) => {
     return (
-        <tr key={key}>
+        <tr>
             <td>
                 {new Date(detail.start).toLocaleString()}
                 -

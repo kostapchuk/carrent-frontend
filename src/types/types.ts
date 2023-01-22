@@ -3,17 +3,9 @@ export enum CarStatus {
     IN_RENT = "IN_RENT",
     IN_BOOKING = "IN_BOOKING",
     IN_RENT_PAUSED = "IN_RENT_PAUSED",
-    UNAVAILABLE = "UNAVAILABLE",
 }
 
-export interface IDetailProps {
-    start: Date,
-    end: Date,
-    status: OrderStatus,
-    price: number,
-}
-
-export interface ICar {
+export interface Car {
     id: number,
     mark: string,
     model: string,
@@ -23,26 +15,13 @@ export interface ICar {
     carStatus: CarStatus,
 }
 
-export interface ILoginUser {
-    email: string,
-    password: string,
-}
-
-export interface IRegisterUser {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    password: string,
-}
-
 export enum OrderStatus {
     RENT = "RENT",
     BOOKING = "BOOKING",
     RENT_PAUSED = "RENT_PAUSED",
 }
 
-export interface IUser {
+export interface User {
     id: number,
     firstName: string,
     lastName: string,
@@ -53,18 +32,18 @@ export interface IUser {
     status: string,
 }
 
-export interface IDetail {
+export interface Details {
     start: Date,
     end: Date,
     status: OrderStatus,
     price: number,
 }
 
-export interface IRide {
+export interface Ride {
     mark: string,
     model: string,
     date: Date,
     totalPrice: number,
     totalTimeHours: number,
-    rideDetailsResponses: IDetail[],
+    rideDetailsResponses: Details[],
 }

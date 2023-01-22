@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-import {IDetailProps} from "../../types/types";
+import {Details} from "../../types/types";
 import AllDetailsTableHeader from "./AllDetailsTableHeader";
 import AllDetailsTableBody from "./AllDetailsTableBody";
 
 interface AllDetailsTableProps {
-    details: IDetailProps[],
+    details: Details[],
 }
 
 const AllDetailsTable: FC<AllDetailsTableProps> = ({details}) => {

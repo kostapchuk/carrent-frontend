@@ -1,20 +1,20 @@
 import React, {FC, useEffect, useState} from "react";
-import ApiService from "../../api/ApiService";
 import UsersView from "./UsersView";
-import {IUser} from "../../types/types";
+import {User} from "../../types/types";
+import AuthApiService from "../../api/AuthApiService";
 
 const UsersContainer: FC = () => {
 
-    const [users, setUsers] = useState<IUser[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
     const [message, setMessage] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [roles, setRoles] = useState<string[]>([]);
     const [statuses, setStatuses] = useState<string[]>([]);
 
     const updateUsers = () => {
-        ApiService.fetchUsers()
+        AuthApiService.fetchUsers()
             .then((r: any) => {
-                setUsers(r.data.userDtos);
+                setUsers(r.data);
                 setLoading(false);
             })
     }
@@ -25,13 +25,13 @@ const UsersContainer: FC = () => {
 
     useEffect(() => {
         updateUsers()
-        ApiService.fetchRoles()
+        AuthApiService.fetchRoles()
             .then((r: any) => {
-                setRoles(r.data.roles);
+                setRoles(r.data);
             })
-        ApiService.fetchStatuses()
+        AuthApiService.fetchStatuses()
             .then((r: any) => {
-                setStatuses(r.data.statuses);
+                setStatuses(r.data);
             })
     }, [setUsers, setRoles, setStatuses]);
 

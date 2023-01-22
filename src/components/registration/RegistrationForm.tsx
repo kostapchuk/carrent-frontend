@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import {Link} from "react-router-dom";
-import {IRegisterUser} from "../../types/types";
+import {RegistrationUser} from "./RegistrationContainer";
 
 interface RegistrationFormProps {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    formUser: IRegisterUser,
+    formUser: RegistrationUser,
 }
 
 const RegistrationForm: FC<RegistrationFormProps> = ({handleSubmit, handleFormChange, formUser}) => {
