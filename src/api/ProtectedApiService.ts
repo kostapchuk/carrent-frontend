@@ -1,6 +1,6 @@
 import {ApiClient} from "./ApiClient";
 import LocalStorage from "../storage/LocalStorage";
-import {Car} from "../types/types";
+import {Car, User} from "../types/types";
 
 class ProtectedApiService {
 
@@ -42,8 +42,8 @@ class ProtectedApiService {
         ApiClient.get("/users/statuses",
             {headers: {Authorization: LocalStorage.getToken()}})
 
-    updateUser = (user: object) =>
-        ApiClient.put("/users", {...user},
+    updateUser = (user: User) =>
+        ApiClient.patch(`/users/${user.id}`, {status: user.status, role: user.role, verified: user.verified},
             {headers: {Authorization: LocalStorage.getToken()}})
 
     // cars
