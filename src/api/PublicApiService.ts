@@ -3,26 +3,14 @@ import {Car} from "../types/types";
 
 class PublicApiService {
 
-    fetchFreeCars = () => {
-        return ApiClient.get<Car>("/cars/free")
-            .catch(e => {
-                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
-            });
-    }
+    // cars
+    fetchFreeCars = () => ApiClient.get<Car>("/cars/free")
 
-    register = (user: object) => {
-        return ApiClient.post("/users", {...user})
-            .catch(e => {
-                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
-            });
-    }
+    // users
+    register = (user: object) => ApiClient.post("/users", {...user})
 
-    login = (credentials: object) => {
-        return ApiClient.post("/auth/login", {...credentials})
-            .catch(e => {
-                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
-            });
-    }
+    // auth
+    login = (credentials: object) => ApiClient.post("/auth/login", {...credentials})
 }
 
 export default new PublicApiService();

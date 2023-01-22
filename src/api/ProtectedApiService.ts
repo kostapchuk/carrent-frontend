@@ -2,15 +2,9 @@ import {ApiClient} from "./ApiClient";
 import LocalStorage from "../storage/LocalStorage";
 import {Car} from "../types/types";
 
-class ApiService {
+class ProtectedApiService {
 
-    fetchAvailableCars = () =>
-        ApiClient.get<Car>(`/cars/available?userId=${LocalStorage.getUserId()}`,
-            {headers: {Authorization: LocalStorage.getToken()}})
-
-    processOrder = (rent: object) =>
-        ApiClient.post("/orders/", {...rent},
-            {headers: {Authorization: LocalStorage.getToken()}})
+    // users
 
     findBalance = () =>
         ApiClient.get(`/users/${LocalStorage.getUserId()}/balance`,
@@ -51,6 +45,18 @@ class ApiService {
     updateUser = (user: object) =>
         ApiClient.put("/users", {...user},
             {headers: {Authorization: LocalStorage.getToken()}})
+
+    // cars
+
+    fetchAvailableCars = () =>
+        ApiClient.get<Car>(`/cars/available?userId=${LocalStorage.getUserId()}`,
+            {headers: {Authorization: LocalStorage.getToken()}})
+
+    // orders
+
+    processOrder = (order: object) =>
+        ApiClient.post("/orders/", {...order},
+            {headers: {Authorization: LocalStorage.getToken()}})
 }
 
-export default new ApiService();
+export default new ProtectedApiService();
