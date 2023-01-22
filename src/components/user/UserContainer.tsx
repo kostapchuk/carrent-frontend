@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
 import UserView from "./UserView";
 import {User} from "../../types/types";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 interface UserContainerProps {
     user: User,

@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import RegistrationView from "./RegistrationView";
 import {useNavigate} from "react-router-dom";
-import ApiService from "../../api/ApiService";
+import ApiService from "../../api/PublicApiService";
 
 export interface RegistrationUser {
     firstName: string,

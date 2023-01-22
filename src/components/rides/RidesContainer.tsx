@@ -3,7 +3,7 @@ import RidesView from "./RidesView";
 import {Ride} from "../../types/types";
 import {useSelector} from "react-redux";
 import {selectLoggedIn} from "../../slices/UserSlice";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 const RidesContainer: FC = () => {
 

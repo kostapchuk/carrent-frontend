@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import LocalStorage from "../../storage/LocalStorage";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 export const enum DocumentType {
     PASSPORT,

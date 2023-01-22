@@ -1,7 +1,7 @@
 import {ApiClient} from "./ApiClient";
 import {Car} from "../types/types";
 
-class ApiService {
+class PublicApiService {
 
     fetchFreeCars = () => {
         return ApiClient.get<Car>("/cars/free")
@@ -25,4 +25,4 @@ class ApiService {
     }
 }
 
-export default new ApiService();
+export default new PublicApiService();

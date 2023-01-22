@@ -4,7 +4,7 @@ import LocalStorage from "../../storage/LocalStorage";
 import {updateBalance} from "../../slices/BalanceSlice";
 import {useDispatch} from "react-redux";
 import CarView from "./CarView";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 interface CarContainerProps {
     car: Car,
