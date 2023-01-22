@@ -36,8 +36,8 @@ const UsersView: FC<UsersViewProps> = ({
                             <th scope="col">First & Last Names</th>
                             <th scope="col">Status</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Img 1</th>
-                            <th scope="col">Img 2</th>
+                            <th scope="col">Passport Image</th>
+                            <th scope="col">Driving License Image</th>
                             <th scope="col">Verification</th>
                             <th scope="col">Action</th>
                         </tr>

@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from "react";
-import ApiService from "../../api/ApiService";
+import ApiService from "../../api/PublicApiService";
 import {useSelector} from "react-redux";
 import {Car} from "../../types/types";
 import {selectLoggedIn} from "../../slices/UserSlice";
 import CarsView from "./CarsView";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 const CarsContainer: FC = () => {
 

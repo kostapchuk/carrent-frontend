@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import UsersView from "./UsersView";
 import {User} from "../../types/types";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 const UsersContainer: FC = () => {
 
