@@ -1,14 +1,20 @@
 import React, {FC, useState} from 'react';
 import LocalStorage from "../../storage/LocalStorage";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
+
+export const enum DocumentType {
+    PASSPORT,
+    DRIVING_LICENSE,
+}
 
 interface FileUploaderProps {
     title: string,
     imgNumber: Number,
-    updateMessage: (success: boolean) => void
+    updateMessage: (success: boolean) => void,
+    documentType: DocumentType,
 }
 
-const FileUploader: FC<FileUploaderProps> = ({title, imgNumber, updateMessage}) => {
+const FileUploader: FC<FileUploaderProps> = ({title, imgNumber, updateMessage, documentType}) => {
 
     const [filePrepared, setFilePrepared] = useState<Blob | null>(null);
 
@@ -27,11 +33,15 @@ const FileUploader: FC<FileUploaderProps> = ({title, imgNumber, updateMessage}) 
         })], {
             type: "application/json"
         }));
-
-        AuthApiService.uploadFile(data)
-            .then(() => {
-                updateMessage(true);
-            })
+        let promise;
+        if (documentType == DocumentType.PASSPORT) {
+            promise = AuthApiService.uploadPassport(data);
+        } else if (documentType == DocumentType.DRIVING_LICENSE) {
+            promise = AuthApiService.uploadDrivingLicense(data);
+        }
+        promise?.then(() => {
+            updateMessage(true);
+        })
     }
 
     return (
@@ -40,7 +50,7 @@ const FileUploader: FC<FileUploaderProps> = ({title, imgNumber, updateMessage}) 
             <div className="d-flex" style={{height: "37px"}}>
                 <input className="form-control" onChange={onFileChange} type="file" id="formFile2"/>
                 <button className="btn btn-primary" data-imgnumber={imgNumber} disabled={!filePrepared}
-                        onClick={uploadFileData}>Upload 2
+                        onClick={uploadFileData}>Upload
                 </button>
             </div>
         </div>

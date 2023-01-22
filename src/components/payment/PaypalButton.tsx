@@ -4,7 +4,7 @@ import {RouteNames} from "../../routes";
 import {fetchBalance, selectBalance, useBalanceDispatch} from '../../slices/BalanceSlice'
 import {useSelector} from "react-redux";
 import React, {FC} from "react";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 const PaypalButton: FC = () => {
 

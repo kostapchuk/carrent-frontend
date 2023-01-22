@@ -5,10 +5,6 @@
   "dependencies": {
     "@paypal/react-paypal-js": "^7.6.0",
     "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
-    "@testing-library/user-event": "^14.1.1",
-    "@types/jest": "^27.5.1",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
     "axios": "^0.26.1",
@@ -19,7 +15,6 @@
     "react-router-dom": "^6.2.2",
     "react-scripts": "^5.0.1",
     "shortid": "^2.2.16",
-    "styled-components": "^5.3.5",
     "typescript": "^4.6.4",
     "web-vitals": "^2.1.4"
   },

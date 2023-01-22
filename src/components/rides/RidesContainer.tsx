@@ -3,7 +3,7 @@ import RidesView from "./RidesView";
 import {Ride} from "../../types/types";
 import {useSelector} from "react-redux";
 import {selectLoggedIn} from "../../slices/UserSlice";
-import AuthApiService from "../../api/AuthApiService";
+import AuthApiService from "../../api/ProtectedApiService";
 
 const RidesContainer: FC = () => {
 
@@ -22,9 +22,7 @@ const RidesContainer: FC = () => {
     }, [setRides, setLoading]);
 
     return (
-        <RidesView rides={rides}
-                   loading={loading}
-        />
+        <RidesView rides={rides} loading={loading}/>
     );
 }
 
