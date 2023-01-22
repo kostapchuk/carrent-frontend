@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useState} from "react";
-import ApiService from "../../api/ApiService";
 import RidesView from "./RidesView";
 import {Ride} from "../../types/types";
 import {useSelector} from "react-redux";
 import {selectLoggedIn} from "../../slices/UserSlice";
+import AuthApiService from "../../api/AuthApiService";
 
 const RidesContainer: FC = () => {
 
@@ -13,7 +13,7 @@ const RidesContainer: FC = () => {
 
     useEffect(() => {
         if (loggedIn) {
-            ApiService.retrieveRides()
+            AuthApiService.retrieveRides()
                 .then((res: any) => {
                     setRides(res.data);
                     setLoading(false);

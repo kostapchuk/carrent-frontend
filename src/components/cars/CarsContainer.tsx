@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {Car} from "../../types/types";
 import {selectLoggedIn} from "../../slices/UserSlice";
 import CarsView from "./CarsView";
+import AuthApiService from "../../api/AuthApiService";
 
 const CarsContainer: FC = () => {
 
@@ -12,7 +13,7 @@ const CarsContainer: FC = () => {
     const loggedIn = useSelector(selectLoggedIn);
 
     useEffect(() => {
-        const promise = (loggedIn ? ApiService.fetchAvailableCars() : ApiService.fetchFreeCars());
+        const promise = (loggedIn ? AuthApiService.fetchAvailableCars() : ApiService.fetchFreeCars());
         promise.then((res: any) => {
             setCars(res.data);
             setLoading(false);

@@ -1,7 +1,7 @@
 import React, {FC, useState} from "react";
-import ApiService from "../../api/ApiService";
 import UserView from "./UserView";
 import {User} from "../../types/types";
+import AuthApiService from "../../api/AuthApiService";
 
 interface UserContainerProps {
     user: User,
@@ -36,7 +36,7 @@ const UserContainer: FC<UserContainerProps> = ({user, statuses, roles, updateUse
             verified: verified,
             status: status
         }
-        ApiService.updateUser(userRequest)
+        AuthApiService.updateUser(userRequest)
             .then(() => {
                 updateUsers();
                 updateMessage("Successfully updated the user");

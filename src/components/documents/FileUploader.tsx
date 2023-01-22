@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import LocalStorage from "../../storage/LocalStorage";
-import ApiService from "../../api/ApiService";
+import AuthApiService from "../../api/AuthApiService";
 
 interface FileUploaderProps {
     title: string,
@@ -28,7 +28,7 @@ const FileUploader: FC<FileUploaderProps> = ({title, imgNumber, updateMessage}) 
             type: "application/json"
         }));
 
-        ApiService.uploadFile(data)
+        AuthApiService.uploadFile(data)
             .then(() => {
                 updateMessage(true);
             })

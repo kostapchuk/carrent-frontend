@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {CarStatus, Car} from "../../types/types";
+import {Car, CarStatus} from "../../types/types";
 import {useSelector} from "react-redux";
 import {selectLoggedIn} from "../../slices/UserSlice";
 
