@@ -63,15 +63,15 @@ const UserView: FC<UserViewProps> = ({
                     </select>
                 </td>
                 <td>
-                    {user.documentImg1
-                        ? <img src={user.documentImg1}
+                    {user.passportUrl
+                        ? <img src={user.passportUrl}
                                alt={"img doc 1"}
                                width={200}/>
                         : "Not uploaded"}
                 </td>
                 <td>
-                    {user.documentImg2
-                        ? <img src={user.documentImg2}
+                    {user.drivingLicenseUrl
+                        ? <img src={user.drivingLicenseUrl}
                                alt={"img doc 2"}
                                width={200}/>
                         : "Not uploaded"}
@@ -92,7 +92,6 @@ const UserView: FC<UserViewProps> = ({
                 </td>
             </tr>
         </>
-
     );
 }
 

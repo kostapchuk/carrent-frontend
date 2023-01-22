@@ -22,9 +22,7 @@ const RidesContainer: FC = () => {
     }, [setRides, setLoading]);
 
     return (
-        <RidesView rides={rides}
-                   loading={loading}
-        />
+        <RidesView rides={rides} loading={loading}/>
     );
 }
 

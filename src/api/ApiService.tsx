@@ -10,16 +10,6 @@ class ApiService {
             });
     }
 
-    logout = () => {
-        ApiClient.post("/auth/logout")
-            .then(() => {
-                console.log("Logout");
-            })
-            .catch(e => {
-                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
-            });
-    }
-
     register = (user: object) => {
         return ApiClient.post("/users", {...user})
             .catch(e => {

@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import LocalStorage from "../../storage/LocalStorage";
-import ApiService from "../../api/ApiService";
 import {selectLoggedIn, updateLoggedIn, useUserDispatch} from "../../slices/UserSlice";
 import React, {FC} from 'react';
 import {useSelector} from "react-redux";
@@ -13,7 +12,6 @@ const Logout: FC = () => {
     const handleClick = () => {
         LocalStorage.clearToken();
         LocalStorage.clearUserId();
-        ApiService.logout();
         dispatch(updateLoggedIn(false));
     }
 

@@ -1,81 +1,100 @@
-import {ApiClient, AuthApiClient} from "./ApiClient";
+import {ApiClient} from "./ApiClient";
 import LocalStorage from "../storage/LocalStorage";
 import {Car} from "../types/types";
 
 class ApiService {
 
     fetchAvailableCars = () => {
-        return AuthApiClient.get<Car>(`/cars/available?userId=${LocalStorage.getUserId()}`)
+        return ApiClient.get<Car>(`/cars/available?userId=${LocalStorage.getUserId()}`,
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     processOrder = (rent: object) => {
-        return AuthApiClient.post("/orders/", {...rent})
+        return ApiClient.post("/orders/", {...rent},
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     findBalance = () => {
-        return AuthApiClient.get(`/users/${LocalStorage.getUserId()}/balance`)
+        return ApiClient.get(`/users/${LocalStorage.getUserId()}/balance`,
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     payDebt = () => {
-        return AuthApiClient.post(`/users/${LocalStorage.getUserId()}/pay`, '',)
+        return ApiClient.post(`/users/${LocalStorage.getUserId()}/pay`, '',
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     findDebt = () => {
-        return ApiClient.get(`/users/${LocalStorage.getUserId()}/debt`,)
+        return ApiClient.get(`/users/${LocalStorage.getUserId()}/debt`,
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     retrieveRides = () => {
-        return AuthApiClient.get(`/users/${LocalStorage.getUserId()}/rides`,)
+        return ApiClient.get(`/users/${LocalStorage.getUserId()}/rides`,
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
-    uploadFile = (payload: object) => {
-        return AuthApiClient.post("/documents", payload,)
+    uploadPassport = (payload: object) => {
+        return ApiClient.patch(`/users/${LocalStorage.getUserId()}/passport`, payload,
+            {headers: {Authorization: LocalStorage.getToken()}})
+            .catch(e => {
+                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
+            });
+    }
+
+    uploadDrivingLicense = (payload: object) => {
+        return ApiClient.patch(`/users/${LocalStorage.getUserId()}/driving_license`, payload,
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     fetchUsers = () => {
-        return AuthApiClient.get("/users",)
+        return ApiClient.get("/users",
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     fetchRoles = () => {
-        return AuthApiClient.get("/users/roles",)
+        return ApiClient.get("/users/roles",
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     fetchStatuses = () => {
-        return AuthApiClient.get("/users/statuses",)
+        return ApiClient.get("/users/statuses",
+            {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     updateUser = (user: object) => {
-        return AuthApiClient.put("/users", {...user},)
+        return ApiClient.put("/users", {...user},
+            {headers: {Authorization: LocalStorage.getToken()}})
     }
 }
 
