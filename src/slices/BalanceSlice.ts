@@ -1,11 +1,11 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import ApiService from "../api/ApiService";
-import {store, RootState} from "../store/store";
+import {RootState, store} from "../store/store";
 import {useDispatch} from "react-redux";
+import AuthApiService from "../api/AuthApiService";
 
 export const fetchBalance = createAsyncThunk('balance/fetchBalance',
     () => {
-        return ApiService.findBalance()
+        return AuthApiService.findBalance()
             .then((r: any) => r.data)
     })
 

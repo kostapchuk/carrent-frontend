@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import {CarStatus, ICar} from "../../types/types";
+import {Car, CarStatus} from "../../types/types";
 import LocalStorage from "../../storage/LocalStorage";
-import ApiService from "../../api/ApiService";
 import {updateBalance} from "../../slices/BalanceSlice";
 import {useDispatch} from "react-redux";
 import CarView from "./CarView";
+import AuthApiService from "../../api/AuthApiService";
 
 interface CarContainerProps {
-    car: ICar,
+    car: Car,
 }
 
 const CarContainer: FC<CarContainerProps> = ({car}) => {
@@ -20,10 +20,10 @@ const CarContainer: FC<CarContainerProps> = ({car}) => {
             carId: carId,
             carStatus: status,
         }
-        ApiService.processOrder(order)
+        AuthApiService.processOrder(order)
             .then(() => {
                 if (status === CarStatus.FREE) {
-                    ApiService.findBalance().then((res: any) => {
+                    AuthApiService.findBalance().then((res: any) => {
                         dispatch(updateBalance(res.data))
                     })
                 }

@@ -1,9 +1,9 @@
 import shortid from "shortid";
-import {IUser} from "../../types/types";
+import {User} from "../../types/types";
 import React, {FC} from "react";
 
 interface UserViewProps {
-    user: IUser,
+    user: User,
     status: string,
     handleStatusChange: (event: React.ChangeEvent<HTMLSelectElement>) => void,
     statuses: string[],

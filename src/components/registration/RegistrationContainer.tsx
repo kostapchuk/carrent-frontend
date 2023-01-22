@@ -3,10 +3,18 @@ import RegistrationView from "./RegistrationView";
 import {useNavigate} from "react-router-dom";
 import ApiService from "../../api/ApiService";
 
+export interface RegistrationUser {
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    password: string,
+}
+
 const RegistrationContainer: FC = () => {
 
     const navigate = useNavigate();
-    const [formUser, setFormUser] = useState({
+    const [formUser, setFormUser] = useState<RegistrationUser>({
         firstName: '',
         lastName: '',
         email: '',

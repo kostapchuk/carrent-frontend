@@ -1,13 +1,12 @@
-import {IDetailProps, OrderStatus} from "../../types/types";
+import {Details, OrderStatus} from "../../types/types";
 import React, {FC} from 'react';
 import DetailsRowView from "./DetailsRowView";
 
 interface DetailsRowContainerProps {
-    detail: IDetailProps,
-    key: string,
+    detail: Details,
 }
 
-const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail, key}) => {
+const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail}) => {
 
     const retrieveStatusValue = (status: OrderStatus) => {
         switch (status) {
@@ -23,7 +22,7 @@ const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail, key}) => {
     }
 
     return (
-        <DetailsRowView detail={detail} key={key} retrieveStatusValue={retrieveStatusValue}/>
+        <DetailsRowView detail={detail} retrieveStatusValue={retrieveStatusValue}/>
     );
 }
 

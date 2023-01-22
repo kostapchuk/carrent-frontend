@@ -1,17 +1,19 @@
 import React, {FC, useEffect, useState} from "react";
-import ApiService from "../../api/ApiService";
-import LocalStorage from "../../storage/LocalStorage";
 import RidesView from "./RidesView";
-import {IRide} from "../../types/types";
+import {Ride} from "../../types/types";
+import {useSelector} from "react-redux";
+import {selectLoggedIn} from "../../slices/UserSlice";
+import AuthApiService from "../../api/AuthApiService";
 
 const RidesContainer: FC = () => {
 
-    const [rides, setRides] = useState<IRide[]>([]);
+    const [rides, setRides] = useState<Ride[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const loggedIn = useSelector(selectLoggedIn);
 
     useEffect(() => {
-        if (LocalStorage.getUserId()) {
-            ApiService.retrieveRides()
+        if (loggedIn) {
+            AuthApiService.retrieveRides()
                 .then((res: any) => {
                     setRides(res.data);
                     setLoading(false);

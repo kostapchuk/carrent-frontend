@@ -34,11 +34,11 @@ export const allRoutes = [
     {path: RouteNames.RIDES, component: <RidesContainer/>},
     {
         path: RouteNames.SUCCESS_PAYMENT, component: <ResultContainer success={true}
-                                                                                   message="Success payment"/>
+                                                                      message="Success payment"/>
     },
     {
         path: RouteNames.CANCELLED_PAYMENT, component: <ResultContainer success={false}
-                                                                                     message="Cancelled payment"/>
+                                                                        message="Cancelled payment"/>
     },
     {path: RouteNames.DOCUMENTS, component: <UploadFileComponent/>},
     {path: RouteNames.ADMIN_USERS, component: <UsersContainer/>},

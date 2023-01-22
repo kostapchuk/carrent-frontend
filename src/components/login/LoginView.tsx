@@ -1,11 +1,11 @@
 import React, {FC} from "react";
-import {ILoginUser} from "../../types/types"
 import LoginForm from "./LoginForm";
+import {LoginUser} from "./LoginContainer";
 
 interface LoginViewProps {
     handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
     handleFormChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
-    formUser: ILoginUser,
+    formUser: LoginUser,
 }
 
 const LoginView: FC<LoginViewProps> = ({handleSubmit, handleFormChange, formUser}) => {

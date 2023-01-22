@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import DetailsRowContainer from "./DetailsRowContainer";
 import shortid from "shortid";
-import {IDetail} from "../../types/types";
+import {Details} from "../../types/types";
 
 interface AllDetailsTableHeaderProps {
-    details: IDetail[],
+    details: Details[],
 }
 
 const AllDetailsTableBody: FC<AllDetailsTableHeaderProps> = ({details}) => {
@@ -13,8 +13,8 @@ const AllDetailsTableBody: FC<AllDetailsTableHeaderProps> = ({details}) => {
         {
             details.map(d =>
                 <DetailsRowContainer
+                    key={shortid()}
                     detail={d}
-                    key={shortid.generate()}
                 />)
         }
         </tbody>
