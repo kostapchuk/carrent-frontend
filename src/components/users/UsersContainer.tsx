@@ -1,11 +1,11 @@
 import React, {FC, useEffect, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UsersView from "./UsersView";
-import {IUser} from "../../types/types";
+import {User} from "../../types/types";
 
 const UsersContainer: FC = () => {
 
-    const [users, setUsers] = useState<IUser[]>([]);
+    const [users, setUsers] = useState<User[]>([]);
     const [message, setMessage] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [roles, setRoles] = useState<string[]>([]);

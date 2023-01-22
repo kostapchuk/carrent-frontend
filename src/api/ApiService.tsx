@@ -1,32 +1,18 @@
 import ApiClient from "./ApiClient";
 import LocalStorage from "../storage/LocalStorage";
-import {ICar} from "../types/types";
+import {Car} from "../types/types";
 
 class ApiService {
 
-    fetchCarById = (carId: number) => {
-        return ApiClient.get("/cars/" + carId)
-            .catch(e => {
-                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
-            });
-    }
-
     fetchFreeCars = () => {
-        return ApiClient.get<ICar>("/cars/free")
-            .catch(e => {
-                console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
-            });
-    }
-
-    fetchCars = () => {
-        return ApiClient.get<ICar>("/cars")
+        return ApiClient.get<Car>("/cars/free")
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });
     }
 
     fetchAvailableCars = () => {
-        return ApiClient.get<ICar>(`/cars/available?userId=${LocalStorage.getUserId()}`, {headers: {Authorization: LocalStorage.getToken()}})
+        return ApiClient.get<Car>(`/cars/available?userId=${LocalStorage.getUserId()}`, {headers: {Authorization: LocalStorage.getToken()}})
             .catch(e => {
                 console.log(`Status: ${e.response.data.status}. Message: ${e.response.data.message}`);
             });

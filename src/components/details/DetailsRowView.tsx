@@ -1,8 +1,8 @@
-import {IDetailProps, OrderStatus} from "../../types/types";
+import {Details, OrderStatus} from "../../types/types";
 import React, {FC} from 'react';
 
 interface DetailsRowViewProps {
-    detail: IDetailProps,
+    detail: Details,
     retrieveStatusValue: (status: OrderStatus) => String,
 }
 

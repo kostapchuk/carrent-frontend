@@ -1,10 +1,10 @@
 import React, {FC} from "react";
-import {CarStatus, ICar} from "../../types/types";
+import {CarStatus, Car} from "../../types/types";
 import {useSelector} from "react-redux";
 import {selectLoggedIn} from "../../slices/UserSlice";
 
 export interface CarCardProps {
-    car: ICar,
+    car: Car,
     startRent: () => void,
     startBook: () => void,
     finishRide: () => void,

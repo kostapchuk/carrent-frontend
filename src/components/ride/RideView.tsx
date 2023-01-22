@@ -1,12 +1,12 @@
 import shortid from 'shortid';
 import React, {FC} from 'react';
 import AllDetailsTable from '../details/AllDetailsTable';
-import {IRide} from '../../types/types';
+import {Ride} from '../../types/types';
 
 interface RideViewProps {
     open: boolean,
     handleOpenClick: (event: React.MouseEvent) => void,
-    ride: IRide,
+    ride: Ride,
 }
 
 const RideView: FC<RideViewProps> = ({

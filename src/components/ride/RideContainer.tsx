@@ -1,9 +1,9 @@
 import React, {FC, useState} from "react";
 import RideView from "./RideView";
-import {IRide} from "../../types/types";
+import {Ride} from "../../types/types";
 
 interface RideContainerProps {
-    ride: IRide,
+    ride: Ride,
 }
 
 const RideContainer: FC<RideContainerProps> = ({ride}) => {

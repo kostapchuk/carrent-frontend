@@ -1,11 +1,11 @@
 import RideContainer from "../ride/RideContainer";
 import shortid from "shortid";
 import React, {FC} from "react";
-import {IRide} from "../../types/types";
+import {Ride} from "../../types/types";
 
 interface RidesViewProps {
     loading: boolean,
-    rides: IRide[],
+    rides: Ride[],
 }
 
 const RidesView: FC<RidesViewProps> = ({loading, rides}) => {

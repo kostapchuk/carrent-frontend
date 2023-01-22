@@ -1,10 +1,10 @@
 import React, {FC, useState} from "react";
 import ApiService from "../../api/ApiService";
 import UserView from "./UserView";
-import {IUser} from "../../types/types";
+import {User} from "../../types/types";
 
 interface UserContainerProps {
-    user: IUser,
+    user: User,
     statuses: string[],
     roles: string[],
     updateUsers: () => void,

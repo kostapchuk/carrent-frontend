@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {CarStatus, ICar} from "../../types/types";
+import {CarStatus, Car} from "../../types/types";
 import LocalStorage from "../../storage/LocalStorage";
 import ApiService from "../../api/ApiService";
 import {updateBalance} from "../../slices/BalanceSlice";
@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import CarView from "./CarView";
 
 interface CarContainerProps {
-    car: ICar,
+    car: Car,
 }
 
 const CarContainer: FC<CarContainerProps> = ({car}) => {

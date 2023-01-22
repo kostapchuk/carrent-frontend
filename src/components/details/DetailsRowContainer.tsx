@@ -1,9 +1,9 @@
-import {IDetailProps, OrderStatus} from "../../types/types";
+import {Details, OrderStatus} from "../../types/types";
 import React, {FC} from 'react';
 import DetailsRowView from "./DetailsRowView";
 
 interface DetailsRowContainerProps {
-    detail: IDetailProps,
+    detail: Details,
 }
 
 const DetailsRowContainer: FC<DetailsRowContainerProps> = ({detail}) => {
